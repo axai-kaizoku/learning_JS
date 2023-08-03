@@ -1,6 +1,4 @@
-var costOfItem = 2000;
-var discount = 250;
+var septillion = 1_000_000_000_000_000_000_000_000n;
+var plusOne = septillion + 1n;
 
-var totalCost = costOfItem - discount;
-
-console.log('Total Cost: ', totalCost);
+console.log('Septillion plus one is equal to', plusOne);
