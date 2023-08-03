@@ -1,32 +1,17 @@
 'use strict';
 
-var sentinel = {
-  name: 'Sentinel Design\u{2122}',
-  employeeCount: 50,
+var user = {
+  name: 'Michelle Roberts',
+  age: 28,
   location: {
-  city: 'Tokyo',
-  country: 'Japan',
+    city: 'New York',
+    country: 'US',
   },
-  isListed: false,
 };
 
-var john = {
-  name: 'John Mockery',
-  age: 23,
-  designation: 'Sr. Designer',
-  organization: sentinel.name,
-  address: sentinel.location,
-};
+user.isAdmin = false;
 
-var sarah = {
-  name: 'Sarah Rice',
-  age: 27,
-  designation: 'UX Architect',
-  organization: sentinel.name,
-  address: sentinel.location,
-};
-
-john.address = {city: 'Osaka', country: 'Japan'};
-
-console.log(john);
-console.log(sarah);
+console.log('User: ', user.name);
+console.log('City: ', user.location.city);
+console.log('Age: ', user.age);
+console.log('Is User Administrator?', user.isAdmin);
