@@ -10,22 +10,23 @@ var sentinel = {
   isListed: false,
 };
 
-console.log(sentinel.name);
+var john = {
+  name: 'John Mockery',
+  age: 23,
+  designation: 'Sr. Designer',
+  organization: sentinel.name,
+  address: sentinel.location,
+};
 
-var propName = 'employeeCount';
-console.log(sentinel[propName]);
+var sarah = {
+  name: 'Sarah Rice',
+  age: 27,
+  designation: 'UX Architect',
+  organization: sentinel.name,
+  address: sentinel.location,
+};
 
-sentinel.stockSymbol = 'SDJ';
-sentinel.isListed = true;
-// sentinel.location.country = 'US'; // Yen is the answer because it is commented
-delete sentinel.location.city;
+john.address = {city: 'Osaka', country: 'Japan'};
 
-var currencies = new Object();
-currencies['Japan'] = 'Yen';
-currencies['US'] = 'US Dollar';
-
-console.log(
-  `The currency of ${sentinel.location.country} is ${currencies[sentinel.location.country]}`
-);
-
-console.log(sentinel);
+console.log(john);
+console.log(sarah);
