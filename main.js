@@ -1,12 +1,19 @@
 'use strict';
 
-var waterTemperature = 50;
+// Compute a sum
+var a = '10';
+var b = 20;
+try {
+  if (typeof a != typeof b)
+    throw new Error('Both operands must belong to the same data type!');
+  var c = a + b;
+  console.log(`The result of the sum is ${c}`);
+} catch (error) {
+  console.log(error);
+} finally {
+  console.log('I will run no matter what!');
+}
 
-var isItBoiling = waterTemperature >= 100;
-var isItFrozen = waterTemperature <= 0;
-var isItWarm = waterTemperature > 30 && waterTemperature < 60;
-
-
-console.log('Is the water boiling?', isItBoiling);
-console.log('Is the water frozen?', isItFrozen);
-console.log('Is it warm?', isItWarm);
+// Display the value of PI
+var pi = Math.PI;
+console.log(`The value of PI is ${pi}`);
