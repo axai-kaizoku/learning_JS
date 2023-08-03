@@ -1,13 +1,21 @@
 'use strict';
 
-console.log('Inequality operator');
-console.log(10 != 20);
-console.log('20' != 20);
-console.log(null != undefined);
+var costOfToothbrush = 10;
+var printedCost = '10';
+var advertisedCost = 20;
 
-console.log('Strict Inequality or Nonidentity operator');
-console.log(10 !== 20);
-console.log('20' !== 20);
-console.log(null !== undefined);
-console.log(1 !== true);
-console.log(10 !== 10);
+
+console.log(
+  'Are both costs same? (Equality Operator)',
+  costOfToothbrush == printedCost
+);
+
+console.log(
+  'Are both costs same? (Strict Equality Operator)',
+  costOfToothbrush === printedCost
+);
+
+console.log(
+  'The advertised cost is not the same as the actual cost: ',
+  advertisedCost !== costOfToothbrush
+);
