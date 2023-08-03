@@ -1,14 +1,9 @@
 'use strict';
 
-var showReport = true;
-var hasDownloaded = false;
-var isPaymentConfirmed = true;
-var forceDelete = false;
+var ageOfJoe = 55;
 
-var message = ''; //hey
-var showPostButton = !!message;
-console.log(`Show Post Button: ${showPostButton}`); //true
+var eligibleForVoting = ageOfJoe > 18;
+var isJoeASeniorCitizen = ageOfJoe > 60;
 
-var numOfCharacters = 0; //2
-var showEditButton = !!numOfCharacters;
-console.log(`Show Edit Button: ${showEditButton}`); //true
+console.log('Joe can vote. true or false?', eligibleForVoting);
+console.log('Joe is a senior citizen. true or false?', isJoeASeniorCitizen);
