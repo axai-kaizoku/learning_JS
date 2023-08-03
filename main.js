@@ -1,16 +1,16 @@
 'use strict';
 
-var bestsellers = [
-  'Contact',
-  'Deception Point',
-  'Digital Fortress',
-  'Jurassic Park',
-  'Shantaram',
-];
+console.log('Equality operator');
+console.log(10 == 10);
+console.log(10 == '10');
+console.log(1 == true);
+console.log('Waffle' == 'waffle');
+console.log(null == undefined);
 
-bestsellers.push('Freakonomics');
+var redCar = {
+  color: 'red',
+  id: 1,
+};
 
-bestsellers[1] = 'The Lord of the Rings';
-
-console.log('Bestsellers: ', bestsellers.toString());
-
+var someCar = redCar;
+console.log(redCar == someCar);
