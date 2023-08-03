@@ -1,21 +1,12 @@
 'use strict';
 
-var costOfToothbrush = 10;
-var printedCost = '10';
-var advertisedCost = 20;
+var waterTemperature = 50;
+
+var isItBoiling = waterTemperature >= 100;
+var isItFrozen = waterTemperature <= 0;
+var isItWarm = waterTemperature > 30 && waterTemperature < 60;
 
 
-console.log(
-  'Are both costs same? (Equality Operator)',
-  costOfToothbrush == printedCost
-);
-
-console.log(
-  'Are both costs same? (Strict Equality Operator)',
-  costOfToothbrush === printedCost
-);
-
-console.log(
-  'The advertised cost is not the same as the actual cost: ',
-  advertisedCost !== costOfToothbrush
-);
+console.log('Is the water boiling?', isItBoiling);
+console.log('Is the water frozen?', isItFrozen);
+console.log('Is it warm?', isItWarm);
