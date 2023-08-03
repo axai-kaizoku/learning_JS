@@ -1,9 +1,20 @@
 'use strict';
 
-var ageOfJoe = 55;
+var sentinel = {
+  name: 'Sentinel Design\u{2122}',
+  employeeCount: 50,
+  city: 'Tokyo',
+  country: 'Japan',
+  isListed: false,
+};
 
-var eligibleForVoting = ageOfJoe > 18;
-var isJoeASeniorCitizen = ageOfJoe > 60;
+console.log(sentinel.name);
 
-console.log('Joe can vote. true or false?', eligibleForVoting);
-console.log('Joe is a senior citizen. true or false?', isJoeASeniorCitizen);
+var propName = 'employeeCount';
+console.log(sentinel[propName]);
+
+sentinel.stockSymbol = 'SDJ';
+sentinel.isListed = true;
+delete sentinel.city;
+
+console.log(sentinel);
