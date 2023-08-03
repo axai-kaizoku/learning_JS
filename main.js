@@ -1,17 +1,11 @@
 'use strict';
 
+var myQuote = "Best friends are like a mirror";
 
-var user = 'John Mockery';
-var designation = 'Sr. Designer';
-var origanization = 'Sentinel Design';
-var city = 'New York';
-var country = 'USA';
-var location = city + ', ' + country;
-var favQuote = 'To \'single-quote\' or "double-quote"';
+var author = "Joe Mockery";
+var fullQuote = myQuote + ' -- ' + author;
 
-var employeeData = `Name: ${user}
-Designation: ${designation}
-Organization: ${origanization}
-Location: ${location}`;
+var lengthOfString = fullQuote.length;
 
-console.log(employeeData);
+console.log(fullQuote);
+console.log('Length of the Quote:', lengthOfString);
