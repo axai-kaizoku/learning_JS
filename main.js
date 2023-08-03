@@ -1,1 +1,6 @@
-console.log("You can't cross the sea merely by standing and staring at the water");
+var costOfItem = 2000;
+var discount = 250;
+
+var totalCost = costOfItem - discount;
+
+console.log('Total Cost: ', totalCost);
