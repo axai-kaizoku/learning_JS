@@ -1,16 +1,13 @@
 'use strict';
 
-console.log('Equality operator');
-console.log(10 == 10);
-console.log(10 == '10');
-console.log(1 == true);
-console.log('Waffle' == 'waffle');
-console.log(null == undefined);
+console.log('Inequality operator');
+console.log(10 != 20);
+console.log('20' != 20);
+console.log(null != undefined);
 
-var redCar = {
-  color: 'red',
-  id: 1,
-};
-
-var someCar = redCar;
-console.log(redCar == someCar);
+console.log('Strict Inequality or Nonidentity operator');
+console.log(10 !== 20);
+console.log('20' !== 20);
+console.log(null !== undefined);
+console.log(1 !== true);
+console.log(10 !== 10);
