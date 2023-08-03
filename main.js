@@ -1,11 +1,10 @@
 'use strict';
 
-var myQuote = "Best friends are like a mirror";
+var showReport = true;
+var hasDownloaded = false;
+var isPaymentConfirmed = true;
+var forceDelete = false;
 
-var author = "Joe Mockery";
-var fullQuote = myQuote + ' -- ' + author;
-
-var lengthOfString = fullQuote.length;
-
-console.log(fullQuote);
-console.log('Length of the Quote:', lengthOfString);
+var message = ''; //hey
+var showPostButton = !!message;
+console.log(`Show Post Button: ${showPostButton}`); //true
