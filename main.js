@@ -1,12 +1,12 @@
-var user = 'Sarah Rice';
+var lengthOfRectangle = 5;
 
-function sayHi() {
-  var greeting = "It's so good to meet you!";
-  function greet() {
-    return `She also says, ${greeting}`;
+function computeArea() {
+  var breadthOfRectangle = 20;
+  function area() {
+    return lengthOfRectangle * breadthOfRectangle;
   }
-  console.log(`${user} says Hi!`);
-  console.log(greet());
+
+  console.log(`Area of Rectangle: ${area()}`);
 }
 
-sayHi();
+computeArea();
