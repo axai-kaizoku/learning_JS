@@ -1,16 +1,23 @@
 'use strict';
 
 
+'use strict';
 
-let currentHour = new Date().getHours();
-// console.log(currentHour)
+let grade;
+let percentage = 71;
 
-if (currentHour >= 0 && currentHour < 12) {
-  console.log('Good Morning!');
-} else if (currentHour >= 12 && currentHour < 16) {
-  console.log('Good Afternoon!');
-} else if (currentHour >= 16 && currentHour < 20) {
-  console.log('Good Evening!');
+
+
+if (percentage <= 100 && percentage >= 91) {
+    grade = 'A+';
+} else if (percentage <= 90 && percentage >= 81) {
+    grade = 'B+';
+} else if (percentage <= 80 && percentage >= 71) {
+    grade = 'C+';
+} else if (percentage <= 70 && percentage >= 61) {
+    grade = 'D+';
 } else {
-  console.log('Good Night!');
+    grade = 'Fail';
 }
+
+console.log(`The student has secured ${grade}`);
