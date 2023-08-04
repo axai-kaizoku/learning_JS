@@ -1,27 +1,18 @@
 'use strict';
 
-const dataSet = [
-  {
-    id: 1,
-    class: 'Basic Calculus',
-    numOfStudents: '23',
-  },
-  {
-    id: 2,
-    class: 'Fundamentals of Computing',
-    numOfStudents: '18',
-  },
-  {
-    id: 3,
-    class: 'Science 101',
-    numOfStudents: '15',
-  },
-];
+
+// Example 1
+let cost = 1250;
+
+if (cost < 1000) console.log('No discount applicable!');
+else console.log('Special Offer: 10% discount for a limited time only');
 
 
-const totalStudents = 
-  Number(dataSet[0].numOfStudents) +
-  Number(dataSet[1].numOfStudents) +
-  Number(dataSet[2].numOfStudents);
+// Example 2
+let currentHour = new Date().getHours();
 
-  console.log(`Total Students in School: ${totalStudents}`);
+if (currentHour >= 0 && currentHour < 12) {
+  console.log('Good Morning!');
+} else {
+  console.log('Good Day!');
+}
