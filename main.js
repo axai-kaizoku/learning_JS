@@ -1,31 +1,26 @@
 'use strict';
 
-let a = 20;
-let b = 50;
-// let action = 'ADD';
-// let action = 'SUBTRACT';
-let action = 'MULTIPLY';
-// let action = 'DIVIDE';
+// let item = 'Potato';
+// let item = 'Kiwi';
+let item = 69;
+let type;
 
-switch (action) {
-  case 'ADD': {
-    let result = a + b;
-    console.log(`The sum of ${a} and ${b} is ${result}`);
+switch (item) {
+  case 'Apple':
+  case 'Banana':
+  case 'Kiwi':
+  case 'Strawberry':
+    type = 'fruit';
     break;
-  }
-  case 'SUBTRACT': {
-    let result = a - b;
-    console.log(`The subtraction of ${a} and ${b} is ${result}`);
+  case 'Lettuce':
+  case 'Potato':
+  case 'Celery':
+  case 'Eggplant':
+    type = 'vegetable';
     break;
-  }
-  case 'MULTIPLY': {
-    let result = a * b;
-    console.log(`The multiplication of ${a} and ${b} is ${result}`);
-    break;
-  }
-  case 'DIVIDE': {
-    let result = a / b;
-    console.log(`The division of ${a} and ${b} is ${result}`);
-    break;
+  default: {
+    throw new Error('Unable to identify item...');
   }
 }
+
+console.log(`${item} is a type of ${type}`);
