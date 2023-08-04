@@ -1,12 +1,11 @@
-var lengthOfRectangle = 5;
+'use strict';
 
-function computeArea() {
-  var breadthOfRectangle = 20;
-  function area() {
-    return lengthOfRectangle * breadthOfRectangle;
-  }
+var cost = 1000;
 
-  console.log(`Area of Rectangle: ${area()}`);
+if(cost >= 1000) {
+  let cost = 950;
+  // var cost = 950;
+  console.log(`Special clearance cost: ${cost}`);
 }
 
-computeArea();
+console.log(`Original Cost: ${cost}`);
