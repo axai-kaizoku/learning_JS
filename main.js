@@ -1,9 +1,13 @@
 'use strict';
 
-var x = 200;
-   // var x = 0;
-for (let x=0; x<10; x=x+1){
-  console.log(`The number is ${x}`);
-}
+const PI = 3.1412;
+const VERSION = 2.01;
+const URI = '/api/v2/posts';
 
-console.log(`Original number: ${x}`);
+const ADMIN = {
+  access:2,
+  userId: 'axai@15',
+};
+
+ADMIN.access = 3;
+console.log(ADMIN);
