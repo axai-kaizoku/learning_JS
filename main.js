@@ -1,11 +1,9 @@
 'use strict';
 
-var cost = 1000;
-
-if(cost >= 1000) {
-  let cost = 950;
-  // var cost = 950;
-  console.log(`Special clearance cost: ${cost}`);
+var x = 200;
+   // var x = 0;
+for (let x=0; x<10; x=x+1){
+  console.log(`The number is ${x}`);
 }
 
-console.log(`Original Cost: ${cost}`);
+console.log(`Original number: ${x}`);
