@@ -1,13 +1,12 @@
 'use strict';
 
 const PI = 3.1412;
-const VERSION = 2.01;
-const URI = '/api/v2/posts';
-
-const ADMIN = {
-  access:2,
-  userId: 'axai@15',
+const circle = {
+  radius: 5.2,
 };
 
-ADMIN.access = 3;
-console.log(ADMIN);
+circle.radius = 6.4;
+
+const circumference = 2 * PI * circle.radius;
+console.log(`Circumference of the circle: ${circumference}`);
+
