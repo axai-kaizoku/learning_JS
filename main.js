@@ -1,18 +1,10 @@
 'use strict';
 
 
-// Example 1
-let cost = 1250;
+let temperature = 25; // use other values
 
-if (cost < 1000) console.log('No discount applicable!');
-else console.log('Special Offer: 10% discount for a limited time only');
-
-
-// Example 2
-let currentHour = new Date().getHours();
-
-if (currentHour >= 0 && currentHour < 12) {
-  console.log('Good Morning!');
+if (temperature < 15) {
+  console.log("It's cold outside");
 } else {
-  console.log('Good Day!');
+  console.log("It's warm outside");
 }
