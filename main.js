@@ -1,12 +1,27 @@
 'use strict';
 
-const PI = 3.1412;
-const circle = {
-  radius: 5.2,
-};
+const dataSet = [
+  {
+    id: 1,
+    class: 'Basic Calculus',
+    numOfStudents: '23',
+  },
+  {
+    id: 2,
+    class: 'Fundamentals of Computing',
+    numOfStudents: '18',
+  },
+  {
+    id: 3,
+    class: 'Science 101',
+    numOfStudents: '15',
+  },
+];
 
-circle.radius = 6.4;
 
-const circumference = 2 * PI * circle.radius;
-console.log(`Circumference of the circle: ${circumference}`);
+const totalStudents = 
+  Number(dataSet[0].numOfStudents) +
+  Number(dataSet[1].numOfStudents) +
+  Number(dataSet[2].numOfStudents);
 
+  console.log(`Total Students in School: ${totalStudents}`);
