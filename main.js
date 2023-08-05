@@ -1,17 +1,21 @@
 'use strict';
 
-let products = [
+let tempData = [
   {
-    name: 'HyperV 4k Projector',
-    cost: 2500,
+    location: 'Block A - East',
+    sensor1: 0,
+    sensor2: 0,
+    sensor3: 4.2,
   },
   {
-    name: 'Vision HDMI Cable',
-    cost: 10,
-    shipping: 0,
+    location: 'Block B - East',
+    sensor1: 0,
+    sensor3: 4,
   },
 ];
 
-console.log(`Product: ${products[0].name || 'N/A'}`);
-console.log(`Cost: ${products[0].cost || 'N/A'}`);
-console.log(`Shipping: ${products[0].shipping ?? 2.5}`);
+console.log(
+  `${tempData[1].location}: ${
+    tempData[1].sensor1 ?? tempData[1].sensor2 ?? tempData[1].sensor3
+  } degrees`
+);
