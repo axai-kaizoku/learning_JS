@@ -1,12 +1,11 @@
 'use strict';
 
-// Logical OR
-let user = '';
-let greeting = `Hello, ${user || 'Stranger'}`;
-// console.log(greeting)
+// Logical AND and OR Assignment
+let dataDownloaded = 10;
 
+let hasBeenDownloaded = dataDownloaded === 100;
+hasBeenDownloaded &&= 'Data download now complete...';
 
+hasBeenDownloaded ||= 'Downloading...';
 
-// Logical AND
-let isUserSmiling = true; // false
-isUserSmiling && console.log('User is smiling')
+console.log(hasBeenDownloaded);
