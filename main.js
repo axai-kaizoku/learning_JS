@@ -1,19 +1,9 @@
 'use script';
 
-let point1 = {
-  x: 4,
-  y: 6,
-};
+tempInFahrenheit = 35;
 
-let point2 = {
-  x: 2,
-  y: 4,
-};
-
-function calcDistance(p1, p2) {
-  return Math.hypot(p2.x - p1.x, p2.y - p1.y);
+function toCelsius (fahrenheit) {
+  return (5 / 9) * (fahrenheit - 32);
 }
 
-console.log(`
-Distance between point1 and point2 is ${calcDistance(point1, point2)}
-`);
+console.log(`${tempInFahrenheit} degrees Fahrenheit is `, toCelsius(tempInFahrenheit), 'degrees Celsius')
