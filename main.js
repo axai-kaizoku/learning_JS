@@ -1,22 +1,16 @@
-'use strict';
+'use script';
 
-const users = [
-  {
-    name: 'Joe',
-    address: {
-      home: '212, River Drive',
-      city: 'New York',
-      country: 'US',
-    },
-  },
-  {
-    name: 'Jane',
-  },
-];
-
-try {
-  console.log(`${users[0].name} lives in ${users[0].address.city}`);
-  console.log(`${users[1].name} lives in ${users[1].address?.city ?? 'a big city'}`);
-} catch (error) {
-  console.log(error.message);
+function computeRectStats(length, width) {
+  let areaRect = Number(length) * Number(width);
+  let perimeterRect = 2 * (Number(length) + Number(width));
+  console.log(`Area: ${areaRect}`);
+  console.log(`Perimeter: ${perimeterRect}`);
 }
+
+let rectALength = 25;
+let rectAWidth = 10;
+computeRectStats(rectALength, rectAWidth);
+
+let rectBLength = 18;
+let rectBWidth = 12;
+computeRectStats(rectBLength, rectBWidth);
