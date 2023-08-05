@@ -26,7 +26,15 @@ const calcBmr = function () {
   }
 };
 
+
+// Call
 console.log(`John's BMI: ${calcBmi.call(john)}`);
 console.log(`John's BMR: ${calcBmr.call(john)}`);
 console.log(`sarah's BMI: ${calcBmi.call(sarah)}`);
 console.log(`sarah's BMR: ${calcBmr.call(sarah)}`);
+
+
+// Bind
+const johnBmi = calcBmi.bind(john);
+const sarahBmi = calcBmi.bind(sarah);
+console.log(sarahBmi());
