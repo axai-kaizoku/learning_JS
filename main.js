@@ -1,16 +1,22 @@
 'use strict';
 
-let students = [
+const users = [
   {
-    id: 1,
-    name: 'Jhonny Sins',
-    age: 17,
+    name: 'Joe',
+    address: {
+      home: '212, River Drive',
+      city: 'New York',
+      country: 'US',
+    },
   },
   {
-    id: 2,
-    name: 'Mia Khalifa',
-    age: 17,
+    name: 'Jane',
   },
 ];
 
-console.log(students[3]?.name ?? 'No record found...');
+try {
+  console.log(`${users[0].name} lives in ${users[0].address.city}`);
+  console.log(`${users[1].name} lives in ${users[1].address?.city ?? 'a big city'}`);
+} catch (error) {
+  console.log(error.message);
+}
