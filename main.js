@@ -1,16 +1,19 @@
 'use script';
 
-function computeRectStats(length, width) {
-  let areaRect = Number(length) * Number(width);
-  let perimeterRect = 2 * (Number(length) + Number(width));
-  console.log(`Area: ${areaRect}`);
-  console.log(`Perimeter: ${perimeterRect}`);
+let point1 = {
+  x: 4,
+  y: 6,
+};
+
+let point2 = {
+  x: 2,
+  y: 4,
+};
+
+function calcDistance(p1, p2) {
+  return Math.hypot(p2.x - p1.x, p2.y - p1.y);
 }
 
-let rectALength = 25;
-let rectAWidth = 10;
-computeRectStats(rectALength, rectAWidth);
-
-let rectBLength = 18;
-let rectBWidth = 12;
-computeRectStats(rectBLength, rectBWidth);
+console.log(`
+Distance between point1 and point2 is ${calcDistance(point1, point2)}
+`);
