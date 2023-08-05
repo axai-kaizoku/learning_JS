@@ -1,21 +1,16 @@
 'use strict';
 
-let restaurants = [
+let students = [
   {
-    name: 'The Bao Boat',
-    category: 'Oriental',
-    location: {
-      lat: 36.88,
-      long: 78.21,
-    },
+    id: 1,
+    name: 'Jhonny Sins',
+    age: 17,
   },
   {
-    name: 'Imperial Diner',
-    category: 'Continental',
-    city: 'Los Angeles',
+    id: 2,
+    name: 'Mia Khalifa',
+    age: 17,
   },
 ];
 
-console.log(
-  `Location: ${restaurants[1].location?.lat ?? 'N/A'} , ${restaurants[1].location?.long ?? 'N/A'}`
-)
+console.log(students[3]?.name ?? 'No record found...');
