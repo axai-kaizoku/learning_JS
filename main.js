@@ -1,11 +1,20 @@
 'use strict';
 
-// Logical AND and OR Assignment
-let dataDownloaded = 10;
+let inputUsername = 'joe';
+let inputPassword = 'joe@901'; // Enter wrong password here
 
-let hasBeenDownloaded = dataDownloaded === 100;
-hasBeenDownloaded &&= 'Data download now complete...';
+const database = {
+  joe: {
+    user: 'Jeo Linder',
+    password: 'joe@901',
+  },
+};
 
-hasBeenDownloaded ||= 'Downloading...';
+let checkPassword = database[inputUsername].password === inputPassword;
 
-console.log(hasBeenDownloaded);
+checkPassword && console.log(`${database[inputUsername].user || `User`} is logged in...`)
+
+// Added this additional feature
+// Play with these operators.
+
+checkPassword ||= console.log('Wrong Password !')
