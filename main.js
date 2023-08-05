@@ -1,26 +1,14 @@
 'use strict';
 
-// let item = 'Potato';
-// let item = 'Kiwi';
-let item = 69;
-let type;
+let temperature = 40;
+let feelTemp = temperature >= 25 ? 'warm' : 'cool';
 
-switch (item) {
-  case 'Apple':
-  case 'Banana':
-  case 'Kiwi':
-  case 'Strawberry':
-    type = 'fruit';
-    break;
-  case 'Lettuce':
-  case 'Potato':
-  case 'Celery':
-  case 'Eggplant':
-    type = 'vegetable';
-    break;
-  default: {
-    throw new Error('Unable to identify item...');
-  }
-}
+// console.log(`Today is a ${feelTemp} day`);
 
-console.log(`${item} is a type of ${type}`);
+
+let cost = 1000;
+let discount = cost < 1000 ? 0 : 10;
+let totalCost = cost - cost * (discount / 100);
+
+console.log(`Original Cost: $${cost}`)
+console.log(`Total Payable: $${totalCost}`)
