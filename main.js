@@ -1,12 +1,19 @@
 'use script';
 
-let user = {
-  name: 'Rob Williams',
-  age: 22,
-  livesIn: 'New Jersey',
-  introduction: function () {
-    return `Hi, my name is ${this.name}. I'm ${this.age} years old and I live in ${this.livesIn}`;
-  },
-};
+const areaOfRect = (l, w) => Number(l) * Number(w);
 
-console.log(user.introduction());
+// console.log(areaOfRect(4, 5));
+
+const perimeterOfRect = (l, w) => 2 * ( Number(l) + Number(w));
+
+// console.log(perimeterOfRect(4, 5));
+
+const createUser = (user, age, isAdmin) => ({
+  user, 
+  age,
+  isAdmin,
+});
+
+let john = createUser('John', 20, true);
+
+console.log(john);
