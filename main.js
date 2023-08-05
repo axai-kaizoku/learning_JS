@@ -21,4 +21,20 @@ let day =
   ? 'Saturday'
   : 'not exactly a real day...';
 
-console.log(`Today is ${day}`)
+// console.log(`Today is ${day}`)
+
+// Actually this is the main part of the excercise
+
+// We have to manually give the input for 'DAY'.
+// But now it's not required.
+
+let DAY = day;
+
+const typeOfDay = 
+  DAY === 'Saturday' || DAY === 'Sunday'
+  ? 'Weekend'
+  : DAY === 'Wednesday'
+  ? 'Hump Day'
+  : 'Weekday';
+
+console.log(typeOfDay)
