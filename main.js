@@ -1,20 +1,17 @@
 'use strict';
 
-let inputUsername = 'joe';
-let inputPassword = 'joe@901'; // Enter wrong password here
-
-const database = {
-  joe: {
-    user: 'Jeo Linder',
-    password: 'joe@901',
+let products = [
+  {
+    name: 'HyperV 4k Projector',
+    cost: 2500,
   },
-};
+  {
+    name: 'Vision HDMI Cable',
+    cost: 10,
+    shipping: 0,
+  },
+];
 
-let checkPassword = database[inputUsername].password === inputPassword;
-
-checkPassword && console.log(`${database[inputUsername].user || `User`} is logged in...`)
-
-// Added this additional feature
-// Play with these operators.
-
-checkPassword ||= console.log('Wrong Password !')
+console.log(`Product: ${products[0].name || 'N/A'}`);
+console.log(`Cost: ${products[0].cost || 'N/A'}`);
+console.log(`Shipping: ${products[0].shipping ?? 2.5}`);
