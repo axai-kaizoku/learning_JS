@@ -1,21 +1,21 @@
 'use strict';
 
-let tempData = [
+let restaurants = [
   {
-    location: 'Block A - East',
-    sensor1: 0,
-    sensor2: 0,
-    sensor3: 4.2,
+    name: 'The Bao Boat',
+    category: 'Oriental',
+    location: {
+      lat: 36.88,
+      long: 78.21,
+    },
   },
   {
-    location: 'Block B - East',
-    sensor1: 0,
-    sensor3: 4,
+    name: 'Imperial Diner',
+    category: 'Continental',
+    city: 'Los Angeles',
   },
 ];
 
 console.log(
-  `${tempData[1].location}: ${
-    tempData[1].sensor1 ?? tempData[1].sensor2 ?? tempData[1].sensor3
-  } degrees`
-);
+  `Location: ${restaurants[1].location?.lat ?? 'N/A'} , ${restaurants[1].location?.long ?? 'N/A'}`
+)
