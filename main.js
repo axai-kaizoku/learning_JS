@@ -1,9 +1,17 @@
 'use script';
 
-tempInFahrenheit = 35;
+const getDay = function () {
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  const today = new Date().getDay();
+  return days[today];
+};
 
-function toCelsius (fahrenheit) {
-  return (5 / 9) * (fahrenheit - 32);
-}
-
-console.log(`${tempInFahrenheit} degrees Fahrenheit is `, toCelsius(tempInFahrenheit), 'degrees Celsius')
+console.log(`Today is ${getDay()}`);
