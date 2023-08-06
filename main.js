@@ -1,16 +1,8 @@
 /** @format */
 
-const Person = function (firstname, lastname, age, email) {
-	this.firstName = firstname;
-	this.lastName = lastname;
-	this.age = age;
-	this.email = email;
-	this.introduction = () => `${this.firstName} is ${this.age} years old.`;
-	this.canDrive = () => this.age >= 18 ? 'Yes' : 'No';
+const averageOfThree = function (a = 0, b = 0, c = 0) {
+	return (a + b + c) / 3;
 };
 
-const Joe = new Person('Joe', 'Manothan', 19, 'joe@joe.com');
-
-console.log(Joe.introduction());
-console.log(Joe.email);
-console.log("Can Joe Drive : ",Joe.canDrive());
+console.log(averageOfThree(1, 2, 3));
+console.log(averageOfThree());
