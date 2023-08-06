@@ -1,11 +1,7 @@
 /** @format */
 
-const calcBmi = function (weight = 70, height = 180) {
-	return {
-		weight,
-		height,
-		bmi: weight / (height / 100) ** 2,
-	};
+const computeReturns = function (principal, rateOfInterest = 3, tenure = 1) {
+	return principal + (principal * rateOfInterest * tenure) / 100;
 };
 
-console.log(calcBmi(65, 180));
+console.log(computeReturns(1000))
