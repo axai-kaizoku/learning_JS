@@ -1,19 +1,17 @@
 'use script';
 
-const areaOfRect = (l, w) => Number(l) * Number(w);
 
-// console.log(areaOfRect(4, 5));
+const rectangle = {
+  width: 20,
+  area() {
+    return (length) => this.width * length;
+  },
+};
 
-const perimeterOfRect = (l, w) => 2 * ( Number(l) + Number(w));
 
-// console.log(perimeterOfRect(4, 5));
-
-const createUser = (user, age, isAdmin) => ({
-  user, 
-  age,
-  isAdmin,
-});
-
-let john = createUser('John', 20, true);
-
-console.log(john);
+try {
+  const areaOfRectangle = rectangle.area();
+  console.log(`Area: ${areaOfRectangle(50)}`);
+} catch (error) {
+  console.log(error.message);
+}
