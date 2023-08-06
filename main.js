@@ -2,22 +2,52 @@
 
 'use strict';
 
-function User(name, age, isAdmin) {
+const Product = function (name, description, cost, stock) {
 	this.name = name;
-	this.age = age;
-	this.isAdmin = isAdmin;
-	this.canDrive = function () {
-		this.age >= 18 ? 'Yes' : 'No'
+	this.description = description;
+	this.cost = cost;
+	this.stock = stock;
+	let revenue = 0;
+
+	this.buy = (qty) => {
+		if (qty <= this.stock) {
+			this.stock -= qty;
+			let costOfOrder = qty * this.cost;
+			revenue += costOfOrder;
+			console.log(`${qty} of ${this.name}: $${costOfOrder}`);
+		} else {
+			console.log(`Out of stock!`);
+		}
 	};
-	this.accessAccounts = () =>
-		isAdmin ? 'You have access...' : 'Access denied...';
-}
+	this.getStock = () =>
+		`Available Quantity (${this.name}): ${this.stock} units\n`;
 
-const john = new User('John', 20, true);
-const jimmy = new User('Jimmy', 17, false);
+	this.salesReport = () => `Total sales for ${this.name}: $${revenue}\n`;
+};
 
-console.log(john.accessAccounts());
-console.log(jimmy.accessAccounts());
+const vPhone = new Product(
+	'vPhone 12 pro',
+	'The fastest smartphone ever',
+	800,
+	25,
+);
 
-// console.log(john);
-// console.log(jimmy);
+const tapBookPro = new Product(
+	'TapBook Pro V2',
+	'Our thinnest laptop ever',
+	1250,
+	40,
+);
+
+vPhone.buy(2);
+vPhone.buy(12);
+
+
+console.log(vPhone.salesReport());
+console.log(vPhone.getStock());
+
+tapBookPro.buy(2);
+tapBookPro.buy(12);
+tapBookPro.buy(12);
+
+console.log(tapBookPro.salesReport());
