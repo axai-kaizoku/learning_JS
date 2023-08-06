@@ -1,8 +1,11 @@
 /** @format */
 
-const averageOfThree = function (a = 0, b = 0, c = 0) {
-	return (a + b + c) / 3;
+const calcBmi = function (weight = 70, height = 180) {
+	return {
+		weight,
+		height,
+		bmi: weight / (height / 100) ** 2,
+	};
 };
 
-console.log(averageOfThree(1, 2, 3));
-console.log(averageOfThree());
+console.log(calcBmi(65, 180));
