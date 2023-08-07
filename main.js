@@ -1,12 +1,10 @@
 /** @format */
 
-const stuff = [
-	['Apple', 'Oranges', 'Banana', 'Kiwi'],
-	['Lettuce', 'Celery', 'Potato', 'Onion'],
-];
+const planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter'];
 
-for (let m = 0; m < stuff.length; m++) {
-	for (let n = 0; n < stuff[m].length; n++) {
-		console.log(stuff[m][n]);
+for (let i = 0; i < planets.length; i++) {
+	if (i !== 3) {
+		continue;
 	}
+	console.log(`Perseverance Rover is on ${planets[i]}`);
 }
