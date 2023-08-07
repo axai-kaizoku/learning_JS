@@ -10,6 +10,7 @@
   "prettier.withNodeModules": true,
   "cSpell.words": [
     "firstname",
-    "lastname"
+    "lastname",
+    "Nums"
   ]
 }
