@@ -1,26 +1,12 @@
 /** @format */
 
-// The 'for-of' and 'for-in' loop
-'use strict';
+const averageOfNums = function () {
+	let sum = 0;
+	for (const i of arguments) {
+		sum += i;
+	}
+	return sum / arguments.length;
+};
 
-const users = [
-	{
-		id: 1,
-		name: 'John',
-		age: 31,
-		profession: 'General Physician',
-	},
-	{
-		id: 2,
-		name: 'jane',
-		age: 29,
-		profession: 'Cardiologist',
-	},
-];
-
-const introduceUser = (user) =>
-	`${user.name} is ${user.age} years old and works as a ${user.profession}`;
-
-for (const user of users) {
-	console.log(introduceUser(user));
-}
+console.log(averageOfNums(1, 2, 3));
+console.log(averageOfNums(3, 4, 5, 6));
