@@ -1,43 +1,13 @@
 /** @format */
 
-// The 'for-of' and 'for-in' loop
-'use strict';
+// while
 
-const products = [
-	{
-		id: 1,
-		name: 'Oranges',
-		quantity: 2,
-		cost: 1.2,
-	},
-	{
-		id: 2,
-		name: 'Chocolate Cake',
-		quantity: 2,
-		cost: 65,
-	},
-	{
-		id: 3,
-		name: 'Coke Zero',
-		quantity: 12,
-		cost: 1.45,
-	},
-];
+let m = 1,
+	oddNums = [];
 
-const totalCost = (item) => {
-	return `Total Cost: $${item.quantity * item.cost}
-------------------------------`;
-};
-
-for (const product of products) {
-	for (const prop in product) {
-		console.log(`${prop}: ${product[prop]}`);
-	}
-	console.log(totalCost(product));
+while (m < 40) {
+	oddNums.push(m);
+	m += 2;
 }
 
-// id: 3
-// name: Coke Zero
-// quantity: 12
-// cost: 1.45
-// Total Cost: $17.4
+console.log(oddNums.toString());
