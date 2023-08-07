@@ -1,7 +1,9 @@
 /** @format */
 
-const computeReturns = function (principal, rateOfInterest = 3, tenure = 1) {
-	return principal + (principal * rateOfInterest * tenure) / 100;
-};
+let sum = 0;
+for (let x = 1; x <= 12; x++) {
+	console.log(`On the ${x} day of Christmas...`);
+	sum += x;
+}
 
-console.log(computeReturns(1000))
+console.log(`Sum of 1 - 12: ${sum}`);
