@@ -1,26 +1,24 @@
 /** @format */
 
-// while
+'use strict';
 
-let m = 1,
-	oddNums = [];
+let m = 0,
+	n = 1,
+	evenNumbers = [],
+	oddNumbers = [];
 
-while (m < 1) {
-	oddNums.push(m);
+// Use the while loop here
+while (m < 100) {
+	evenNumbers.push(m);
 	m += 2;
 }
 
-console.log(oddNums.toString());
-
-// do-while
-
-let n = 1,
-	oddNumsAgain = [];
-
+// Use the do-while loop here
 do {
-	oddNumsAgain.push(n);
-	if (n === 15) break;
+	oddNumbers.push(n);
 	n += 2;
-} while (n < 1);
+} while (n <= 100);
 
-console.log(oddNumsAgain);
+console.log(`Even Numbers (0 - 100): ${evenNumbers.toString()}`);
+console.log('--------------------------------------');
+console.log(`Odd Numbers (0 - 100): ${oddNumbers.toString()}`);
