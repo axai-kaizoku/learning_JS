@@ -1,24 +1,10 @@
 /** @format */
 
-'use strict';
+const loopMe = function (maxCount, counter = 0) {
+	if (counter < maxCount) {
+		console.log(`This should run 10 times ${counter}`);
+		return loopMe(maxCount, counter + 1);
+	}
+};
 
-let m = 0,
-	n = 1,
-	evenNumbers = [],
-	oddNumbers = [];
-
-// Use the while loop here
-while (m < 100) {
-	evenNumbers.push(m);
-	m += 2;
-}
-
-// Use the do-while loop here
-do {
-	oddNumbers.push(n);
-	n += 2;
-} while (n <= 100);
-
-console.log(`Even Numbers (0 - 100): ${evenNumbers.toString()}`);
-console.log('--------------------------------------');
-console.log(`Odd Numbers (0 - 100): ${oddNumbers.toString()}`);
+loopMe(10);
