@@ -1,14 +1,13 @@
 /** @format */
 
-const loopMe = function (maxCount, callback, counter = 0) {
-	if (counter < maxCount) {
-		callback(counter);
-		return loopMe(maxCount,callback,  counter + 1);
+'use strict';
+
+const calcPower = function (num, power = 1) {
+	if (power !== 1) {
+		return num * calcPower(num, power - 1);
 	}
+
+	return num;
 };
 
-const fruits = ['Apples', 'Mango', 'Kiwi']
-
-loopMe(fruits.length, function(count) {
-	console.log(fruits[count])
-});
+console.log(calcPower(2));
