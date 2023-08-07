@@ -1,8 +1,12 @@
 /** @format */
 
-const fruits = ['Apple', 'Banana', 'Kiwi', 'Strawberry', 'Mango'];
+const stuff = [
+	['Apple', 'Oranges', 'Banana', 'Kiwi'],
+	['Lettuce', 'Celery', 'Potato', 'Onion'],
+];
 
-for (let i = 0; i < fruits.length; i++) {
-	if (fruits[i] === 'Kiwi') break;
-	console.log(fruits[i]);
+for (let m = 0; m < stuff.length; m++) {
+	for (let n = 0; n < stuff[m].length; n++) {
+		console.log(stuff[m][n]);
+	}
 }
