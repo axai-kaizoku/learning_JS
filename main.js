@@ -1,10 +1,14 @@
 /** @format */
 
-const loopMe = function loop(maxCount, counter = 0) {
+const loopMe = function (maxCount, callback, counter = 0) {
 	if (counter < maxCount) {
-		console.log(`This should run 10 times ${counter}`);
-		return loop(maxCount, counter + 1);
+		callback(counter);
+		return loopMe(maxCount,callback,  counter + 1);
 	}
 };
 
-loopMe(10);
+const fruits = ['Apples', 'Mango', 'Kiwi']
+
+loopMe(fruits.length, function(count) {
+	console.log(fruits[count])
+});
