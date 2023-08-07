@@ -1,9 +1,9 @@
 /** @format */
 
-const loopMe = function (maxCount, counter = 0) {
+const loopMe = function loop(maxCount, counter = 0) {
 	if (counter < maxCount) {
 		console.log(`This should run 10 times ${counter}`);
-		return loopMe(maxCount, counter + 1);
+		return loop(maxCount, counter + 1);
 	}
 };
 
