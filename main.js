@@ -2,14 +2,14 @@
 
 'use strict';
 
-const calcPower = function (num, power = 1) {
-	if (power !== 1) {
-		return num * calcPower(num, power - 1);
+const isPalindrome = (word) => {
+	let wordArr = [];
+	let revWord = [];
+	for (const w of word) {
+		wordArr.push(w);
+		revWord.push(w);
 	}
-
-	return num;
+	return wordArr.toString() === revWord.reverse().toString();
 };
 
-console.log(calcPower(2, 10));
-console.log(calcPower(10, 2));
-console.log(calcPower(20, 8));
+console.log(isPalindrome('pop') ? 'Is a palidrome!' : 'Not a palindrome...')
