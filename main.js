@@ -1,7 +1,8 @@
-const items = ['Mouse', 'Cable', 'Mic'];
-const itemsCopy = [...items];
+/** @format */
 
-itemsCopy.push('Usb');
+let primaryColor = ['red', 'green', 'blue'];
+let secondaryColor = ['orange', 'green', 'purple'];
 
-console.log(`Items : ${items}`)
-console.log(`Itemscopy : ${itemsCopy}`)
+let colorWheel = [...primaryColor, ...secondaryColor];
+
+console.log(colorWheel);
