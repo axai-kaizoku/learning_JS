@@ -23,8 +23,12 @@ const users = [
 
 const genId = () => parseInt(Math.random() * 1000);
 const withIds = users.map((user) => {
-	user.id = genId();
-	return user;
+	// user.id = genId();
+	// return user;
+	return {
+		id: genId().toString(),
+		...user
+	}
 });
 
 console.log(withIds);
