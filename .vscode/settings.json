@@ -9,8 +9,14 @@
   "prettier.vueIndentScriptAndStyle": true,
   "prettier.withNodeModules": true,
   "cSpell.words": [
+    "dragonball",
     "firstname",
+    "goku",
+    "kira",
     "lastname",
-    "Nums"
+    "luffy",
+    "naruto",
+    "Nums",
+    "onepiece"
   ]
 }
