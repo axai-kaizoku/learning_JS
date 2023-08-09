@@ -1,13 +1,22 @@
-let joe = ['Joe Mandell', 23, 'SWE']
-let [user, , job] = joe;
+/** @format */
 
-// console.log(user,job);
+let restaurants = [
+	{
+		name: 'Taj',
+		category: 'Biryani',
+		area: 'Ambedkar Chowk',
+	},
+	{
+		name: 'Friends',
+		category: 'fastfood',
+		area: 'Gopal Nagar',
+	},
+];
 
-let isLoading = true;
-let showUI = false;
+const findDetails = (name) => {
+	let findPlace = restaurants.find((elem) => elem.name === name);
+	return findPlace ? [findPlace.category, findPlace.area] : [];
+};
 
-[isLoading, showUI] = [showUI, isLoading]
-
-// console.log(`isLoading: ${isLoading}`)
-// console.log(`showUI: ${showUI}`)
-
+let [category, area] = findDetails('Friends');
+console.log(`Category: ${category}, area: ${area}`);
