@@ -1,11 +1,13 @@
-'use strict';
+let joe = ['Joe Mandell', 23, 'SWE']
+let [user, , job] = joe;
 
-const genStars = (count) => Array.from(Array(count), () => '*')
+// console.log(user,job);
 
-for (let i = 1; i <= 6; i++) {
-  console.log(genStars(i));
-}
+let isLoading = true;
+let showUI = false;
 
-for (let i = 6; i >= 1; i--) {
-  console.log(genStars(i));
-}
+[isLoading, showUI] = [showUI, isLoading]
+
+// console.log(`isLoading: ${isLoading}`)
+// console.log(`showUI: ${showUI}`)
+
