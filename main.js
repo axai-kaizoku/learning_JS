@@ -1,5 +1,7 @@
 /** @format */
 
-const isPalindrome = (word) => Array.from(word).reverse().join('') === word;
+const getArrayArgs = function () {
+	return Array.from(arguments);
+};
 
-console.log(isPalindrome('civic'));
+console.log(getArrayArgs( 4, 5, 6, 'Hello'));
