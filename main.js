@@ -1,7 +1,6 @@
 /** @format */
 
-const getArrayArgs = function () {
-	return Array.from(arguments);
-};
+const iLoveIceCreams = (flavorArray) =>
+	Array.from(flavorArray, (elem) => `I love ${elem} ice cream!`);
 
-console.log(getArrayArgs( 4, 5, 6, 'Hello'));
+console.log(iLoveIceCreams(['Mango', 'Vanilla', 'Butterscotch']));
