@@ -1,6 +1,6 @@
 /** @format */
 
-const iLoveIceCreams = (flavorArray) =>
-	Array.from(flavorArray, (elem) => `I love ${elem} ice cream!`);
+const randomNums = (count) =>
+	Array.from(new Array(count), (elem) => parseInt(Math.random() * 100));
 
-console.log(iLoveIceCreams(['Mango', 'Vanilla', 'Butterscotch']));
+console.log(randomNums(5));
