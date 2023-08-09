@@ -1,22 +1,8 @@
 /** @format */
 
-let restaurants = [
-	{
-		name: 'Taj',
-		category: 'Biryani',
-		area: 'Ambedkar Chowk',
-	},
-	{
-		name: 'Friends',
-		category: 'fastfood',
-		area: 'Gopal Nagar',
-	},
-];
+let fruits = ['Apple', 'Kiwi', 'Pineapple', 'Watermelon'];
+let [pie, smoothie, ...rest] = fruits;
 
-const findDetails = (name) => {
-	let findPlace = restaurants.find((elem) => elem.name === name);
-	return findPlace ? [findPlace.category, findPlace.area] : [];
-};
-
-let [category, area] = findDetails('Friends');
-console.log(`Category: ${category}, area: ${area}`);
+console.log(`I love ${pie} pie`);
+console.log(`Let's whip up a ${smoothie} smoothie`);
+console.log(`Remaining fruits: ${rest}`);
