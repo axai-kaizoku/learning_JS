@@ -30,5 +30,5 @@ const withIds = users.map((user) => {
 		...user
 	}
 });
-
+ 
 console.log(withIds);
