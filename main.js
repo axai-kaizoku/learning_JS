@@ -1,15 +1,14 @@
 /** @format */
 
-'use strict';
+const str =
+	'House No. 3-4-108, Shanthinagar, Sircilla, Rajanna Sircilla - 505301';
 
-const isPalindrome = (word) => {
-	let wordArr = [];
-	let revWord = [];
-	for (const w of word) {
-		wordArr.push(w);
-		revWord.push(w);
-	}
-	return wordArr.toString() === revWord.reverse().toString();
-};
+// console.log(str.split(', '));
 
-console.log(isPalindrome('pop') ? 'Is a palidrome!' : 'Not a palindrome...')
+const strng = ['Hello!', 'How are you?', 'Nice to meet you!'];
+
+// for (let i in strng){
+// 	console.log(strng[i])
+// }
+
+console.log(strng.join());
