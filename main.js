@@ -1,34 +1,33 @@
-const users = [
+/** @format */
+
+'use strict';
+
+const citizens = [
 	{
-		first_name: 'Ichigo',
-		last_name: 'Kurasaki',
-		email: 'kichigo@mappa.com'
+		id: 1,
+		name: 'John Smith',
+		age: 65,
 	},
 	{
-		first_name: 'Naruto',
-		last_name: 'Uzumaki',
-		email: 'uzumakinaruto@jp.com'
+		id: 2,
+		name: 'Roger McShane',
+		age: 68,
 	},
 	{
-		first_name: 'Aizen',
-		last_name: 'Kotsuke',
-		email: 'aizenk@bleach.com'
+		id: 3,
+		name: 'Dolly McShane',
+		age: 55,
 	},
 	{
-		first_name: 'Luffy',
-		last_name: 'D',
-		email: 'monkeydluffy@op.com'
+		id: 4,
+		name: 'Joan Mockery',
+		age: 61,
 	},
 ];
 
-const genId = () => parseInt(Math.random() * 1000);
-const withIds = users.map((user) => {
-	// user.id = genId();
-	// return user;
-	return {
-		id: genId().toString(),
-		...user
-	}
+const seniorCitizens = citizens.map(function (person) {
+	person.isSeniorCitizens = person.age >= 60;
+	return person;
 });
- 
-console.log(withIds);
+
+console.log(seniorCitizens);
