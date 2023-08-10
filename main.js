@@ -2,32 +2,20 @@
 
 'use strict';
 
-const citizens = [
-	{
-		id: 1,
-		name: 'John Smith',
-		age: 65,
-	},
-	{
-		id: 2,
-		name: 'Roger McShane',
-		age: 68,
-	},
-	{
-		id: 3,
-		name: 'Dolly McShane',
-		age: 55,
-	},
-	{
-		id: 4,
-		name: 'Joan Mockery',
-		age: 61,
-	},
-];
+function genNum() {
+	const randomNum = [];
+	let num;
+	for (let i = 0; i < 10; i++) {
+		num = Math.floor(10 + Math.random() * 1000);
+		randomNum.push(num);
+	}
+	return randomNum;
+}
 
-const seniorCitizens = citizens.map(function (person) {
-	person.isSeniorCitizens = person.age >= 60;
-	return person;
-});
+const numArray = [...genNum()];
+const asc = [...numArray].sort((a, b) => a - b);
+const desc = [...numArray].sort((a, b) => b - a);
 
-console.log(seniorCitizens);
+console.log(`Ascending: ${asc}`);
+console.log(`Descending: ${desc}`);
+console.log(`Original: ${numArray}`);
