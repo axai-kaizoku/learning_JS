@@ -2,8 +2,8 @@
 
 'use strict';
 
-const arrC = [1, 2, 3, 1, 23, 10, { id: 1 }, { id: 2 }, 'Hello'];
-const arrD = [1, 2, 3, 1, 23, 10, { id: 1 }, { id: 2 }, 'Hello'];
+const arrC = ['Cheese Cubes', 'Pasta', 'Milk', 'Coke Zero', 'Apples'];
+const arrD = ['Pasta', 'Cheese Cubes', 'Apples', 'Milk', 'Coke Zero'];
 
 const hasSameContents = (arrA, arrB) => {
 	const stringA = arrA.map((el) => JSON.stringify(el));
