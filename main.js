@@ -1,34 +1,25 @@
+/** @format */
+
 'use strict';
 
-const users = [
-  {
-    name: 'John M',
-    isVerified: true,
-  },
-  {
-    name: 'Jane S',
-    isVerified: false,
-  },
-  {
-    name: 'Wanda M',
-    isVerified: true,
-  },
-  {
-    name: 'Tony S',
-    isVerified: false,
-  },
-  {
-    name: 'Emilio Q',
-    isVerified: true,
-  },
-  {
-    name: 'Jonathan W',
-    isVerified: false,
-  },
+const coords_1 = [
+	[0, 3],
+	[11, 7],
+	[24, 4],
+	[13, 35],
+	[54, 33],
+	[78, 39],
+	[90, 73],
+	[
+		[12, 45],
+		[43, 56],
+	],
+	[11, 9],
+	[
+		[45, 87],
+		[98, 75],
+	],
 ];
 
-const isVerified = users.filter(({ isVerified }) => isVerified).map(({name}) => name);
-const notVerified = users.filter(({ isVerified }) => !isVerified).map(({name}) => name);
-
-console.log(`Verified: ${isVerified}`);
-console.log(`Not Verified: ${notVerified}`);
+const flatArr = coords_1.flat(2).filter((elem) => `${elem}`);
+console.log(flatArr);
