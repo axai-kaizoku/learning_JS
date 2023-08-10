@@ -1,31 +1,20 @@
-/** @format */
-
 'use strict';
 
-const hollywoodDirectors = [
-	'Martin Scorsese',
-	'David Dhawan',
-	'Steven Spielberg',
-	'Christopher Nolan',
-	'Quentin Tarantino',
-	'James Cameron',
-];
+function genNum() {
+	const randomNum = [];
+	let num;
+	for (let i = 0; i < 10; i++) {
+		num = Math.floor(10 + Math.random() * 1000);
+		randomNum.push(num);
+	}
+	return randomNum;
+}
 
+const numArray = [...genNum()];
+const evenNums = numArray.filter((elem) => elem % 2 === 0)
+const oddNums = numArray.filter((elem) => elem % 2 !== 0)
 
-const removeAndInsert = (arr, elem, newElem) => {
-	const findElem = arr.findIndex((e) => e === elem);
-	const tempArray = [...arr];
-	tempArray.splice(findElem, 1, newElem);
-	return tempArray;
-};
+console.log(`\nEven: ${evenNums}\n`)
+console.log(`Odd: ${oddNums}\n`)
 
-const topThree = (arr) => arr.slice(0, 3);
-
-const revisedList = removeAndInsert(
-	hollywoodDirectors,
-	'David Dhawan',
-	'Davis Diley',
-);
-const directors = topThree(revisedList);
-
-console.log(`Hollywood Masterclass featuring ${directors}`);
+console.log(`Original: ${numArray}\n`);
