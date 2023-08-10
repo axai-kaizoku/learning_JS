@@ -1,35 +1,34 @@
-/** @format */
-
 'use strict';
 
-const products = [
-	{
-		name: 'HEPA filter',
-		isAvailable: true,
-	},
-	{
-		name: 'Datacables',
-		isAvailable: false,
-	},
-	{
-		name: 'Bags',
-		isAvailable: true,
-	},
-	{
-		name: 'Shoes',
-		isAvailable: true,
-	},
-	{
-		name: 'Watch',
-		isAvailable: false,
-	},
+const users = [
+  {
+    name: 'John M',
+    isVerified: true,
+  },
+  {
+    name: 'Jane S',
+    isVerified: false,
+  },
+  {
+    name: 'Wanda M',
+    isVerified: true,
+  },
+  {
+    name: 'Tony S',
+    isVerified: false,
+  },
+  {
+    name: 'Emilio Q',
+    isVerified: true,
+  },
+  {
+    name: 'Jonathan W',
+    isVerified: false,
+  },
 ];
 
-const isAvailable = products.filter((elem) => elem.isAvailable);
-console.log(isAvailable);
+const isVerified = users.filter(({ isVerified }) => isVerified).map(({name}) => name);
+const notVerified = users.filter(({ isVerified }) => !isVerified).map(({name}) => name);
 
-const dispProducts = (arr) => {
-	arr.forEach((elem) => console.log(elem));
-};
-
-dispProducts(products);
+console.log(`Verified: ${isVerified}`);
+console.log(`Not Verified: ${notVerified}`);
