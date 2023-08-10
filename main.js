@@ -2,50 +2,46 @@
 
 'use strict';
 
-const crew = [
+const perfumes = [
 	{
 		id: 1,
-		name: 'Luffy',
-		age: 18,
+		brand: 'Fruity by Kiwi 50ml',
+		cost: 300,
 	},
 	{
 		id: 2,
-		name: 'Zoro',
-		age: 19,
+		brand: 'Silly Smelly',
+		cost: 575,
 	},
 	{
 		id: 3,
-		name: 'Brook',
-		age: 100,
+		brand: 'Ocean Mist by Ventuo',
+		cost: 1243,
 	},
 	{
 		id: 4,
-		name: 'Nami',
-		age: 21,
+		brand: 'Spotlight',
+		cost: 991,
 	},
 	{
 		id: 5,
-		name: 'Robin',
-		age: 30,
-	},
-	{
-		id: 6,
-		name: 'Chopper',
-		age: 16,
+		brand: 'Horrendous by Britney',
+		cost: 230,
 	},
 ];
 
-const displayList = (arr, sortFn) => {
-	sortFn([...arr]).forEach((elem) =>
-		console.log(`${elem.name} | ${elem.age} years old`),
-	);
+const mostExpensive = [...perfumes].sort((a, b) => b.cost - a.cost)[0];
+
+const cheapest = [...perfumes].sort((a, b) => a.cost - b.cost)[0];
+
+console.log(`Most Expensive: ${mostExpensive.brand} at $${mostExpensive.cost}`);
+console.log(`Cheapest: ${cheapest.brand} at $${cheapest.cost}`);
+
+const dispasc = (arr) => {
+	let asc = [];
+	arr.forEach((elem) => asc.push(elem.cost));
+	asc.sort((a, b) => b - a)
+	console.log(asc)
 };
 
-const byAgeAsc = (arr) => arr.sort((a, b) => a.age - b.age);
-const byAgeDesc = (arr) => arr.sort((a, b) => b.age - a.age);
-const byNameAsc = (arr) =>
-	arr.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
-const byNameDesc = (arr) =>
-	arr.sort((a, b) => (a.name < b.name ? 1 : a.name > b.name ? -1 : 0));
-
-displayList(crew, byNameDesc);
+// dispasc(perfumes);
