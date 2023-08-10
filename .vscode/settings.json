@@ -9,6 +9,8 @@
   "prettier.vueIndentScriptAndStyle": true,
   "prettier.withNodeModules": true,
   "cSpell.words": [
+    "Datacables",
+    "disp",
     "dragonball",
     "firstname",
     "goku",

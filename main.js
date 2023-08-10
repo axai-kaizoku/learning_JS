@@ -1,38 +1,35 @@
+/** @format */
+
 'use strict';
 
-const crew = [
+const products = [
 	{
-		name: 'Luffy',
-		age: 18,
-		role: 'Captain',
+		name: 'HEPA filter',
+		isAvailable: true,
 	},
 	{
-		name: 'Zoro',
-		age: 19,
-		role: 'Swordsman',
+		name: 'Datacables',
+		isAvailable: false,
 	},
 	{
-		name: 'Brook',
-		age: 100,
-		role: 'musician',
+		name: 'Bags',
+		isAvailable: true,
 	},
 	{
-		name: 'Nami',
-		age: 21,
-		role: 'navigator',
+		name: 'Shoes',
+		isAvailable: true,
 	},
 	{
-		name: 'Robin',
-		age: 30,
-		role: 'archeologist',
-	},
-	{
-		name: 'Chopper',
-		age: 16,
-		role: 'doctor',
+		name: 'Watch',
+		isAvailable: false,
 	},
 ];
 
-const findCrewmen = ([prop, val], arr) => arr.filter((elem) => elem[prop] === val);
+const isAvailable = products.filter((elem) => elem.isAvailable);
+console.log(isAvailable);
 
-console.log(findCrewmen(['role', 'navigator'], crew))
+const dispProducts = (arr) => {
+	arr.forEach((elem) => console.log(elem));
+};
+
+dispProducts(products);
