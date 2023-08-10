@@ -2,24 +2,30 @@
 
 'use strict';
 
-const coords_1 = [
-	[0, 3],
-	[11, 7],
-	[24, 4],
-	[13, 35],
-	[54, 33],
-	[78, 39],
-	[90, 73],
+const coords_2 = [
 	[
 		[12, 45],
 		[43, 56],
 	],
-	[11, 9],
 	[
 		[45, 87],
 		[98, 75],
 	],
+	[
+		[11, 3],
+		[34, 5],
+	],
+	[
+		[42, 67],
+		[8, 95],
+	],
 ];
 
-const flatArr = coords_1.flat(2).filter((elem) => `${elem}`);
-console.log(flatArr);
+const calcDistance = ([x1, y1], [x2, y2]) =>
+	Number(Math.hypot(x2 - x1, y2 - y1).toPrecision(4));
+const shortestRoute = coords_2
+	.flatMap(([p1, p2]) => calcDistance(p1, p2))
+	.filter((elem) => elem)
+	.sort((a, b) => b - a);
+
+console.log(shortestRoute);
