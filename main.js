@@ -1,47 +1,12 @@
-/** @format */
-
 'use strict';
 
-const perfumes = [
-	{
-		id: 1,
-		brand: 'Fruity by Kiwi 50ml',
-		cost: 300,
-	},
-	{
-		id: 2,
-		brand: 'Silly Smelly',
-		cost: 575,
-	},
-	{
-		id: 3,
-		brand: 'Ocean Mist by Ventuo',
-		cost: 1243,
-	},
-	{
-		id: 4,
-		brand: 'Spotlight',
-		cost: 991,
-	},
-	{
-		id: 5,
-		brand: 'Horrendous by Britney',
-		cost: 230,
-	},
-];
+const keys = ['XDC-102-2206', 'HXC-754-1510', 'XXX-998-0311']
+const dateStrings = keys.map((elem) => elem.slice(8));
+console.log(dateStrings)
 
-const mostExpensive = [...perfumes].sort((a, b) => b.cost - a.cost)[0];
+const keyCodes = keys.map((elem) => elem.slice(4, 7))
+console.log(keyCodes)
 
-const cheapest = [...perfumes].sort((a, b) => a.cost - b.cost)[0];
+const key = keys.map((elem) => elem.slice(0, 3))
+console.log(key)
 
-console.log(`Most Expensive: ${mostExpensive.brand} at $${mostExpensive.cost}`);
-console.log(`Cheapest: ${cheapest.brand} at $${cheapest.cost}`);
-
-const dispasc = (arr) => {
-	let asc = [];
-	arr.forEach((elem) => asc.push(elem.cost));
-	asc.sort((a, b) => b - a)
-	console.log(asc)
-};
-
-// dispasc(perfumes);
