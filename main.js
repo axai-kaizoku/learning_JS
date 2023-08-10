@@ -2,20 +2,50 @@
 
 'use strict';
 
-function genNum() {
-	const randomNum = [];
-	let num;
-	for (let i = 0; i < 10; i++) {
-		num = Math.floor(10 + Math.random() * 1000);
-		randomNum.push(num);
-	}
-	return randomNum;
-}
+const crew = [
+	{
+		id: 1,
+		name: 'Luffy',
+		age: 18,
+	},
+	{
+		id: 2,
+		name: 'Zoro',
+		age: 19,
+	},
+	{
+		id: 3,
+		name: 'Brook',
+		age: 100,
+	},
+	{
+		id: 4,
+		name: 'Nami',
+		age: 21,
+	},
+	{
+		id: 5,
+		name: 'Robin',
+		age: 30,
+	},
+	{
+		id: 6,
+		name: 'Chopper',
+		age: 16,
+	},
+];
 
-const numArray = [...genNum()];
-const asc = [...numArray].sort((a, b) => a - b);
-const desc = [...numArray].sort((a, b) => b - a);
+const displayList = (arr, sortFn) => {
+	sortFn([...arr]).forEach((elem) =>
+		console.log(`${elem.name} | ${elem.age} years old`),
+	);
+};
 
-console.log(`Ascending: ${asc}`);
-console.log(`Descending: ${desc}`);
-console.log(`Original: ${numArray}`);
+const byAgeAsc = (arr) => arr.sort((a, b) => a.age - b.age);
+const byAgeDesc = (arr) => arr.sort((a, b) => b.age - a.age);
+const byNameAsc = (arr) =>
+	arr.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+const byNameDesc = (arr) =>
+	arr.sort((a, b) => (a.name < b.name ? 1 : a.name > b.name ? -1 : 0));
+
+displayList(crew, byNameDesc);
