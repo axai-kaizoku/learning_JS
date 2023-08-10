@@ -2,15 +2,30 @@
 
 'use strict';
 
-const desk = ['Laptop', 'Mouse', 'Speakers', 'Monitors', 'Microphone'];
+const hollywoodDirectors = [
+	'Martin Scorsese',
+	'David Dhawan',
+	'Steven Spielberg',
+	'Christopher Nolan',
+	'Quentin Tarantino',
+	'James Cameron',
+];
 
-const move = (arr, start, count, moveTo) => {
-	const clone = [...arr];
-	clone.splice(moveTo, 0, ...clone.splice(start, count));
-	return clone;
+
+const removeAndInsert = (arr, elem, newElem) => {
+	const findElem = arr.findIndex((e) => e === elem);
+	const tempArray = [...arr];
+	tempArray.splice(findElem, 1, newElem);
+	return tempArray;
 };
 
-let newDesk = move(desk, 2, 2, 1);
+const topThree = (arr) => arr.slice(0, 3);
 
-let newDesk1 = move(desk, 0, 1, 1);
-console.log(newDesk1);
+const revisedList = removeAndInsert(
+	hollywoodDirectors,
+	'David Dhawan',
+	'Davis Diley',
+);
+const directors = topThree(revisedList);
+
+console.log(`Hollywood Masterclass featuring ${directors}`);
