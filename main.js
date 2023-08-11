@@ -2,25 +2,7 @@
 
 'use strict';
 
-const words = ['Civic:', 'Seltos', 'Car', 'Noon', 'Refer', 'Tenet', 'Design'];
+const str1 = 'Name: John, Age: 20, Profession: Web Developer';
+const age = str1.substring(str1.search('Age'), 19);
 
-const isPalindrome = (str) => {
-	const starAProc = str
-		.toLowerCase()
-		.replaceAll(/\s/g, '')
-		.replaceAll(/[:;'"!@#$%^&*]/g, '');
-
-	const starBProc = str
-		.toLowerCase()
-		.replaceAll(/\s/g, '')
-		.replaceAll(/[:;'"!@#$%^&*]/g, '')
-		.split('')
-		.reverse()
-		.join('');
-
-	return starAProc === starBProc;
-};
-
-words.forEach((w) => {
-	console.log(`${w} ${isPalindrome(w) ? 'is' : 'is not'} a palindrome`);
-});
+console.log(age);
