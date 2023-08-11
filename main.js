@@ -9,4 +9,6 @@ const getDistance = (str) => {
 	return str.matchAll(pattern);
 };
 
-console.log(getDistance(message).next().value[0]);
+for (const dist of getDistance(message)) {
+	console.log(dist.groups.miles);
+}
