@@ -2,78 +2,42 @@
 
 'use strict';
 
-const Car = function () {
-	let brand = '';
-	let model = '';
-	let transmission = '';
-	let color = '';
-	let changeLog = [];
-	Object.defineProperties(this, {
-		id: {
-			enumerable: true,
-			value: `CAR-012X-DB1`,
+const user = {
+	id: 1,
+	name: 'Axai Y',
+	age: 21,
+	home: {
+		address: '3-4-108, ward-32, shanthinagar',
+		city: 'Sircilla',
+		country: 'India',
+		favColors: ['Blue', 'Black'],
+		loc: {
+			lat: 61.2034,
+			long: 34.2019,
 		},
-		brand: {
-			enumerable: true,
-			set(val) {
-				changeLog.push(`Brand changed to ${val}`);
-				brand = val;
-			},
-			get() {
-				return brand;
-			},
-		},
-		model: {
-			enumerable: true,
-			set(val) {
-				changeLog.push(`Model changed to ${val}`);
-				model = val;
-			},
-			get() {
-				return model;
-			},
-		},
-		transmission: {
-			enumerable: true,
-			set(val) {
-				changeLog.push(`Transmission changed to ${val}`);
-				transmission = val;
-			},
-			get() {
-				return transmission;
-			},
-		},
-		color: {
-			enumerable: true,
-			set(val) {
-				changeLog.push(`Color changed to ${val}`);
-				color = val;
-			},
-			get() {
-				return color;
-			},
-		},
-		changeLog: {
-			enumerable: true,
-			get() {
-				return changeLog;
-			},
-		},
-	});
+	},
 };
 
-const Civic = new Car();
+const deepCopy = function (obj) {
+	let tempObj = [];
+	for (let key in obj) {
+		tempObj = {
+			...tempObj,
+			[key]:
+				typeof obj[key] === 'object' && !Array.isArray(obj[key])
+					? { ...deepCopy(obj[key]) }
+					: typeof obj[key] === 'object' && Array.isArray(obj[key])
+					? [...obj[key]]
+					: obj[key],
+		};
+	}
+	return tempObj;
+};
 
-Civic.brand = 'Honda';
-Civic.model = 'Civic';
-Civic.transmission = 'AT';
-Civic.color = 'Galaxy Grey';
-
-Civic.model = 'Civic 1.8S';
-Civic.color = 'Pearl White';
-
-for (let prop in Civic) {
-	console.log(`${prop}: ${Civic[prop]}`);
-}
-
-console.log(Civic.changeLog);
+let axai = deepCopy(user);
+axai.age = 22;
+axai.home.address = '2334, Ganesh nagar';
+axai.home.loc.lat = 43;
+axai.home.favColors = ['White']
+console.log('Original: ', user)
+console.log('Deepcopied: ', axai)

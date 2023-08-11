@@ -9,6 +9,7 @@
   "prettier.vueIndentScriptAndStyle": true,
   "prettier.withNodeModules": true,
   "cSpell.words": [
+    "Axai",
     "Datacables",
     "disp",
     "dragonball",
