@@ -9,5 +9,6 @@ const user = {
 	country: 'India',
 };
 
-const findVal = (val, obj) => Object.values(obj).includes(val);
-console.log(findVal('Sircilla', user));
+for (let [key, val] of Object.entries(user)) {
+	console.log(key, val);
+}
