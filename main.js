@@ -1,13 +1,12 @@
 /** @format */
 
 'use strict';
-const post =
-	'The Calzone at the #Pizza Mill #foodie #calzone #italian #dindin #foodpics #foodblogger #weekend #fun';
 
-	const getTags = (post) => {
-		const pattern = /(?<=#)\w+/gi;
-		const detect = post.match(pattern);
-		return detect && detect.length > 1 ? detect : detect[0];
-	}
+const message =
+	'Rivercomb is 200 miles from the station and about 150 miles from the airport';
+const getDistance = (str) => {
+	const pattern = /(?<miles>\d+(?!miles))/g;
+	return str.matchAll(pattern);
+};
 
-	console.log(getTags(post));
+console.log(getDistance(message).next().value[0]);
