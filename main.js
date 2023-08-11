@@ -2,12 +2,13 @@
 
 'use strict';
 
-const steps = 6;
+const post =
+	'This waffle is brilliant! #foodie #waffles #instafood #nutella #chocolate #hazelnut #icecream';
 
-for (let x = 1; x <= steps; x++) {
-	console.log(`${' '.repeat(x)}${'*'.repeat(steps + 1 - x)}`);
-}
+const getTags = (post) => {
+	const pattern = /(?<=#)\w+/gi;
+	const detectTags = post.match(pattern);
+	return detectTags && detectTags.length > 1 ? detectTags : detectTags[0];
+};
 
-for (let x = steps; x >= 1; x--) {
-	console.log(`${' '.repeat(x)}${'*'.repeat(steps + 1 - x)}`);
-}
+console.log(getTags(post));
