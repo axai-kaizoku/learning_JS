@@ -3,16 +3,24 @@
 'use strict';
 
 const User = function () {
+	let name= '';
 	Object.defineProperties(this, {
 		id: {
 			enumerable: true,
-			writable: false,
-			configurable: false,
-			value: `UID-${parseInt(Math.random() * 30000)}-XZ`,
+			value: `UID-${parseInt(Math.random() * 32390)}-XZ`,
+		},
+		name: {
+			enumerable: true,
+			get() {
+				return name;
+			},
+			set(val) {
+				name = val;
+			},
 		},
 	});
 };
 
 let joe = new User();
-// joe.id = '12341297';
-console.log(joe);
+joe.name = 'Joe Mockery';
+console.log("\n",joe.id,"\n", joe.name);
