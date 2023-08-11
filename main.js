@@ -1,30 +1,24 @@
 /** @format */
+
 'use strict';
-const user = {
-	id: 1,
-	name: 'Axai Y',
-	age: 21,
-	address: '3-4-108, ward-32, shanthinagar',
-	city: 'Sircilla',
-	country: 'India',
+
+const book = {
+	isbn: '0-671-00410-7',
+	title: 'Contact',
+	author: 'Carl Sagan',
+	publisher: 'Pocket Books',
 };
 
-const deepCopy = function (obj) {
-	let tempObj = {};
-	for (let [key, value] of Object.entries(obj)) {
-		tempObj = {
-			...tempObj,
-			[key]:
-				typeof value === 'object' && !Array.isArray(value)
-					? { ...deepCopy(value) }
-					: typeof value === 'object' && Array.isArray(value)
-					? [...value]
-					: value,
-		};
-	}
-	return tempObj;
-};
+const findKey = (val, obj) => Object.keys(obj).includes(val);
+console.log(`ISBN: ${findKey('isbn', book) ? 'Yes' : 'No'}`);
 
-let axai = deepCopy(user);
+const findValue = (val, obj) => Object.values(obj).includes(val);
+console.log(
+	`Did Carl Sagan write the book? ${
+		findValue('Carl Sagan', book) ? 'Yes' : 'No'
+	}`,
+);
 
-console.log(axai);
+for (const [key, value] of Object.entries(book)) {
+	console.log(`${key}: ${value}`);
+}
