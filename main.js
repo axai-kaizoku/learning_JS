@@ -14,6 +14,14 @@ const tsla = {
 	},
 };
 
-let { stName: stock, stCurrPrc: value, stExc: exchange } = tsla;
+let {
+	stName: stock,
+	stCurrPrc: value,
+	stExc: exchange,
+	stDetails: { name: company, ceo, hq },
+	...rest
+} = tsla;
 
 console.log(`${stock} is trading for $${value} on ${exchange}`);
+console.log(`${company} is headquartered in ${hq} and headed by ${ceo}`);
+console.log(rest);
