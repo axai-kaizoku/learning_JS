@@ -2,26 +2,32 @@
 
 'use strict';
 
-const tsla = {
-	stIdx: 2013234,
-	stName: 'TSLA',
-	stCurrPrc: 836.16,
-	stExc: 'NASDAQ',
-	stDetails: {
-		name: 'TESLA, Inc',
-		ceo: 'Elon Musk',
-		hq: 'Paolo Alto, California, United States',
+const apple = {
+	id: 209891,
+	company: 'Apple Inc',
+	exchange: 'NASDAQ',
+	symbol: 'AAPL',
+	currPrice: 120.07,
+	details: {
+		ceo: 'Tim Cook',
+		hq: 'Cupertino, California, US',
 	},
 };
 
-let {
-	stName: stock,
-	stCurrPrc: value,
-	stExc: exchange,
-	stDetails: { name: company, ceo, hq },
+// Write your code below this line
+const {
+	company,
+	exchange,
+	currPrice,
+	details: { ceo },
 	...rest
-} = tsla;
-
-console.log(`${stock} is trading for $${value} on ${exchange}`);
-console.log(`${company} is headquartered in ${hq} and headed by ${ceo}`);
-console.log(rest);
+} = apple;
+// Write your code above this line
+try {
+	console.log(
+		`${company} headed by ${ceo} was trading for $${currPrice} on ${exchange}`,
+	);
+	// console.log(rest)
+} catch (error) {
+	console.log('Stock data could not be accessed...');
+}
