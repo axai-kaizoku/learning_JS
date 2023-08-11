@@ -1,57 +1,29 @@
 /** @format */
-
 'use strict';
 
-const productA = {
-	category: 'Air Conditioners',
-	brand: 'Samsung',
-	model: 'XTR-15-5S',
-	type: 'Split',
-	cost: 1200,
-	wiFiEnabled: false,
-	details: {
-		compressor: 'Tecumseh',
-		capacity: 1.5,
-		powerConsumption: 1200,
-		type: 'Rotary',
+const book1 = {
+	id: 1,
+	title: 'Freakonomics',
+	publisher: 'Harper Torch',
+	cost: 7.99,
+	isbn10: '0-06-124270-5',
+	overview() {
+		return `${this.title}, published by ${this.publisher} retails for $${this.cost}`;
 	},
 };
-// Write your code below this line
-const deepCopy = function (obj) {
-	let tempObj = {};
-	for (let key in obj) {
-		tempObj = {
-			...tempObj,
-			[key]:
-				typeof obj[key] === 'object' && !Array.isArray(obj[key])
-					? { ...deepCopy(obj[key]) }
-					: typeof obj[key] === 'object' && Array.isArray(obj[key])
-					? [...obj[key]]
-					: obj[key],
-		};
-	}
-	return tempObj;
+
+const book2 = {
+	id: 2,
+	title: 'Jurassic Park',
+	publisher: 'Arrow',
+	cost: 4.99,
 };
-// Write your code above this line
-let productB = deepCopy(productA);
-productB.model = 'XJR-20W';
-productB.type = 'Window';
-productB.cost = 800;
-productB.details.compressor = 'Samsung';
 
-console.log(`Product A | Model: ${productA.model}`);
-console.log(`Product A | Type: ${productA.type}`);
-console.log(`Product A | Cost: ${productA.cost}`);
-console.log(`Product A | Compressor: ${productA.details.compressor}`);
+const showDetails = (book) =>
+	// 'overview' in book
+	book.hasOwnProperty('overview')
+		? console.log(book.overview())
+		: console.log('Unable to show details...');
 
-console.log(`Product B | Model: ${productB.model}`);
-console.log(`Product B | Type: ${productB.type}`);
-console.log(`Product B | Cost: ${productB.cost}`);
-console.log(`Product B | Compressor: ${productB.details.compressor}`);
-console.log(
-	`CONCLUSION: ${
-		Object.is(productA, productB)
-			? 'Both objects are still the same. productB has mutated productA'
-			: 'productB is now a deep clone of productA'
-	}`,
-);
+showDetails(book1);
+showDetails(book2);
