@@ -2,24 +2,23 @@
 
 'use strict';
 
-const user = {
-	id: 1,
-	name: 'Axai Y',
-	age: 21,
-	home: {
-		address: '3-4-108, ward-32, shanthinagar',
-		city: 'Sircilla',
-		country: 'India',
-		favColors: ['Blue', 'Black'],
-		loc: {
-			lat: 61.2034,
-			long: 34.2019,
-		},
+const productA = {
+	category: 'Air Conditioners',
+	brand: 'Samsung',
+	model: 'XTR-15-5S',
+	type: 'Split',
+	cost: 1200,
+	wiFiEnabled: false,
+	details: {
+		compressor: 'Tecumseh',
+		capacity: 1.5,
+		powerConsumption: 1200,
+		type: 'Rotary',
 	},
 };
-
+// Write your code below this line
 const deepCopy = function (obj) {
-	let tempObj = [];
+	let tempObj = {};
 	for (let key in obj) {
 		tempObj = {
 			...tempObj,
@@ -33,11 +32,26 @@ const deepCopy = function (obj) {
 	}
 	return tempObj;
 };
+// Write your code above this line
+let productB = deepCopy(productA);
+productB.model = 'XJR-20W';
+productB.type = 'Window';
+productB.cost = 800;
+productB.details.compressor = 'Samsung';
 
-let axai = deepCopy(user);
-axai.age = 22;
-axai.home.address = '2334, Ganesh nagar';
-axai.home.loc.lat = 43;
-axai.home.favColors = ['White']
-console.log('Original: ', user)
-console.log('Deepcopied: ', axai)
+console.log(`Product A | Model: ${productA.model}`);
+console.log(`Product A | Type: ${productA.type}`);
+console.log(`Product A | Cost: ${productA.cost}`);
+console.log(`Product A | Compressor: ${productA.details.compressor}`);
+
+console.log(`Product B | Model: ${productB.model}`);
+console.log(`Product B | Type: ${productB.type}`);
+console.log(`Product B | Cost: ${productB.cost}`);
+console.log(`Product B | Compressor: ${productB.details.compressor}`);
+console.log(
+	`CONCLUSION: ${
+		Object.is(productA, productB)
+			? 'Both objects are still the same. productB has mutated productA'
+			: 'productB is now a deep clone of productA'
+	}`,
+);
