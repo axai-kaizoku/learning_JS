@@ -2,13 +2,9 @@
 
 'use strict';
 
-const str = 'name:James Dean,age:45,profession:Actor,location:Hollywood';
+const message =
+	'       Hello everyone, this is a message from the moon. At approx 9.27am, received a distress call from station X-23       ';
 
-const fullName = str.substring(str.search('name') + 5, str.search('age') - 1);
-
-const profession = str.substring(
-	str.search('profession') + 11,
-	str.search('location') - 1,
-);
-
-console.log(`${fullName} was an ${profession}`);
+const trimmed = message.trim();
+// console.log(message);
+console.log(trimmed);
