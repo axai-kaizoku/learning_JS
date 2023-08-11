@@ -2,23 +2,27 @@
 
 'use strict';
 
-const book = {
-	isbn: '0-671-00410-7',
-	title: 'Contact',
-	author: 'Carl Sagan',
-	publisher: 'Pocket Books',
+const user = {
+	id: 1,
+	name: 'Axai Y',
+	age: 21,
+	home: {
+		address: '3-4-108, ward-32, shanthinagar',
+		city: 'Sircilla',
+		country: 'India',
+		favColors: ['Blue', 'Black'],
+		loc: {
+			lat: 61.2034,
+			long: 34.2019,
+		},
+	},
 };
 
-const findKey = (val, obj) => Object.keys(obj).includes(val);
-console.log(`ISBN: ${findKey('isbn', book) ? 'Yes' : 'No'}`);
+Object.seal(user);
+// Object.freeze(user);
 
-const findValue = (val, obj) => Object.values(obj).includes(val);
-console.log(
-	`Did Carl Sagan write the book? ${
-		findValue('Carl Sagan', book) ? 'Yes' : 'No'
-	}`,
-);
+user.age = 25;
+user.home.city = 'Vemulawada';
+user.home.phone = 7780342220;
 
-for (const [key, value] of Object.entries(book)) {
-	console.log(`${key}: ${value}`);
-}
+console.log(user);
