@@ -2,24 +2,41 @@
 
 'use strict';
 
-const user = {
-	id: 1,
-	name: 'Akshay',
-	age: 21,
+const userDb = [
+	{
+		id: 1,
+		name: 'Dmitri Mishkov',
+		email: 'dmitri.m@sprintserve.co',
+		password: 'tempPass',
+	},
+	{
+		id: 2,
+		name: 'Jimmy McIntyre',
+		email: 'jimmymc@whatmail.com',
+		password: 'tempPass',
+	},
+	{
+		id: 3,
+		name: 'David Adams',
+		email: 'adams@whatmail.com',
+		password: 'tempPass',
+	},
+];
+
+const userPriveleges = {
+	profile: true,
+	admin: false,
+	billing: true,
 };
 
-const banking = {
-	accountType: 'Savings',
-	accountNum: '62121568601',
-	bank: 'Canara Bank',
-};
+const genPassword = (name) =>
+	name.replace(/\s/, '-').toLowerCase().split('').reverse().join('');
 
-let userDetails = {
+// Write your code here...
+const configureUsers = userDb.map((user) => ({
 	...user,
-	...banking,
-	email: 'akshay@gmail.com',
-	id: 2,
-	name: 'Akshay Yelle',
-};
+	password: genPassword(user.name),
+	...userPriveleges,
+}));
 
-console.log(userDetails);
+console.log(configureUsers);
