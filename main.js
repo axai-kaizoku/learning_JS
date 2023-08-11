@@ -2,41 +2,47 @@
 
 'use strict';
 
-const userDb = [
-	{
-		id: 1,
-		name: 'Dmitri Mishkov',
-		email: 'dmitri.m@sprintserve.co',
-		password: 'tempPass',
+const tsla = {
+	stIdx: 2013234,
+	stName: 'TSLA',
+	stCurrPrc: 836.16,
+	stExc: 'NASDAQ',
+	stDetails: {
+		name: 'TESLA, Inc',
+		ceo: 'Elon Musk',
+		hq: 'Paolo Alto, California, United States',
 	},
-	{
-		id: 2,
-		name: 'Jimmy McIntyre',
-		email: 'jimmymc@whatmail.com',
-		password: 'tempPass',
-	},
-	{
-		id: 3,
-		name: 'David Adams',
-		email: 'adams@whatmail.com',
-		password: 'tempPass',
-	},
-];
-
-const userPriveleges = {
-	profile: true,
-	admin: false,
-	billing: true,
 };
 
-const genPassword = (name) =>
-	name.replace(/\s/, '-').toLowerCase().split('').reverse().join('');
+Object.defineProperty(tsla, 'stIdx', {
+	stIdx : 98876,
+	writable: false,
+	enumerable: false,
+	configurable: false,
+});
 
-// Write your code here...
-const configureUsers = userDb.map((user) => ({
-	...user,
-	password: genPassword(user.name),
-	...userPriveleges,
-}));
+Object.defineProperty(tsla, 'stExc', {
+	value: 'NASDA',
+	writable: true,
+	enumerable: false,
+	configurable: false,
+});
 
-console.log(configureUsers);
+for (let i in tsla) {
+	console.log(i)
+}
+
+delete tsla.stExc;
+
+let {
+	stIdx: id,
+	stName: stock,
+	stCurrPrc: value,
+	stExc: exchange,
+	stDetails: { name: company, ceo, hq },
+} = tsla;
+
+
+console.log(`ID: ${id}`);
+console.log(`${stock} is trading for $${value}`);
+console.log(`${company} is headquartered in ${hq} and headed by ${ceo}`);
