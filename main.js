@@ -2,50 +2,78 @@
 
 'use strict';
 
-const User = function () {
-	let name = '';
-	let age,
-		changes = [];
+const Car = function () {
+	let brand = '';
+	let model = '';
+	let transmission = '';
+	let color = '';
+	let changeLog = [];
 	Object.defineProperties(this, {
 		id: {
 			enumerable: true,
-			value: `UID-${parseInt(Math.random() * 32390)}-XZ`,
+			value: `CAR-012X-DB1`,
 		},
-		name: {
+		brand: {
 			enumerable: true,
-			get() {
-				return name;
-			},
 			set(val) {
-				changes.push(`name set to ${val}`);
-				name = val.toUpperCase();
+				changeLog.push(`Brand changed to ${val}`);
+				brand = val;
 			},
-		},
-		age: {
-			enumerable: true,
-
 			get() {
-				return age;
-			},
-			set(val) {
-				age = val;
+				return brand;
 			},
 		},
-		changes: {
+		model: {
+			enumerable: true,
+			set(val) {
+				changeLog.push(`Model changed to ${val}`);
+				model = val;
+			},
+			get() {
+				return model;
+			},
+		},
+		transmission: {
+			enumerable: true,
+			set(val) {
+				changeLog.push(`Transmission changed to ${val}`);
+				transmission = val;
+			},
+			get() {
+				return transmission;
+			},
+		},
+		color: {
+			enumerable: true,
+			set(val) {
+				changeLog.push(`Color changed to ${val}`);
+				color = val;
+			},
+			get() {
+				return color;
+			},
+		},
+		changeLog: {
 			enumerable: true,
 			get() {
-				return changes;
-			},
-			set(val) {
-				changes = val;
+				return changeLog;
 			},
 		},
 	});
 };
 
-let joe = new User();
-joe.name = 'Joe Mockery';
-joe.age = 32;
-joe.name = 'Akshay';
-console.log('\n', joe.id, '\n', joe.name, '\n', joe.age);
-console.log(joe.changes);
+const Civic = new Car();
+
+Civic.brand = 'Honda';
+Civic.model = 'Civic';
+Civic.transmission = 'AT';
+Civic.color = 'Galaxy Grey';
+
+Civic.model = 'Civic 1.8S';
+Civic.color = 'Pearl White';
+
+for (let prop in Civic) {
+	console.log(`${prop}: ${Civic[prop]}`);
+}
+
+console.log(Civic.changeLog);
