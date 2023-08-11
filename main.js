@@ -2,7 +2,9 @@
 
 'use strict';
 
-const str1 = 'Name: John, Age: 20, Profession: Web Developer';
-const age = str1.substring(str1.search('Age'), 19);
+const message =
+	'My registration number is RKQ01291210-23. Please update me on the status';
 
-console.log(age);
+const findReg = message.search(/RKQ\d+\-\d+/g);
+const extractReg = message.substring(findReg, findReg + 14);
+console.log(`Reg No. ${extractReg}`);
