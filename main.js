@@ -1,13 +1,16 @@
 /** @format */
 
 'use strict';
-const text =
-	'Whether its color or colour, it is all the same. The human eye can see a wide gamut of colours, which makes us unique as a species.';
-	
-// const pattern = /colou?rs?/g;
-const pattern = new RegExp('colou?rs?', 'g');
 
-let results;
-while ((results = pattern.exec(text)) !== null) {
-	console.log(results[0]);
-}
+const article =
+	'The movie starring Johnny Depp was released to the masses on a social networking site which created quite a buzz in the industry due to its unconventional approach.';
+	
+
+	const findActor = (str, actor) => {
+		const pattern = new RegExp(actor, 'gi');
+		// return pattern.test(str);
+		return str.search(pattern);
+	}
+
+	// console.log(findActor(article, 'johnny deep')) // this doesn't work
+	console.log(findActor(article, 'Johnny Depp'))
