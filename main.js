@@ -2,9 +2,11 @@
 
 'use strict';
 
-const str = 
-  'Johnny Depp is an incredible actor. Johnny Depp was nominated for an Oscar';
+const message = 
+  'Rivercomb is 200 miles from the station and about 150 miles from the airport';
 
-const tom = str.replace(/Johnny Depp/g, 'Tom Cruise')
-const tom1 = str.replaceAll('Johnny Depp', 'Tom Cruise')
-console.log(tom1)
+const messageKms = message
+  .replace(/\d+(?!miles)/g, (miles) => miles * 1.609)
+  .replace(/miles/g, 'kms')
+
+console.log(messageKms);
