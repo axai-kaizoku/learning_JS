@@ -2,24 +2,18 @@
 
 'use strict';
 
-const { title, publisher, authors, cost} = {
-	id: 1,
-	title: 'Freakonomics',
-	authors: [
-		{
-			authorCode: 210,
-			name: 'Steven D. Levitt',
-		},
-		{
-			authorCode: 231,
-			name: 'Stephen J. Dubner',
-		},
-	],
-	publisher: 'Harper Torch',
-	isbn10: '0-06-124270-5',
-	cost: 7.99,
+const tsla = {
+	stIdx: 2013234,
+	stName: 'TSLA',
+	stCurrPrc: 836.16,
+	stExc: 'NASDAQ',
+	stDetails: {
+		name: 'TESLA, Inc',
+		ceo: 'Elon Musk',
+		hq: 'Paolo Alto, California, United States',
+	},
 };
 
-console.log(
-	`${title} is published by ${publisher} and is written by ${authors.map((el) => el.name).join(' and ')}.It costs $${cost}`
-)
+let { stName: stock, stCurrPrc: value, stExc: exchange } = tsla;
+
+console.log(`${stock} is trading for $${value} on ${exchange}`);
