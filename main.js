@@ -2,9 +2,13 @@
 
 'use strict';
 
-const message =
-	'My registration number is RKQ01291210-23. Please update me on the status';
+const str = 'name:James Dean,age:45,profession:Actor,location:Hollywood';
 
-const findReg = message.search(/RKQ\d+\-\d+/g);
-const extractReg = message.substring(findReg, findReg + 14);
-console.log(`Reg No. ${extractReg}`);
+const fullName = str.substring(str.search('name') + 5, str.search('age') - 1);
+
+const profession = str.substring(
+	str.search('profession') + 11,
+	str.search('location') - 1,
+);
+
+console.log(`${fullName} was an ${profession}`);
