@@ -2,13 +2,9 @@
 
 'use strict';
 
-const message =
-	'Rivercomb is 200 miles from the station and about 150 miles from the airport';
-const getDistance = (str) => {
-	const pattern = /(?<miles>\d+(?!miles))/g;
-	return str.matchAll(pattern);
-};
+const str = 
+  'Johnny Depp is an incredible actor. Johnny Depp was nominated for an Oscar';
 
-for (const dist of getDistance(message)) {
-	console.log(dist.groups.miles);
-}
+const tom = str.replace(/Johnny Depp/g, 'Tom Cruise')
+const tom1 = str.replaceAll('Johnny Depp', 'Tom Cruise')
+console.log(tom1)
