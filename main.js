@@ -2,31 +2,24 @@
 
 'use strict';
 
-const book = {
+const user = {
 	id: 1,
-	title: 'Freakonomics',
-	authors: [
-		{
-			authorCode: 210,
-			name: 'Steven D. Levitt',
-		},
-		{
-			authorCode: 231,
-			name: 'Stephen J. Dubner',
-		},
-	],
-	isbn10: '0-06-124270-5',
-	cost: 7.99,
+	name: 'Akshay',
+	age: 21,
 };
 
-let { title, authors, cost, publisher } = {
-	...book,
-	publisher: 'Harper Torch',
-	title: 'Freaknomoics 2011',
+const banking = {
+	accountType: 'Savings',
+	accountNum: '62121568601',
+	bank: 'Canara Bank',
 };
 
-console.log(
-	`${title} published by ${publisher} is written by ${authors.map(
-		(elem) => elem.name
-	)}`,
-);
+let userDetails = {
+	...user,
+	...banking,
+	email: 'akshay@gmail.com',
+	id: 2,
+	name: 'Akshay Yelle',
+};
+
+console.log(userDetails);
