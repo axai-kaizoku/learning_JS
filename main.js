@@ -2,11 +2,14 @@
 
 'use strict';
 
-const message = 
-  'Rivercomb is 200 miles from the station and about 150 miles from the airport';
+const str1 =
+	'The captain of this ship, a dangerous man - Captain Roger was known to have killed 10 whales!!';
 
-const messageKms = message
-  .replace(/\d+(?!miles)/g, (miles) => miles * 1.609)
-  .replace(/miles/g, 'kms')
+const str2 =
+	'The captain of this ship - a dangerous man, Captain Roger was known to have killed 10 whales!!';
 
-console.log(messageKms);
+const compareStrings = (str1, str2) =>
+	str1.toLowerCase().replaceAll(/[\W+_-]/gi, '') ===
+	str2.toLowerCase().replaceAll(/[\W+_-]/gi, '');
+
+console.log(compareStrings(str1, str2));
