@@ -1,9 +1,10 @@
 /** @format */
 
 'use strict';
-const stories = [
-	'And poor Jack jumped off the roof in anticipation of a tragic outcome, but instead landed on a haystack, safe and sound and away from the inferno of her former home. He knew the secret too well now.',
-	'It is a known fact that secret agents have all the tools at their disposal that helps them collect valuable data in the field.',
+
+const quotesFromContact = [
+	'Had he merely announced his plans to the world, certain complications would ensue. If Hadden was frozen to four degrees Kelvin at ten billion kilometers from Earth, what exactly was his legal status?',
+	'Gilgamesh was not equipped with a radio. He no longer wished to know what had happened to the five.',
 ];
 
 const findString = (str, arr) => {
@@ -14,4 +15,8 @@ const findString = (str, arr) => {
 	return result && result.length > 1 ? result : result[0];
 };
 
-console.log(findString('tools', stories))
+console.log(`FINDING "HADDEN": "${findString('hadden', quotesFromContact)}"`);
+
+console.log(
+	`FINDING "GILGAMESH": "${findString('gilgamesh', quotesFromContact)}"`,
+);
