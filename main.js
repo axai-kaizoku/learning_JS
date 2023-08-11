@@ -9,6 +9,22 @@ const user = {
 	country: 'India',
 };
 
-for (let [key, val] of Object.entries(user)) {
-	console.log(key, val);
-}
+const deepCopy = function (obj) {
+	let tempObj = {};
+	for (let [key, value] of Object.entries(obj)) {
+		tempObj = {
+			...tempObj,
+			[key]:
+				typeof value === 'object' && !Array.isArray(value)
+					? { ...deepCopy(value) }
+					: typeof value === 'object' && Array.isArray(value)
+					? [...value]
+					: value,
+		};
+	}
+	return tempObj;
+};
+
+let axai = deepCopy(user);
+
+console.log(axai);
