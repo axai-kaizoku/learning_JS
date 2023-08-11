@@ -1,14 +1,13 @@
 /** @format */
 
 'use strict';
+const post =
+	'The Calzone at the #Pizza Mill #foodie #calzone #italian #dindin #foodpics #foodblogger #weekend #fun';
 
-const str =
-	'If you have any information on the whereabouts of our cat, please email us at findKibbles@gmail.com and we would get in touch with you right away. You can also mail us at john@mockery.com. Thanks.';
-
-	const getEmails = (str) => {
-		const pattern = /[a-z0-9._]+@[a-z0-9-]+\.[a-z.]{2,6}/gi;
-		const detect = str.match(pattern);
+	const getTags = (post) => {
+		const pattern = /(?<=#)\w+/gi;
+		const detect = post.match(pattern);
 		return detect && detect.length > 1 ? detect : detect[0];
-	};
+	}
 
-	console.log(getEmails(str))
+	console.log(getTags(post));
