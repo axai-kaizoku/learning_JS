@@ -2,45 +2,27 @@
 
 'use strict';
 
-const user = {
-	id: 1,
-	name: 'Axai Y',
-	age: 21,
-	home: {
-		address: '3-4-108, ward-32, shanthinagar',
-		city: 'Sircilla',
-		country: 'India',
-		favColors: ['Blue', 'Black'],
-		loc: {
-			lat: 61.2034,
-			long: 34.2019,
-		},
-	},
+const book = {
+	isbn: '0-671-00410-7',
+	title: 'Contact',
+	author: 'Carl Sagan',
+	publisher: 'Pocket Books',
 };
 
-// Object.seal(user);
-// Object.freeze(user);
+Object.freeze(book);
 
-const deepSeal = (obj) => {
-	Object.values(obj).forEach(
-		(elem) => typeof elem === 'object' && deepSeal(elem),
-	);
+try {
+	book.isbn = null;
+	book.title = null;
+	book.author = null;
+	book.publisher = 'Hacked';
+	book.intro = function () {
+		console.log('This object has been hacked!');
+	};
 
-	return !Object.isSealed(obj) && Object.seal(obj);
-};
-
-const deepFreeze = (obj) => {
-	Object.values(obj).forEach(
-		(elem) => typeof elem === 'object' && deepFreeze(elem),
-	);
-	return !Object.isFrozen(obj) && Object.freeze(obj);
-};
-
-// deepSeal(user);
-deepFreeze(user);
-
-user.age = 25;
-user.home.city = 'Vemulawada';
-user.home.phone = 7780342220;
-
-console.log(user);
+	console.log(book.intro());
+} catch (e) {
+	console.log(e.message);
+} finally {
+	console.log(book);
+}
