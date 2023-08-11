@@ -1,29 +1,33 @@
 /** @format */
+
 'use strict';
 
-const book1 = {
-	id: 1,
-	title: 'Freakonomics',
-	publisher: 'Harper Torch',
-	cost: 7.99,
-	isbn10: '0-06-124270-5',
-	overview() {
-		return `${this.title}, published by ${this.publisher} retails for $${this.cost}`;
+const rectangles = [
+	{
+		id: 'Rectangle - 01',
+		width: 129.2,
+		height: 80.9,
 	},
+	{
+		id: 'Rectangle - 02',
+		width: 342,
+		height: 120,
+		area() {
+			return this.width * this.height;
+		},
+	},
+];
+
+// Your Code Goes Here
+const calcArea = function () {
+	return this.width * this.height;
 };
 
-const book2 = {
-	id: 2,
-	title: 'Jurassic Park',
-	publisher: 'Arrow',
-	cost: 4.99,
-};
-
-const showDetails = (book) =>
-	// 'overview' in book
-	book.hasOwnProperty('overview')
-		? console.log(book.overview())
-		: console.log('Unable to show details...');
-
-showDetails(book1);
-showDetails(book2);
+try {
+	rectangles.forEach((rect) => 
+	console.log(
+		`${rect.id} : ${
+			rect.hasOwnProperty('area') ? rect.area() : calcArea.call(rect)}`));
+} catch (error) {
+	console.log(error.message);
+}
