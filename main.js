@@ -3,7 +3,8 @@
 'use strict';
 
 const User = function () {
-	let name= '';
+	let name = '';
+	let age;
 	Object.defineProperties(this, {
 		id: {
 			enumerable: true,
@@ -18,9 +19,20 @@ const User = function () {
 				name = val;
 			},
 		},
+		age: {
+			enumerable: true,
+			
+			get() {
+				return age;
+			},
+			set(val) {
+				age = val;
+			},
+		},
 	});
 };
 
 let joe = new User();
 joe.name = 'Joe Mockery';
-console.log("\n",joe.id,"\n", joe.name);
+joe.age = 32
+console.log('\n', joe.id, '\n', joe.name, '\n', joe.age);
