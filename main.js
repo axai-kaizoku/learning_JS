@@ -9,6 +9,5 @@ const user = {
 	country: 'India',
 };
 
-if (Object.keys(user).includes('country')) {
-	console.log(user.country);
-}
+const findVal = (val, obj) => Object.values(obj).includes(val);
+console.log(findVal('Sircilla', user));
