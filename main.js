@@ -4,7 +4,8 @@
 
 const User = function () {
 	let name = '';
-	let age;
+	let age,
+		changes = [];
 	Object.defineProperties(this, {
 		id: {
 			enumerable: true,
@@ -16,12 +17,13 @@ const User = function () {
 				return name;
 			},
 			set(val) {
-				name = val;
+				changes.push(`name set to ${val}`);
+				name = val.toUpperCase();
 			},
 		},
 		age: {
 			enumerable: true,
-			
+
 			get() {
 				return age;
 			},
@@ -29,10 +31,21 @@ const User = function () {
 				age = val;
 			},
 		},
+		changes: {
+			enumerable: true,
+			get() {
+				return changes;
+			},
+			set(val) {
+				changes = val;
+			},
+		},
 	});
 };
 
 let joe = new User();
 joe.name = 'Joe Mockery';
-joe.age = 32
+joe.age = 32;
+joe.name = 'Akshay';
 console.log('\n', joe.id, '\n', joe.name, '\n', joe.age);
+console.log(joe.changes);
