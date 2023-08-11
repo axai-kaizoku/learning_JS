@@ -11,20 +11,6 @@ const data = [
 	'SENSE02,1453,14,45,0.59',
 ];
 
-const readDataToObj = (key, arr) =>
-	arr
-		.filter((el) => el.startsWith(key))
-		.filter((el) => el.split(',')[4] > 0.75)
-		.map((el) => {
-			const [sensor, time, temp, humidity, accuracy] = el.split(',');
+const byAccuracy = (acc, arr) => arr.filter((el) => el.endsWith(acc));
 
-			return {
-				sensor,
-				time,
-				temp,
-				humidity,
-				accuracy,
-			};
-		});
-
-console.log(readDataToObj('SENSE01', data))
+console.log(byAccuracy(0.77, data));
