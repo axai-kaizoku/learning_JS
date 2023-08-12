@@ -2,17 +2,11 @@
 
 'use strict';
 
-const today = new Date();
+const vDay = new Date(2023, 7, 15, 9, 30, 0);
+console.log(`Independence Day: ${vDay.toLocaleString()}`);
 
-console.log(
-	`New Delhi: ${today.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })}`,
-);
-console.log(
-	`Singapore: ${today.toLocaleString('en-US', { timeZone: 'Asia/Singapore' })}`,
-);
-console.log(
-	`New York: ${today.toLocaleString('en-US', {
-		timeZone: 'America/New_York',
-	})}`,
-);
-console.log(`Tokyo: ${today.toLocaleString('en-US', { timeZone: 'Japan' })}`);
+const whDay = new Date('7 Apr 2023')
+console.log(`World Health Day: ${whDay.toLocaleString()}`)
+console.log(`World Health Day: ${whDay.toDateString()}`)
+
+// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
