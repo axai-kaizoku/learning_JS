@@ -1,5 +1,3 @@
-/** @format */
-
 'use strict';
 
 // DD, d-MM-YYYY at hh:mm:ss
@@ -7,17 +5,39 @@ const formatDate = (
 	dateObj = new Date(),
 	str = 'DD, d-MM-YYYY at hh:mm:ss',
 ) => {
-	const [day, month, date, year] = dateObj.toDateString().split(/\s/);
-	const [hour, minutes, ...rest] = dateObj.toTimeString().split(':');
-	const [seconds] = rest[0].split(/\s/);
+	const days = [
+		'Sunday',
+		'Monday',
+		'Tuesday',
+		'Wednesday',
+		'Thursday',
+		'Friday',
+		'Saturday',
+	];
+
+	const months = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
+	];
+
 	const formattedDate = str
-		.replaceAll('d', date)
-		.replaceAll('DD', day)
-		.replaceAll('MM', month)
-		.replaceAll('YYYY', year)
-		.replaceAll('hh', hour)
-		.replaceAll('mm', minutes)
-		.replaceAll('ss', seconds);
+		.replaceAll('d', dateObj.getDate().toString().padStart(2, 0))
+		.replaceAll('DD', days[dateObj.getDay()])
+		.replaceAll('MM', months[dateObj.getMonth()])
+		.replaceAll('YYYY', [dateObj.getFullYear()])
+		.replaceAll('hh', dateObj.getHours().toString().padStart(2, 0))
+		.replaceAll('mm', dateObj.getMinutes().toString().padStart(2, 0))
+		.replaceAll('ss', dateObj.getSeconds().toString().padStart(2, 0));
 
 	return formattedDate;
 };
