@@ -2,15 +2,22 @@
 
 'use strict';
 
-const waltDisneyBirthday = new Date('5 December, 1901 00:35:00');
+const log = (str) => console.log(str);
+const now = new Date();
 
-const yearsTo = (date) => {
-	const diff = (date = Date.now()) / 3156000000;
-	return Math.abs(diff.toPrecision(4));
-};
+now.setDate(10);
+now.setMonth(3);
+now.setMinutes(30);
+now.setHours(12);
 
-console.log(
-	`Walt Disney was born on ${waltDisneyBirthday.toLocaleString(
-		'en-IN',
-	)}. That was ${yearsTo(waltDisneyBirthday)} years ago!`,
-);
+log(now.getDate());
+log(now.getDay());
+log(now.getMonth());
+log(now.getFullYear());
+
+log(now.getHours())
+log(now.getMinutes())
+log(now.getSeconds())
+log(now.getMilliseconds())
+log(now.getTimezoneOffset() / 60)
+log(now.toTimeString())
