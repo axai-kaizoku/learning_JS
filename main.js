@@ -1,27 +1,27 @@
+/** @format */
+
 'use strict';
 
-const date = new Date(2023, 2, 20);
+// DD, d-MM-YYYY at hh:mm:ss
+const formatDate = (
+	dateObj = new Date(),
+	str = 'DD, d-MM-YYYY at hh:mm:ss',
+) => {
+	const [day, month, date, year] = dateObj.toDateString().split(/\s/);
+	const [hour, minutes, ...rest] = dateObj.toTimeString().split(':');
+	const [seconds] = rest[0].split(/\s/);
+	const formattedDate = str
+		.replaceAll('d', date)
+		.replaceAll('DD', day)
+		.replaceAll('MM', month)
+		.replaceAll('YYYY', year)
+		.replaceAll('hh', hour)
+		.replaceAll('mm', minutes)
+		.replaceAll('ss', seconds);
 
-date.setHours(15)
-date.setMinutes(35)
-date.setSeconds(23)
-date.setMilliseconds(12)
+	return formattedDate;
+};
 
-const getDate = date.getDate();
-const getDay = date.getDay();
-const getMonth = date.getMonth();
-const getFullYear = date.getFullYear();
-
-const getHours = date.getHours();
-const getMinutes = date.getMinutes();
-const getSeconds = date.getSeconds();
-const getMilliseconds = date.getMilliseconds();
-const getTime = date.getTime();
-
-console.log(`Date: ${date}`);
-console.log(`The date: ${getDate}`);
-console.log(`The day: ${getDay}`);
-console.log(`The Month: ${getMonth}`);
-console.log(`The year: ${getFullYear}`);
-console.log(`Time: ${getHours}:${getMinutes}:${getSeconds}:${getMilliseconds}`);
-console.log(`Time (ms since Epoch): ${getTime}`);
+console.log(
+	formatDate(new Date('7 April, 2022 22:45'), 'd MM (DD). The time was hh:mm'),
+);
