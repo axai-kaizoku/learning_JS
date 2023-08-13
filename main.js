@@ -1,25 +1,31 @@
 'use strict';
 
-const date = new Date(2021, 6, 21, 22, 10, 0);
+const dateA = new Date('14 Aug, 2023 00:00:00');
+const dateB = new Date('19 Sep, 2023 00:00:00');
 
-const formatDate = (dateObj, str) => {
-	const [day, month, date, year] = dateObj.toDateString().split(/\s/);
-	const [hour, minutes, ...rest] = dateObj.toTimeString().split(':');
-	const [seconds] = rest[0].split(/\s/g);
-	const formattedDate = str
-		.replaceAll('d', date)
-		.replaceAll('DD', day)
-		.replaceAll('MM', month)
-		.replaceAll('YYYY', year)
-		.replaceAll('hh', hour)
-		.replaceAll('mm', minutes)
-		.replaceAll('ss', seconds);
-	return formattedDate;
+const dateDiff = (start, end, format) => {
+	const diff = end - start;
+	const hasElapsed = diff <= 0;
+	const suffix = hasElapsed ? 'elapsed...' : 'left...';
+	const days = `${((hasElapsed ? -diff : diff) / 86400000).toPrecision(
+		2,
+	)} days`;
+	const hours = `${Math.ceil((hasElapsed ? -diff : diff) / 3600000)} hours`;
+	const minutes = `${Math.ceil((hasElapsed ? -diff : diff) / 3600000)} hours`;
+	const seconds = `${Math.ceil((hasElapsed ? -diff : diff) / 3600000)} hours`;
+
+	switch (format) {
+		case 'D':
+			return `${days} ${suffix}`;
+		case 'H':
+			return `${hours} ${suffix}`;
+		case 'M':
+			return `${minutes} ${suffix}`;
+		case 'S':
+			return `${seconds} ${suffix}`;
+		default:
+			return `Invalid format string`;
+	}
 };
 
-console.log(
-	`21st june, 2021 can be formatted as ${formatDate(
-		date,
-		'DD, d-MM-YYYY at hh:mm:ss',
-	)}`,
-);
+console.log(dateDiff(dateA, dateB, 'D'));
