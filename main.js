@@ -17,15 +17,11 @@ const createPost = function ({ title, content }) {
 	postTitle.innerText = title;
 	postUser.innerText = 'Joe Mockery';
 	postContent.innerText = content;
+
 	document.body.prepend(socialCard);
 };
 
 createPost({
-	title: 'Crazy Summer',
-	content: `This week was crazy with temperatures shooting up all the way to 47 degrees Celsius. At this rate, we'll be BBQed the moment we step out of our houses...`,
-});
-
-createPost({
-	title: 'Remember, Tell me Why??',
-	content: `Back in the 80s, there were a series of books for kids known as the 'Tell Me Why' series from Hamlyn. These were the first few books that I ever got as a child. Pretty amazing. I still have some of em lying around.`,
+	title: 'Onepiece 1072',
+	content: `Oh Man the episode was lit 🔥. But it didn't get up to my expectations. I thought the final fight between Luffy and Kaido would come to an end in this episode, but they are stretching it to another episode. I hope it should be the last fight episode...`,
 });
