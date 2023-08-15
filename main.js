@@ -1,27 +1,25 @@
-// Selectors
+const morningBtn = document.querySelector('#morning');
+const dayBtn = document.querySelector('#day');
+const afternoonBtn = document.querySelector('#afternoon');
+const eveningBtn = document.querySelector('#evening');
+const nightBtn = document.querySelector('#night');
+const greeting = document.querySelector('#greeting');
 
-const siteTitle = document.getElementById('site-title');
-const navEls = document.getElementsByTagName('li');
-const contentText = document.getElementsByClassName('content-text');
-const siteDesc = document.querySelector('#site-description');
-const contentDiv = document.querySelector('.content');
-const allNavs = document.querySelectorAll('#nav > li:nth-of-type(even)');
-
-// Manipulation
-siteTitle.innerText = 'Dynamtion SpaceTech';
-
-Array.from(navEls).forEach((el) => (el.innerText = `--${el.innerText}--`));
-
-Array.from(contentText).forEach(
-	(el) => (el.innerText = el.innerHTML.toUpperCase()),
+morningBtn.addEventListener(
+	'click',
+	() => (greeting.innerText = 'Good Morning'),
 );
 
-siteDesc.innerText = siteDesc.innerText.replace(
-	'DynTech LLC',
-	'Dynamation SpaceTech',
+dayBtn.addEventListener('click', () => (greeting.innerText = 'Good Day'));
+
+afternoonBtn.addEventListener(
+	'click',
+	() => (greeting.innerText = 'Good Afternoon'),
 );
 
-contentDiv.style.backgroundColor = '#add8e6';
-contentDiv.style.textAlign = 'justify';
+eveningBtn.addEventListener(
+	'click',
+	() => (greeting.innerText = 'Good Evening'),
+);
 
-allNavs.forEach((el) => (el.style.backgroundColor = 'rgba(0,0,0,0.5'));
+nightBtn.addEventListener('click', () => (greeting.innerText = 'Good Night'));
