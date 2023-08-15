@@ -8,3 +8,16 @@ button {
 	font-size: 20px;
 	margin: 5px;
 }
+
+#greeting {
+	font-size: 20px;
+	border-bottom: 1px solid;
+}
+
+#quote {
+	position: relative;
+	left: 20px;
+	width: 800px;
+	font-size: 40px;
+	font-family: serif;
+}
