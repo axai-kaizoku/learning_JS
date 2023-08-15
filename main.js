@@ -62,30 +62,18 @@ leftBtn.addEventListener('click', stepLeft);
 homeBtn.addEventListener('click', home);
 
 // Keyboard events
+const keyMapping = {
+	'ArrowUp': stepUp,
+	'ArrowDown': stepDown,
+	'ArrowRight': stepRight,
+	'ArrowLeft': stepLeft,
+	']': turnClockwise,
+	'[': turnAntiClockwise,
+	'H': home,
+	'h': home,
+};
+
 document.addEventListener('keydown', function (event) {
 	const { key } = event;
-	switch (key) {
-		case 'ArrowUp':
-			stepUp();
-			break;
-		case 'ArrowDown':
-			stepDown();
-			break;
-		case 'ArrowLeft':
-			stepLeft();
-			break;
-		case 'ArrowRight':
-			stepRight();
-			break;
-		case ']':
-			turnClockwise();
-			break;
-		case '[':
-			turnAntiClockwise();
-			break;
-		case 'H':
-		case 'h':
-			home();
-			break;
-	}
+	keyMapping[key]();
 });
