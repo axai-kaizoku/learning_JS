@@ -1,27 +1,25 @@
 'use strict';
 
-const createPost = function ({ title, content }) {
-	const socialCard = document.createElement('div');
-	socialCard.setAttribute('class', 'social-card');
-	const icon = document.createElement('div');
-	icon.setAttribute('class', 'post-icon');
-	const postTitle = document.createElement('div');
-	postTitle.setAttribute('class', 'post-title');
-	const postUser = document.createElement('div', 'a');
-	postUser.setAttribute('class', 'post-user');
-	const postContent = document.createElement('div');
-	postContent.setAttribute('class', 'post-content');
+const siteTitle = document.getElementById('site-title');
+siteTitle.innerText = 'RedDOT Cloud Engineers';
 
-	socialCard.append(icon, postTitle, postContent, postUser);
+const contentText = document.getElementsByClassName('content-text');
 
-	postTitle.innerText = title;
-	postUser.innerText = 'Joe Mockery';
-	postContent.innerText = content;
-
-	document.body.prepend(socialCard);
-};
-
-createPost({
-	title: 'Onepiece 1072',
-	content: `Oh Man the episode was lit 🔥. But it didn't get up to my expectations. I thought the final fight between Luffy and Kaido would come to an end in this episode, but they are stretching it to another episode. I hope it should be the last fight episode...`,
+Array.from(contentText).forEach((el) => {
+	el.innerText = el.innerText.replace(
+		'RedDot Technologies',
+		'RedDOT Cloud Engineers',
+	);
+	el.innerText = el.innerText.toUpperCase();
 });
+
+const siteDesc = document.querySelector('#site-description');
+siteDesc.innerText = 'Your trusted partner is the Cloud';
+
+const contentDiv = document.querySelector('.content');
+contentDiv.computedStyleMap.textAlign = 'justify';
+
+const altNavs = document.querySelectorAll('#nav > li:nth-of-type(odd)');
+altNavs.forEach(
+	(el) => (el.computedStyleMap.backgroundColor = 'rgba(0,0,0,0.5)'),
+);
