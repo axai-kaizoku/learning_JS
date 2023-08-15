@@ -52,6 +52,7 @@ const home = () => {
 	setTransform();
 };
 
+// Mouse Click events
 turnClockwiseBtn.addEventListener('click', turnClockwise);
 turnAntiClockwiseBtn.addEventListener('click', turnAntiClockwise);
 upBtn.addEventListener('click', stepUp);
@@ -59,3 +60,32 @@ downBtn.addEventListener('click', stepDown);
 rightBtn.addEventListener('click', stepRight);
 leftBtn.addEventListener('click', stepLeft);
 homeBtn.addEventListener('click', home);
+
+// Keyboard events
+document.addEventListener('keydown', function (event) {
+	const { key } = event;
+	switch (key) {
+		case 'ArrowUp':
+			stepUp();
+			break;
+		case 'ArrowDown':
+			stepDown();
+			break;
+		case 'ArrowLeft':
+			stepLeft();
+			break;
+		case 'ArrowRight':
+			stepRight();
+			break;
+		case ']':
+			turnClockwise();
+			break;
+		case '[':
+			turnAntiClockwise();
+			break;
+		case 'H':
+		case 'h':
+			home();
+			break;
+	}
+});
