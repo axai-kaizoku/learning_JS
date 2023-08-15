@@ -1,29 +1,61 @@
-const quotes = {
-	nelsonMandela: `"The greatest glory in living lies not in never falling, but in rising every time we fall" - Nelson Mandela`,
-	steveJobs: `"Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking." - Steve Jobs`,
-	johnLennon: `"Life is what happens when you're busy making other plans." - John Lennon`,
-	anneFrank: `"Whoever is happy will make others happy too." - Anne Frank`,
+const bug = document.querySelector('.ladybird');
+const upBtn = document.querySelector('#up');
+const downBtn = document.querySelector('#down');
+const rightBtn = document.querySelector('#right');
+const leftBtn = document.querySelector('#left');
+const homeBtn = document.querySelector('#home');
+const turnClockwiseBtn = document.querySelector('#turnClockWise');
+const turnAntiClockwiseBtn = document.querySelector('#turnAntiClockWise');
+
+let rotation = 0;
+let xPos = 0;
+let yPos = 0;
+
+const turnClockwise = () => {
+	rotation += 90;
+	bug.style.transform = `rotate(${rotation}deg)`;
 };
 
-const quoteOut = document.querySelector('#quote');
-const nelsonMBtn = document.querySelector('#nelson-mandela');
-const steveJBtn = document.querySelector('#steve-jobs');
-const johnLBtn = document.querySelector('#john-lennon');
-const anneFBtn = document.querySelector('#anne-frank');
+const turnAntiClockwise = () => {
+	rotation -= 90;
+	bug.style.transform = `rotate(${rotation}deg)`;
+};
 
-nelsonMBtn.addEventListener(
-	'click',
-	() => (quoteOut.innerText = quotes.nelsonMandela),
-);
-steveJBtn.addEventListener(
-	'click',
-	() => (quoteOut.innerText = quotes.steveJobs),
-);
-johnLBtn.addEventListener(
-	'click',
-	() => (quoteOut.innerText = quotes.johnLennon),
-);
-anneFBtn.addEventListener(
-	'click',
-	() => (quoteOut.innerText = quotes.anneFrank),
-);
+function setTransform() {
+	bug.style.left = `${xPos}px`;
+	bug.style.top = `${yPos}px`;
+}
+
+const stepUp = () => {
+	yPos > 0 && (yPos += -10);
+	setTransform();
+};
+
+const stepDown = () => {
+	yPos < 450 && (yPos += 10);
+	setTransform();
+};
+
+const stepRight = () => {
+	xPos < 450 && (xPos += 10);
+	setTransform();
+};
+
+const stepLeft = () => {
+	xPos > 0 && (xPos += -10);
+	setTransform();
+};
+
+const home = () => {
+	xPos = 0;
+	yPos = 0;
+	setTransform();
+};
+
+turnClockwiseBtn.addEventListener('click', turnClockwise);
+turnAntiClockwiseBtn.addEventListener('click', turnAntiClockwise);
+upBtn.addEventListener('click', stepUp);
+downBtn.addEventListener('click', stepDown);
+rightBtn.addEventListener('click', stepRight);
+leftBtn.addEventListener('click', stepLeft);
+homeBtn.addEventListener('click', home);

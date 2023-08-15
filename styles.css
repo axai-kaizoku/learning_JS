@@ -4,20 +4,36 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
-button {
-	font-size: 20px;
-	margin: 5px;
-}
-
-#greeting {
-	font-size: 20px;
-	border-bottom: 1px solid;
-}
-
-#quote {
+.box {
 	position: relative;
+	border: 1px solid;
+	width: 500px;
+	height: 500px;
+	top: 20px;
 	left: 20px;
-	width: 800px;
-	font-size: 40px;
-	font-family: serif;
+}
+
+.ladybird {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	transform: rotate(0deg);
+	width: 50px;
+	height: 50px;
+	background-image: url('./images/ladybird.png');
+	background-size: cover;
+	background-position-x: -5px;
+}
+
+.control-buttons {
+	position: relative;
+	top: 40px;
+	left: 45px;
+	width: 450px;
+}
+
+.control-buttons > button {
+	font-size: 30px;
+	width: 50px;
+	margin: 5px;
 }
