@@ -1,25 +1,27 @@
-'use strict';
+// Selectors
 
 const siteTitle = document.getElementById('site-title');
-siteTitle.innerText = 'RedDOT Cloud Engineers';
-
+const navEls = document.getElementsByTagName('li');
 const contentText = document.getElementsByClassName('content-text');
-
-Array.from(contentText).forEach((el) => {
-	el.innerText = el.innerText.replace(
-		'RedDot Technologies',
-		'RedDOT Cloud Engineers',
-	);
-	el.innerText = el.innerText.toUpperCase();
-});
-
 const siteDesc = document.querySelector('#site-description');
-siteDesc.innerText = 'Your trusted partner is the Cloud';
-
 const contentDiv = document.querySelector('.content');
-contentDiv.computedStyleMap.textAlign = 'justify';
+const allNavs = document.querySelectorAll('#nav > li:nth-of-type(even)');
 
-const altNavs = document.querySelectorAll('#nav > li:nth-of-type(odd)');
-altNavs.forEach(
-	(el) => (el.computedStyleMap.backgroundColor = 'rgba(0,0,0,0.5)'),
+// Manipulation
+siteTitle.innerText = 'Dynamtion SpaceTech';
+
+Array.from(navEls).forEach((el) => (el.innerText = `--${el.innerText}--`));
+
+Array.from(contentText).forEach(
+	(el) => (el.innerText = el.innerHTML.toUpperCase()),
 );
+
+siteDesc.innerText = siteDesc.innerText.replace(
+	'DynTech LLC',
+	'Dynamation SpaceTech',
+);
+
+contentDiv.style.backgroundColor = '#add8e6';
+contentDiv.style.textAlign = 'justify';
+
+allNavs.forEach((el) => (el.style.backgroundColor = 'rgba(0,0,0,0.5'));

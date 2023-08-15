@@ -18,7 +18,7 @@
 }
 
 #nav li {
-	padding: 15px;
+	padding: 5px;
 	margin: 0px;
 	margin-right: 5px;
 	display: inline-block;
@@ -31,19 +31,16 @@
 #site-description {
 	position: relative;
 	width: 740px;
-	font-size: 30px;
-	padding: 0px;
-	text-align: center;
 }
 
 #site-head-img {
 	position: relative;
-	top: 10px;
-	width: 740px;
+	top: 20px;
 }
 
 .content {
 	position: relative;
-	top: 5px;
+	top: 40px;
 	width: 740px;
+	background-color: rgba(0, 0, 0, 0.1);
 }
