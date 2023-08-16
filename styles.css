@@ -4,36 +4,61 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
-.box {
-	position: relative;
-	border: 1px solid;
-	width: 500px;
-	height: 500px;
-	top: 20px;
-	left: 20px;
-}
-
-.ladybird {
-	position: relative;
+.label {
+	position: absolute;
+	color: white;
+	background-color: #000;
 	top: 0px;
 	left: 0px;
-	transform: rotate(0deg);
-	width: 50px;
-	height: 50px;
-	background-image: url('./images/ladybird.png');
-	background-size: cover;
-	background-position-x: -5px;
+	font-size: 12px;
+	padding: 5px;
 }
 
-.control-buttons {
+.all-employees {
 	position: relative;
-	top: 40px;
-	left: 45px;
-	width: 450px;
+	border: 3px solid red;
+	width: 550px;
+	padding: 10px;
+	margin: 20px;
+	padding-top: 40px;
+	user-select: none;
 }
 
-.control-buttons > button {
-	font-size: 30px;
-	width: 50px;
-	margin: 5px;
+div.highlight-drop {
+	border: 3px dashed rgb(0, 0, 0);
+	background-color: rgba(200, 200, 200, 0.1);
+}
+
+.task-force {
+	position: relative;
+	border: 3px solid rgb(17, 166, 0);
+	width: 550px;
+	padding: 10px;
+	margin: 20px;
+	padding-top: 40px;
+	/* user-select: none; */
+}
+
+.employee {
+	position: relative;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	margin: 10px;
+	background-size: cover;
+	display: inline-block;
+	border: 2px solid;
+}
+
+.employee > img {
+	width: 100px;
+}
+
+.info-panel {
+	position: absolute;
+	padding: 10px;
+	background-color: rgba(61, 61, 61, 0.8);
+	color: #fff;
+	z-index: 10;
+	font-size: 12px;
 }
