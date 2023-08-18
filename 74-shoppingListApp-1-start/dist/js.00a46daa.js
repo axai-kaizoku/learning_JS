@@ -123,8 +123,9 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setPriority = exports.removeItem = exports.getShoppingList = exports.addToShoppingList = void 0;
+exports.setPriority = exports.removeItem = exports.getShoppingList = exports.getCompletedList = exports.clearCompletedList = exports.addToShoppingList = exports.addToCompletedList = void 0;
 let shoppingList = [];
+let completedList = [];
 const addToShoppingList = item => {
   const itemId = `${parseInt(Math.random() * 100000)} - ${new Date().getTime()}`;
   shoppingList.push({
@@ -159,6 +160,171 @@ const removeItem = itemId => {
 exports.removeItem = removeItem;
 const getShoppingList = () => shoppingList;
 exports.getShoppingList = getShoppingList;
+const addToCompletedList = itemId => {
+  const getItem = shoppingList.find(({
+    id
+  }) => id === itemId);
+  shoppingList = shoppingList.filter(({
+    id
+  }) => id !== itemId);
+  completedList = [getItem, ...completedList];
+};
+exports.addToCompletedList = addToCompletedList;
+const getCompletedList = () => completedList;
+exports.getCompletedList = getCompletedList;
+const clearCompletedList = () => completedList = [];
+exports.clearCompletedList = clearCompletedList;
+},{}],"../node_modules/vm-browserify/index.js":[function(require,module,exports) {
+var indexOf = function (xs, item) {
+    if (xs.indexOf) return xs.indexOf(item);
+    else for (var i = 0; i < xs.length; i++) {
+        if (xs[i] === item) return i;
+    }
+    return -1;
+};
+var Object_keys = function (obj) {
+    if (Object.keys) return Object.keys(obj)
+    else {
+        var res = [];
+        for (var key in obj) res.push(key)
+        return res;
+    }
+};
+
+var forEach = function (xs, fn) {
+    if (xs.forEach) return xs.forEach(fn)
+    else for (var i = 0; i < xs.length; i++) {
+        fn(xs[i], i, xs);
+    }
+};
+
+var defineProp = (function() {
+    try {
+        Object.defineProperty({}, '_', {});
+        return function(obj, name, value) {
+            Object.defineProperty(obj, name, {
+                writable: true,
+                enumerable: false,
+                configurable: true,
+                value: value
+            })
+        };
+    } catch(e) {
+        return function(obj, name, value) {
+            obj[name] = value;
+        };
+    }
+}());
+
+var globals = ['Array', 'Boolean', 'Date', 'Error', 'EvalError', 'Function',
+'Infinity', 'JSON', 'Math', 'NaN', 'Number', 'Object', 'RangeError',
+'ReferenceError', 'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
+'decodeURI', 'decodeURIComponent', 'encodeURI', 'encodeURIComponent', 'escape',
+'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'undefined', 'unescape'];
+
+function Context() {}
+Context.prototype = {};
+
+var Script = exports.Script = function NodeScript (code) {
+    if (!(this instanceof Script)) return new Script(code);
+    this.code = code;
+};
+
+Script.prototype.runInContext = function (context) {
+    if (!(context instanceof Context)) {
+        throw new TypeError("needs a 'context' argument.");
+    }
+    
+    var iframe = document.createElement('iframe');
+    if (!iframe.style) iframe.style = {};
+    iframe.style.display = 'none';
+    
+    document.body.appendChild(iframe);
+    
+    var win = iframe.contentWindow;
+    var wEval = win.eval, wExecScript = win.execScript;
+
+    if (!wEval && wExecScript) {
+        // win.eval() magically appears when this is called in IE:
+        wExecScript.call(win, 'null');
+        wEval = win.eval;
+    }
+    
+    forEach(Object_keys(context), function (key) {
+        win[key] = context[key];
+    });
+    forEach(globals, function (key) {
+        if (context[key]) {
+            win[key] = context[key];
+        }
+    });
+    
+    var winKeys = Object_keys(win);
+
+    var res = wEval.call(win, this.code);
+    
+    forEach(Object_keys(win), function (key) {
+        // Avoid copying circular objects like `top` and `window` by only
+        // updating existing context properties or new properties in the `win`
+        // that was only introduced after the eval.
+        if (key in context || indexOf(winKeys, key) === -1) {
+            context[key] = win[key];
+        }
+    });
+
+    forEach(globals, function (key) {
+        if (!(key in context)) {
+            defineProp(context, key, win[key]);
+        }
+    });
+    
+    document.body.removeChild(iframe);
+    
+    return res;
+};
+
+Script.prototype.runInThisContext = function () {
+    return eval(this.code); // maybe...
+};
+
+Script.prototype.runInNewContext = function (context) {
+    var ctx = Script.createContext(context);
+    var res = this.runInContext(ctx);
+
+    if (context) {
+        forEach(Object_keys(ctx), function (key) {
+            context[key] = ctx[key];
+        });
+    }
+
+    return res;
+};
+
+forEach(Object_keys(Script.prototype), function (name) {
+    exports[name] = Script[name] = function (code) {
+        var s = Script(code);
+        return s[name].apply(s, [].slice.call(arguments, 1));
+    };
+});
+
+exports.isContext = function (context) {
+    return context instanceof Context;
+};
+
+exports.createScript = function (code) {
+    return exports.Script(code);
+};
+
+exports.createContext = Script.createContext = function (context) {
+    var copy = new Context();
+    if(typeof context === 'object') {
+        forEach(Object_keys(context), function (key) {
+            copy[key] = context[key];
+        });
+    }
+    return copy;
+};
+
 },{}],"js/Item.js":[function(require,module,exports) {
 "use strict";
 
@@ -167,7 +333,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 const Item = (title, priority = 'normal', id) => {
-  return `<div class="item ${priority}" data-id="${id}" >
+  return `<div class="item ${priority}" data-id="${id}" draggable="true">
 <div class="task">${title}</div>
 <div class="priority-control">
   <span class="high"></span>
@@ -185,11 +351,13 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.renderShoppingList = void 0;
+exports.renderShoppingList = exports.renderCompletedList = void 0;
+var _vm = require("vm");
 var _Item = _interopRequireDefault(require("./Item"));
 var _model = require("./model");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const shoppingListDiv = document.querySelector('.shopping-list');
+const completedDiv = document.querySelector('.completed');
 const renderShoppingList = () => {
   const domNodes = (0, _model.getShoppingList)().map(({
     item,
@@ -201,7 +369,18 @@ const renderShoppingList = () => {
   shoppingListDiv.innerHTML = domNodes.join('');
 };
 exports.renderShoppingList = renderShoppingList;
-},{"./Item":"js/Item.js","./model":"js/model.js"}],"js/index.js":[function(require,module,exports) {
+const renderCompletedList = () => {
+  const domNodes = (0, _model.getCompletedList)().map(({
+    item,
+    priority,
+    id
+  }) => {
+    return (0, _Item.default)(item, priority, id);
+  });
+  completedDiv.innerHTML = domNodes.join('');
+};
+exports.renderCompletedList = renderCompletedList;
+},{"vm":"../node_modules/vm-browserify/index.js","./Item":"js/Item.js","./model":"js/model.js"}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
 var _model = require("./model");
@@ -238,6 +417,34 @@ shoppingListDiv.addEventListener('click', function (evt) {
       (0, _view.renderShoppingList)();
     }
   }
+});
+
+// Drag and Drop
+
+shoppingListDiv.addEventListener('dragstart', function (evt) {
+  if (evt.target.classList.contains('item')) {
+    const getId = evt.target.getAttribute('data-id');
+    evt.dataTransfer.setData('text/plain', getId);
+  }
+});
+completedDiv.addEventListener('drop', function (evt) {
+  const itemId = evt.dataTransfer.getData('text/plain');
+  if (itemId) {
+    // Add to completed list
+    (0, _model.addToCompletedList)(itemId);
+    // Update shopping list
+    (0, _view.renderShoppingList)();
+    // Update completed tasks list
+    (0, _view.renderCompletedList)();
+  }
+});
+completedDiv.addEventListener('dragover', function (evt) {
+  evt.preventDefault();
+});
+clearCompletedBtn.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  (0, _model.clearCompletedList)();
+  (0, _view.renderCompletedList)();
 });
 },{"./model":"js/model.js","./view":"js/view.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

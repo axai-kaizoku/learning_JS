@@ -1,5 +1,11 @@
-import { addToShoppingList, setPriority, removeItem } from './model';
-import { renderShoppingList } from './view';
+import {
+	addToShoppingList,
+	setPriority,
+	removeItem,
+	addToCompletedList,
+	clearCompletedList,
+} from './model';
+import { renderShoppingList, renderCompletedList } from './view';
 
 const itemInput = document.querySelector("input[name='itemInput']");
 const shoppingListDiv = document.querySelector('.shopping-list');
@@ -36,4 +42,35 @@ shoppingListDiv.addEventListener('click', function (evt) {
 			renderShoppingList();
 		}
 	}
+});
+
+// Drag and Drop
+
+shoppingListDiv.addEventListener('dragstart', function (evt) {
+	if (evt.target.classList.contains('item')) {
+		const getId = evt.target.getAttribute('data-id');
+		evt.dataTransfer.setData('text/plain', getId);
+	}
+});
+
+completedDiv.addEventListener('drop', function (evt) {
+	const itemId = evt.dataTransfer.getData('text/plain');
+	if (itemId) {
+		// Add to completed list
+		addToCompletedList(itemId);
+		// Update shopping list
+		renderShoppingList();
+		// Update completed tasks list
+		renderCompletedList();
+	}
+});
+
+completedDiv.addEventListener('dragover', function (evt) {
+	evt.preventDefault();
+});
+
+clearCompletedBtn.addEventListener('click', function (evt) {
+	evt.preventDefault();
+	clearCompletedList();
+	renderCompletedList();
 });

@@ -1,4 +1,5 @@
 let shoppingList = [];
+let completedList = [];
 
 export const addToShoppingList = (item) => {
 	const itemId = `${parseInt(
@@ -34,3 +35,13 @@ export const removeItem = (itemId) => {
 };
 
 export const getShoppingList = () => shoppingList;
+
+export const addToCompletedList = (itemId) => {
+	const getItem = shoppingList.find(({ id }) => id === itemId);
+	shoppingList = shoppingList.filter(({ id }) => id !== itemId);
+	completedList = [getItem, ...completedList];
+};
+
+export const getCompletedList = () => completedList;
+
+export const clearCompletedList = () => (completedList = []);
