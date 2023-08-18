@@ -123,7 +123,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getShoppingList = exports.addToShoppingList = void 0;
+exports.setPriority = exports.getShoppingList = exports.addToShoppingList = void 0;
 let shoppingList = [];
 const addToShoppingList = item => {
   const itemId = `${parseInt(Math.random() * 100000)} - ${new Date().getTime()}`;
@@ -136,6 +136,18 @@ const addToShoppingList = item => {
 exports.addToShoppingList = addToShoppingList;
 const getShoppingList = () => shoppingList;
 exports.getShoppingList = getShoppingList;
+const setPriority = (itemId, priority) => {
+  shoppingList = shoppingList.map(item => {
+    if (item.id === itemId) {
+      return {
+        ...item,
+        priority
+      };
+    }
+    return item;
+  });
+};
+exports.setPriority = setPriority;
 },{}],"js/Item.js":[function(require,module,exports) {
 "use strict";
 
@@ -196,6 +208,17 @@ itemInput.addEventListener('keyup', function (evt) {
     this.value = '';
   }
 });
+shoppingListDiv.addEventListener('click', function (evt) {
+  // Priority
+  if (evt.target.parentElement.classList.contains('priority-control')) {
+    const priority = evt.target.classList.value;
+    const itemId = evt.target.parentElement.parentElement.getAttribute('data-id');
+    // Set priority
+    (0, _model.setPriority)(itemId, priority);
+    // Update View
+    (0, _view.renderShoppingList)();
+  }
+});
 },{"./model":"js/model.js","./view":"js/view.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -221,7 +244,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60595" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61614" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

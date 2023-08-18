@@ -1,4 +1,4 @@
-import { addToShoppingList } from './model';
+import { addToShoppingList, setPriority } from './model';
 import { renderShoppingList } from './view';
 
 const itemInput = document.querySelector("input[name='itemInput']");
@@ -13,5 +13,18 @@ itemInput.addEventListener('keyup', function (evt) {
 		// update the view
 		renderShoppingList();
 		this.value = '';
+	}
+});
+
+shoppingListDiv.addEventListener('click', function (evt) {
+	// Priority
+	if (evt.target.parentElement.classList.contains('priority-control')) {
+		const priority = evt.target.classList.value;
+		const itemId =
+			evt.target.parentElement.parentElement.getAttribute('data-id');
+		// Set priority
+		setPriority(itemId, priority);
+		// Update View
+		renderShoppingList();
 	}
 });

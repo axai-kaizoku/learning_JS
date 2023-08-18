@@ -13,3 +13,15 @@ export const addToShoppingList = (item) => {
 };
 
 export const getShoppingList = () => shoppingList;
+
+export const setPriority = (itemId, priority) => {
+	shoppingList = shoppingList.map((item) => {
+		if (item.id === itemId) {
+			return {
+				...item,
+				priority,
+			};
+		}
+		return item;
+	});
+};
