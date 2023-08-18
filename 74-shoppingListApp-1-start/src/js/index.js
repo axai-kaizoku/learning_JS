@@ -4,6 +4,7 @@ import {
 	removeItem,
 	addToCompletedList,
 	clearCompletedList,
+	bootUp,
 } from './model';
 import { renderShoppingList, renderCompletedList } from './view';
 
@@ -37,8 +38,11 @@ shoppingListDiv.addEventListener('click', function (evt) {
 	// Remove an item
 	if (evt.target.classList.contains('remove-btn')) {
 		const itemId = evt.target.parentElement.getAttribute('data-id');
+		// Confirm ?
+		const confirm = window.confirm('Do you really want to delete this item?');
 		// if the item is removed update the view
-		if (removeItem(itemId)) {
+		if (confirm) {
+			removeItem(itemId);
 			renderShoppingList();
 		}
 	}
@@ -74,3 +78,10 @@ clearCompletedBtn.addEventListener('click', function (evt) {
 	clearCompletedList();
 	renderCompletedList();
 });
+
+// Immediately Invoked Function Expression (IIFE)
+(() => {
+	bootUp();
+	renderShoppingList();
+	renderCompletedList();
+})();

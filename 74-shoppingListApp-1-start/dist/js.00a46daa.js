@@ -117,13 +117,38 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/model.js":[function(require,module,exports) {
+})({"js/storage.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setPriority = exports.removeItem = exports.getShoppingList = exports.getCompletedList = exports.clearCompletedList = exports.addToShoppingList = exports.addToCompletedList = void 0;
+exports.saveToStore = exports.getFromStore = void 0;
+const saveToStore = function ({
+  shoppingList,
+  completedList
+}) {
+  window.localStorage.setItem('shoppingApp_active', JSON.stringify(shoppingList));
+  window.localStorage.setItem('shoppingApp_completed', JSON.stringify(completedList));
+};
+exports.saveToStore = saveToStore;
+const getFromStore = function () {
+  const getActive = window.localStorage.getItem('shoppingApp_active');
+  const getCompleted = window.localStorage.getItem('shoppingApp_completed');
+  return {
+    active: getActive ? JSON.parse(getActive) : [],
+    completed: getCompleted ? JSON.parse(getCompleted) : []
+  };
+};
+exports.getFromStore = getFromStore;
+},{}],"js/model.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setPriority = exports.removeItem = exports.getShoppingList = exports.getCompletedList = exports.clearCompletedList = exports.bootUp = exports.addToShoppingList = exports.addToCompletedList = void 0;
+var _storage = require("./storage");
 let shoppingList = [];
 let completedList = [];
 const addToShoppingList = item => {
@@ -132,6 +157,10 @@ const addToShoppingList = item => {
     id: itemId,
     item,
     priority: 'normal'
+  });
+  (0, _storage.saveToStore)({
+    shoppingList,
+    completedList
   });
 };
 exports.addToShoppingList = addToShoppingList;
@@ -145,17 +174,20 @@ const setPriority = (itemId, priority) => {
     }
     return item;
   });
+  (0, _storage.saveToStore)({
+    shoppingList,
+    completedList
+  });
 };
 exports.setPriority = setPriority;
 const removeItem = itemId => {
-  const confirm = window.confirm('Do you really want to delete the item?');
-  if (confirm) {
-    shoppingList = shoppingList.filter(({
-      id
-    }) => id !== itemId);
-    return true;
-  }
-  return false;
+  shoppingList = shoppingList.filter(({
+    id
+  }) => id !== itemId);
+  (0, _storage.saveToStore)({
+    shoppingList,
+    completedList
+  });
 };
 exports.removeItem = removeItem;
 const getShoppingList = () => shoppingList;
@@ -172,9 +204,24 @@ const addToCompletedList = itemId => {
 exports.addToCompletedList = addToCompletedList;
 const getCompletedList = () => completedList;
 exports.getCompletedList = getCompletedList;
-const clearCompletedList = () => completedList = [];
+const clearCompletedList = () => {
+  completedList = [];
+  (0, _storage.saveToStore)({
+    shoppingList,
+    completedList
+  });
+};
 exports.clearCompletedList = clearCompletedList;
-},{}],"../node_modules/vm-browserify/index.js":[function(require,module,exports) {
+const bootUp = () => {
+  const {
+    active,
+    completed
+  } = (0, _storage.getFromStore)();
+  shoppingList = active;
+  completedList = completed;
+};
+exports.bootUp = bootUp;
+},{"./storage":"js/storage.js"}],"../node_modules/vm-browserify/index.js":[function(require,module,exports) {
 var indexOf = function (xs, item) {
     if (xs.indexOf) return xs.indexOf(item);
     else for (var i = 0; i < xs.length; i++) {
@@ -412,8 +459,11 @@ shoppingListDiv.addEventListener('click', function (evt) {
   // Remove an item
   if (evt.target.classList.contains('remove-btn')) {
     const itemId = evt.target.parentElement.getAttribute('data-id');
+    // Confirm ?
+    const confirm = window.confirm('Do you really want to delete this item?');
     // if the item is removed update the view
-    if ((0, _model.removeItem)(itemId)) {
+    if (confirm) {
+      (0, _model.removeItem)(itemId);
       (0, _view.renderShoppingList)();
     }
   }
@@ -446,6 +496,13 @@ clearCompletedBtn.addEventListener('click', function (evt) {
   (0, _model.clearCompletedList)();
   (0, _view.renderCompletedList)();
 });
+
+// Immediately Invoked Function Expression (IIFE)
+(() => {
+  (0, _model.bootUp)();
+  (0, _view.renderShoppingList)();
+  (0, _view.renderCompletedList)();
+})();
 },{"./model":"js/model.js","./view":"js/view.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -471,7 +528,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61614" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64168" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
