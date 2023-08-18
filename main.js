@@ -1,81 +1,65 @@
-const allEmployees = document.querySelector('.all-employees');
-const taskForce = document.querySelector('.task-force');
-const employeeCards = document.querySelectorAll('.employee');
-const { top, left } = allEmployees.getBoundingClientRect();
+const formEl = document.querySelector('form');
+const emailFld = document.querySelector("input[name='email']");
+const passwordFld = document.querySelector("input[name='password']");
+const repasswordFld = document.querySelector("input[name='repassword']");
+const fullnameFld = document.querySelector("input[name='fullname']");
+const merchantFld = document.querySelector("input[name='merchant']");
+const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
 
-const createPanel = (x, y, name) => {
-	const createPnl = document.createElement('div');
-	createPnl.setAttribute('class', 'info-panel');
-	createPnl.innerText = name;
-	createPnl.style.top = `${y}px`;
-	createPnl.style.left = `${x}px`;
+let canSubmit = false;
 
-	return createPnl;
+const submitForm = (data) => {
+	console.log(data);
 };
 
-const removePanel = () => document.querySelector('.info-panel')?.remove();
+//Validators
 
-allEmployees.addEventListener('contextmenu', function (evt) {
-	evt.preventDefault();
-	removePanel();
-	if (evt.target.getAttribute('class') === 'employee') {
-		const name = evt.target.getAttribute('data-name');
-		const infoPanel = createPanel(evt.clientX - left, evt.clientY - top, name);
-
-		allEmployees.append(infoPanel);
+const validateForm = (el, condition) => {
+	if (condition) {
+		canSubmit = true;
+		el.parentElement.classList.remove('form-field-error');
+	} else {
+		canSubmit = false;
+		el.parentElement.classList.add('form-field-error');
 	}
-});
+};
 
-allEmployees.addEventListener('click', removePanel);
-
-// Drag 'n' Drop
-
-employeeCards.forEach((el) => {
-	el.addEventListener('dragstart', function (evt) {
-		removePanel();
-		const getId = evt.target.getAttribute('data-id');
-		evt.dataTransfer.setData('text/plain', getId);
-	});
-});
-
-taskForce.addEventListener('dragenter', function (evt) {
+emailFld.addEventListener('keyup', function (evt) {
 	evt.preventDefault();
-	evt.currentTarget.classList.add('highlight-drop');
+	validateForm(this, evt.target.reportValidity());
 });
 
-taskForce.addEventListener('dragleave', function (evt) {
+passwordFld.addEventListener('keyup', function (evt) {
 	evt.preventDefault();
-	evt.currentTarget.classList.remove('highlight-drop');
+	validateForm(this, passwordRegEx.test(evt.target.value));
 });
 
-taskForce.addEventListener('drop', function (evt) {
+repasswordFld.addEventListener('keyup', function (evt) {
 	evt.preventDefault();
-	const empId = evt.dataTransfer.getData('text/plain');
-	evt.currentTarget.append(document.querySelector(`div[data-id = '${empId}']`));
-	evt.currentTarget.classList.remove('highlight-drop');
+	validateForm(this, passwordFld.value === evt.target.value);
 });
 
-taskForce.addEventListener('dragover', function (evt) {
+fullnameFld.addEventListener('keyup', function (evt) {
 	evt.preventDefault();
+	evt.target.value = evt.target.value.trimLeft();
+	validateForm(this, evt.target.reportValidity());
 });
 
-allEmployees.addEventListener('dragenter', function (evt) {
+formEl.addEventListener('submit', function (evt) {
 	evt.preventDefault();
-	evt.currentTarget.classList.add('highlight-drop');
-});
+	const getFormValues = [...evt.target.elements]
+		.filter((el) => el.type !== 'submit' && el)
+		.map((el) => {
+			return {
+				name: el.getAttribute('name'),
+				type: el.type,
+				value: el.type === 'checkbox' ? el.checked : el.value,
+			};
+		});
 
-allEmployees.addEventListener('dragleave', function (evt) {
-	evt.preventDefault();
-	evt.currentTarget.classList.remove('highlight-drop');
-});
+	const isFilled = getFormValues
+		.filter((el) => el.type !== 'checkbox')
+		.every((el) => el.value !== '');
 
-allEmployees.addEventListener('drop', function (evt) {
-	evt.preventDefault();
-	const empId = evt.dataTransfer.getData('text/plain');
-	evt.currentTarget.append(document.querySelector(`div[data-id = '${empId}']`));
-	evt.currentTarget.classList.remove('highlight-drop');
-});
-
-allEmployees.addEventListener('dragover', function (evt) {
-	evt.preventDefault();
+	isFilled && canSubmit && submitForm(getFormValues);
 });

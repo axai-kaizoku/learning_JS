@@ -12,49 +12,49 @@
 	</head>
 	<body>
 		<div id="main">
-			<h2>Project Assignment</h2>
-			<div class="all-employees">
-				<div class="label">ALL EMPLOYEES</div>
-				<div
-					class="employee"
-					data-name="Andrew Kumar"
-					data-id="1"
-					style="background-image: url('./images/img/andrew-kumar.jpg')"
-					draggable="true"></div>
-				<div
-					class="employee"
-					data-name="Christopher Gibson"
-					data-id="2"
-					style="background-image: url('./images/img/chris-gibson.jpg')"
-					draggable="true"></div>
-				<div
-					class="employee"
-					data-name="Jesse Caldery"
-					data-id="3"
-					style="background-image: url('./images/img/jesse-caldery.jpg')"
-					draggable="true"></div>
-				<div
-					class="employee"
-					data-name="Joe Mockery"
-					data-id="4"
-					style="background-image: url('./images/img/joe-mockery.jpg')"
-					draggable="true"></div>
-				<div
-					class="employee"
-					data-name="June Cha"
-					data-id="5"
-					style="background-image: url('./images/img/june-cha.jpg')"
-					draggable="true"></div>
-				<div
-					class="employee"
-					data-name="Lurecia Calder"
-					data-id="6"
-					style="background-image: url('./images/img/lurecia-calder.jpg')"
-					draggable="true"></div>
-			</div>
-			<div class="task-force">
-				<div class="label">SHORTLISTED EMPLOYEES</div>
-			</div>
+			<form
+				method="post"
+				action="">
+				<div id="signup-form">
+					<div id="form-title">Signup</div>
+					<div id="form-body">
+						<div class="form-field">
+							<label>E-Mail</label
+							><input
+								type="email"
+								name="email" />
+						</div>
+						<div class="form-field">
+							<label>Password</label
+							><input
+								type="password"
+								name="password" />
+						</div>
+						<div class="form-field">
+							<label>Retype Password</label
+							><input
+								type="password"
+								name="repassword" />
+						</div>
+						<div class="form-field">
+							<label>Full Name</label
+							><input
+								type="text"
+								name="fullname"
+								minlength="2" />
+						</div>
+						<div class="form-field">
+							<label>Are you a merchant?</label>
+							<input
+								type="checkbox"
+								name="isMerchant" />
+						</div>
+						<div class="form-field">
+							<button type="submit">Go</button>
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 		<script
 			type="module"
