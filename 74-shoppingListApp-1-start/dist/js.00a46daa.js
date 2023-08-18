@@ -123,7 +123,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setPriority = exports.getShoppingList = exports.addToShoppingList = void 0;
+exports.setPriority = exports.removeItem = exports.getShoppingList = exports.addToShoppingList = void 0;
 let shoppingList = [];
 const addToShoppingList = item => {
   const itemId = `${parseInt(Math.random() * 100000)} - ${new Date().getTime()}`;
@@ -134,8 +134,6 @@ const addToShoppingList = item => {
   });
 };
 exports.addToShoppingList = addToShoppingList;
-const getShoppingList = () => shoppingList;
-exports.getShoppingList = getShoppingList;
 const setPriority = (itemId, priority) => {
   shoppingList = shoppingList.map(item => {
     if (item.id === itemId) {
@@ -148,6 +146,19 @@ const setPriority = (itemId, priority) => {
   });
 };
 exports.setPriority = setPriority;
+const removeItem = itemId => {
+  const confirm = window.confirm('Do you really want to delete the item?');
+  if (confirm) {
+    shoppingList = shoppingList.filter(({
+      id
+    }) => id !== itemId);
+    return true;
+  }
+  return false;
+};
+exports.removeItem = removeItem;
+const getShoppingList = () => shoppingList;
+exports.getShoppingList = getShoppingList;
 },{}],"js/Item.js":[function(require,module,exports) {
 "use strict";
 
@@ -217,6 +228,15 @@ shoppingListDiv.addEventListener('click', function (evt) {
     (0, _model.setPriority)(itemId, priority);
     // Update View
     (0, _view.renderShoppingList)();
+  }
+
+  // Remove an item
+  if (evt.target.classList.contains('remove-btn')) {
+    const itemId = evt.target.parentElement.getAttribute('data-id');
+    // if the item is removed update the view
+    if ((0, _model.removeItem)(itemId)) {
+      (0, _view.renderShoppingList)();
+    }
   }
 });
 },{"./model":"js/model.js","./view":"js/view.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

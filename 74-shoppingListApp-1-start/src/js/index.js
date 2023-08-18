@@ -1,4 +1,4 @@
-import { addToShoppingList, setPriority } from './model';
+import { addToShoppingList, setPriority, removeItem } from './model';
 import { renderShoppingList } from './view';
 
 const itemInput = document.querySelector("input[name='itemInput']");
@@ -26,5 +26,14 @@ shoppingListDiv.addEventListener('click', function (evt) {
 		setPriority(itemId, priority);
 		// Update View
 		renderShoppingList();
+	}
+
+	// Remove an item
+	if (evt.target.classList.contains('remove-btn')) {
+		const itemId = evt.target.parentElement.getAttribute('data-id');
+		// if the item is removed update the view
+		if (removeItem(itemId)) {
+			renderShoppingList();
+		}
 	}
 });

@@ -12,8 +12,6 @@ export const addToShoppingList = (item) => {
 	});
 };
 
-export const getShoppingList = () => shoppingList;
-
 export const setPriority = (itemId, priority) => {
 	shoppingList = shoppingList.map((item) => {
 		if (item.id === itemId) {
@@ -25,3 +23,14 @@ export const setPriority = (itemId, priority) => {
 		return item;
 	});
 };
+
+export const removeItem = (itemId) => {
+	const confirm = window.confirm('Do you really want to delete the item?');
+	if (confirm) {
+		shoppingList = shoppingList.filter(({ id }) => id !== itemId);
+		return true;
+	}
+	return false;
+};
+
+export const getShoppingList = () => shoppingList;
