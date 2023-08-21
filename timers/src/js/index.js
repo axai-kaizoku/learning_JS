@@ -1,18 +1,15 @@
-// import { quotes } from './quotes';
+import { quotes } from './quotes';
+import { typeWriter, loopThrough } from './timers';
 
-// const main = document.querySelector('#quotemaster > h1');
-// const playBtn = document.querySelector('#playBtn');
+const main = document.querySelector('#quotemaster > h1');
+const playBtn = document.querySelector('#playBtn');
+const playControl = loopThrough(quotes, main, typeWriter, 5000, 20);
 
-let counter = 0;
+let isPlaying = true;
+playBtn.addEventListener('click', function (evt) {
+	evt.preventDefault();
+	isPlaying ? playControl.stop() : playControl.play();
+	isPlaying = !isPlaying;
+});
 
-let timer = setInterval(function () {
-	console.log(`Counter: ${counter}`);
-	counter++;
-}, 1000);
-
-setTimeout(function () {
-	clearInterval(timer);
-	counter = 0;
-}, 15000);
-
-console.log(`Timer`);
+// playControl.play();
