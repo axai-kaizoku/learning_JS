@@ -1,17 +1,21 @@
-function funcOne() {
-	return 'Hi from Function One';
-}
+let startMs = Date.now();
 
-function funcTwo(cb) {
+function multipleTimeouts() {
+	let delay = 1000;
+
 	setTimeout(function () {
-		cb('Hello from function two');
-	}, 0);
+		console.log(`First one : ${Date.now() - startMs}ms`);
+	}, delay);
+	setTimeout(function () {
+		for (let i = 0; i < 1000000000; i++) {}
+		console.log(`Second one : ${Date.now() - startMs}ms`);
+	}, delay);
+	setTimeout(function () {
+		console.log(`Third one : ${Date.now() - startMs}ms`);
+	}, delay);
+	setTimeout(function () {
+		console.log(`Fourth one : ${Date.now() - startMs}ms`);
+	}, delay);
 }
 
-function funcThree() {
-	return 'Hello from function three';
-}
-
-console.log(funcOne());
-funcTwo((out) => console.log(out));
-console.log(funcThree());
+multipleTimeouts();
