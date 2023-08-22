@@ -1,7 +1,0 @@
-node_modules
-dist
-.cache
-README.md
-package-lock.json
-package.json
-.babelrc
