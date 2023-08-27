@@ -1,21 +1,47 @@
-let startMs = Date.now();
+const dataSource =
+	'Apples, Mangoes, Kiwi, Strawberries, Pineapple, Oranges, Raspberries';
 
-function multipleTimeouts() {
-	let delay = 1000;
+// Convert String to Array
+const strToArray = (str, cb) =>
+	setTimeout(function () {
+		if (typeof str !== 'string')
+			return cb('Invalid data presented. Only strings can be processed', null);
+		cb(null, str.split(','));
+	}, 0);
 
+// Transform each string and prefix the words 'I love '
+const loveFruits = (arr, cb) =>
 	setTimeout(function () {
-		console.log(`First one : ${Date.now() - startMs}ms`);
-	}, delay);
-	setTimeout(function () {
-		for (let i = 0; i < 1000000000; i++) {}
-		console.log(`Second one : ${Date.now() - startMs}ms`);
-	}, delay);
-	setTimeout(function () {
-		console.log(`Third one : ${Date.now() - startMs}ms`);
-	}, delay);
-	setTimeout(function () {
-		console.log(`Fourth one : ${Date.now() - startMs}ms`);
-	}, delay);
-}
+		if (!Array.isArray(arr))
+			return cb('Invalid data presented. Only arrays can be transformed', null);
+		cb(
+			null,
+			arr.map((e) => `I love ${e}`),
+		);
+	}, 0);
 
-multipleTimeouts();
+// Print the array on the console
+
+const echoArray = (arr) => arr.forEach((e, i) => console.log(`${i + 1}. ${e}`));
+
+// Promisifying callback based functions
+
+const Promisify =
+	(fn) =>
+	(...args) => {
+		return new Promise((resolve, reject) => {
+			fn.call(this, ...args, (error, result) => {
+				if (error) return reject(error);
+
+				resolve(result);
+			});
+		});
+	};
+
+const strToArrayPromise = Promisify(strToArray);
+const loveFruitsPromise = Promisify(loveFruits);
+
+strToArrayPromise(dataSource)
+	.then(loveFruitsPromise)
+	.then(echoArray)
+	.catch((error) => console.log(error));
