@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Props The App works as expected 1`] = `"<div class=\\"app\\"><div class=\\"user-card\\"><img src=\\"https://randomuser.me/api/portraits/med/men/75.jpg\\" alt=\\"Brad Gibson\\"><div class=\\"user-name\\">Brad Gibson</div><div class=\\"designation\\">Database Administrator</div><div class=\\"admin\\">A</div></div><div class=\\"user-card\\"><img src=\\"https://randomuser.me/api/portraits/med/men/76.jpg\\" alt=\\"Cory Edwards\\"><div class=\\"user-name\\">Cory Edwards</div><div class=\\"designation\\">Sr. Developer</div></div><div class=\\"user-card\\"><img src=\\"https://randomuser.me/api/portraits/med/men/63.jpg\\" alt=\\"Xavier Klocke\\"><div class=\\"user-name\\">Xavier Klocke</div><div class=\\"designation\\">Backend Developer</div><div class=\\"admin\\">A</div></div></div>"`;
+
+exports[`Props The UserCard component renders data received using props! 1`] = `"<div class=\\"user-card\\"><img src=\\"https://randomuser.me/api/portraits/med/men/63.jpg\\" alt=\\"Larry David\\"><div class=\\"user-name\\">Larry David</div><div class=\\"designation\\">Testing Manager</div><div class=\\"admin\\">A</div></div>"`;
