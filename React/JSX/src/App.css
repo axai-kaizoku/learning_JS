@@ -1,0 +1,47 @@
+.app-container {
+	position: absolute;
+	width: 500px;
+	height: fit-content;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	padding: 10px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+	background-color: white;
+}
+
+.app-title {
+	position: relative;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	font-size: 24px;
+	padding: 10px;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+	border-radius: 25px;
+}
+
+.book {
+	position: relative;
+	background-color: rgb(228, 73, 73);
+	color: white;
+	padding: 15px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	margin-bottom: 5px;
+}
+
+.book-title {
+	position: relative;
+	font-size: 32px;
+}
+
+.book-author {
+	position: relative;
+	left: 1px;
+}
