@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import FruitBasket from "./FruitBasket";
+import LoginComponent from "./LoginComponent";
 
-ReactDOM.render(<FruitBasket />, document.getElementById("root"));
+ReactDOM.render(<LoginComponent />, document.getElementById("root"));
