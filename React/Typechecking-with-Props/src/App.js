@@ -6,18 +6,18 @@ import StudentCard from './components/StudentCard'; // Requires student: Shape
 const App = () => {
 	return (
 		<div className='main'>
-			<Notification
+			{/* <Notification
 				messages={['Please renew your account', 'You have 2 notifications']}
-			/>
-			<NumberedButtons num={5} />
-			<StudentCard
+			/> */}
+			<NumberedButtons num={50} />
+			{/* <StudentCard
 				student={{
 					name: 'Richie Salmon',
 					id: 2099,
 					active: true,
 					courses: ['Deep Learning - Python', 'Advance JAVA'],
 				}}
-			/>
+			/> */}
 		</div>
 	);
 };
