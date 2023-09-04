@@ -1,44 +1,42 @@
-import React, { Component } from 'react';
-import Timer from './Timer';
-import { v1 as uuid } from 'uuid';
+import React, { useState } from 'react';
 
-class App extends Component {
-	state = {
-		timers: [],
+const App = () => {
+	const [xPos, setXPos] = useState(0);
+	const [yPos, setYPos] = useState(0);
+	const [marker, setMarker] = useState([]);
+	const onMouseMoveHandler = (evt) => {
+		setXPos(evt.nativeEvent.offsetX);
+		setYPos(evt.nativeEvent.offsetY);
 	};
-	addTimer = (name) =>
-		this.setState({ timers: [{ id: uuid(), name }, ...this.state.timers] });
-	removeTimer = (id) =>
-		this.setState({
-			timers: this.state.timers.filter((t) => t.id !== id),
-		});
-	render() {
-		return (
-			<div className="container">
-				<div className="create-timer">
-					<input
-						type="text"
-						placeholder="Title"
-						onKeyUp={(e) => {
-							if (e.keyCode === 13) {
-								this.addTimer(e.target.value);
-								e.target.value = '';
-							}
-						}}
-					/>
-				</div>
-				<div className="timer-bench">
-					{this.state.timers.map((t) => (
-						<Timer
-							name={t.name}
-							key={t.id}
-							onRemove={() => this.removeTimer(t.id)}
-						/>
-					))}
-				</div>
+	const onClickHandler = (evt) => {
+		setMarker([
+			...marker,
+			{
+				id: new Date().getTime(),
+				x: evt.nativeEvent.offsetX - 5,
+				y: evt.nativeEvent.offsetY - 5,
+			},
+		]);
+	};
+	return (
+		<div className="container">
+			<div className="stats">
+				{xPos}, {yPos}
+				<button id="clear-btn" onClick={() => setMarker([])}>
+					Clear
+				</button>
 			</div>
-		);
-	}
-}
+			<div
+				className="canvas"
+				onMouseMove={onMouseMoveHandler}
+				onClick={onClickHandler}
+			>
+				{marker.map((m) => (
+					<div key={m.id} className="dot" style={{ left: m.x, top: m.y }} />
+				))}
+			</div>
+		</div>
+	);
+};
 
 export default App;
