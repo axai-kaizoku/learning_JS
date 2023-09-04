@@ -1,37 +1,41 @@
 import React, { Component } from 'react';
-import './index.css';
-import Joke from './Joke';
-import Data from './Sources/data';
+import Timer from './Timer';
+import { v1 as uuid } from 'uuid';
 
 class App extends Component {
 	state = {
-		joke: '',
-		isLoading: false,
+		timers: [],
 	};
-
-	getJoke = () => {
+	addTimer = (name) =>
+		this.setState({ timers: [{ id: uuid(), name }, ...this.state.timers] });
+	removeTimer = (id) =>
 		this.setState({
-			isLoading: true,
+			timers: this.state.timers.filter((t) => t.id !== id),
 		});
-
-		const randomIndex = Math.floor(Math.random() * Data.length);
-		const randomJoke = Data[randomIndex].joke;
-
-		this.setState({
-			joke: randomJoke,
-			isLoading: false,
-		});
-	};
-	componentDidMount = () => this.getJoke();
 	render() {
 		return (
 			<div className="container">
-				<div
-					className={this.state.isLoading ? 'title title-pulse' : 'title'}
-					onClick={this.getJoke}>
-					Joke Machine
+				<div className="create-timer">
+					<input
+						type="text"
+						placeholder="Title"
+						onKeyUp={(e) => {
+							if (e.keyCode === 13) {
+								this.addTimer(e.target.value);
+								e.target.value = '';
+							}
+						}}
+					/>
 				</div>
-				<Joke punchline={this.state.joke} />
+				<div className="timer-bench">
+					{this.state.timers.map((t) => (
+						<Timer
+							name={t.name}
+							key={t.id}
+							onRemove={() => this.removeTimer(t.id)}
+						/>
+					))}
+				</div>
 			</div>
 		);
 	}
