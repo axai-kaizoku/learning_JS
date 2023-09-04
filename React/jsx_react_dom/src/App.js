@@ -1,24 +1,40 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './index.css';
 import Joke from './Joke';
+import Data from './Sources/data';
 
-const App = () => {
-	const [category, setCategory] = useState('general');
-	return (
-		<>
+class App extends Component {
+	state = {
+		joke: '',
+		isLoading: false,
+	};
+
+	getJoke = () => {
+		this.setState({
+			isLoading: true,
+		});
+
+		const randomIndex = Math.floor(Math.random() * Data.length);
+		const randomJoke = Data[randomIndex].joke;
+
+		this.setState({
+			joke: randomJoke,
+			isLoading: false,
+		});
+	};
+	componentDidMount = () => this.getJoke();
+	render() {
+		return (
 			<div className="container">
-				<div className="category-picker">
-					<select onChange={(e) => setCategory(e.target.value)}>
-						<option value="general">General</option>
-						<option value="programming">Programming</option>
-						<option value="dad">Dad</option>
-						<option value="knock-knock">Knock-knock</option>
-					</select>
+				<div
+					className={this.state.isLoading ? 'title title-pulse' : 'title'}
+					onClick={this.getJoke}>
+					Joke Machine
 				</div>
-				<Joke category={category} />
+				<Joke punchline={this.state.joke} />
 			</div>
-		</>
-	);
-};
+		);
+	}
+}
 
 export default App;
