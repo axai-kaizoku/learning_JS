@@ -1,40 +1,41 @@
 import React, { useState } from 'react';
+import './App.css';
 
 const App = () => {
-	const [xPos, setXPos] = useState(0);
-	const [yPos, setYPos] = useState(0);
-	const [marker, setMarker] = useState([]);
-	const onMouseMoveHandler = (evt) => {
-		setXPos(evt.nativeEvent.offsetX);
-		setYPos(evt.nativeEvent.offsetY);
-	};
-	const onClickHandler = (evt) => {
-		setMarker([
-			...marker,
-			{
-				id: new Date().getTime(),
-				x: evt.nativeEvent.offsetX - 5,
-				y: evt.nativeEvent.offsetY - 5,
-			},
-		]);
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [isComplete, setIsComplete] = useState(false);
+	const registerBtnHandler = () => {
+		if (name && email) {
+			setIsComplete(true);
+		}
 	};
 	return (
-		<div className="container">
-			<div className="stats">
-				{xPos}, {yPos}
-				<button id="clear-btn" onClick={() => setMarker([])}>
-					Clear
-				</button>
-			</div>
-			<div
-				className="canvas"
-				onMouseMove={onMouseMoveHandler}
-				onClick={onClickHandler}
-			>
-				{marker.map((m) => (
-					<div key={m.id} className="dot" style={{ left: m.x, top: m.y }} />
-				))}
-			</div>
+		<div className="app">
+			<h1 id="title">Register</h1>
+			{!isComplete ? (
+				<div className="form-fields">
+					<input
+						id="name-fld"
+						type="text"
+						placeholder="Name"
+						onChange={(e) => setName(e.target.value)}
+					/>
+					<input
+						id="email-fld"
+						type="text"
+						placeholder="E-Mail"
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+					<button id="register-btn" onClick={registerBtnHandler}>
+						Register
+					</button>
+				</div>
+			) : (
+				<h1 id="confirm">
+					Thank you, {name}! We will contact you shortly on {email}
+				</h1>
+			)}
 		</div>
 	);
 };
