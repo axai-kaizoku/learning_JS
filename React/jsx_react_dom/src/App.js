@@ -1,47 +1,40 @@
 import React, { Component } from 'react';
-import SongCard from './components/SongCard';
-import songs from './services/songs';
+import './index.css';
+import Joke from './Joke';
 
 class App extends Component {
 	state = {
-		songs,
+		joke: {},
+		isLoading: false,
 	};
-	sortByTitle = () => {
+	getJoke = async () => {
 		this.setState({
-			songs: [
-				...this.state.songs.sort((a, b) =>
-					a.title.toUpperCase() > b.title.toUpperCase() ? 1 : -1,
-				),
-			],
+			isLoading: true,
+		});
+
+		const callJokeApi = await fetch(
+			'https://official-joke-api.appspot.com/random_joke',
+		);
+		const resolveJoke = await callJokeApi.json();
+
+		this.setState({
+			joke: resolveJoke,
+			isLoading: false,
 		});
 	};
-	sortByRating = () => {
-		this.setState({
-			songs: [...this.state.songs.sort((a, b) => b.rating - a.rating)],
-		});
-	};
+	componentDidMount = () => this.getJoke();
 	render() {
 		return (
-			<div id="super-tunes">
-				<h2 id="st-title">SuperTunes - Songs of the Week</h2>
-				<button
-					className="st-btn"
-					onClick={this.sortByTitle}>
-					Sort by Title
-				</button>
-				<button
-					className="st-btn"
-					onClick={this.sortByRating}>
-					Sort by Rating
-				</button>
-				<div id="song-list">
-					{this.state.songs.map((song) => (
-						<SongCard
-							key={song.id}
-							data={song}
-						/>
-					))}
+			<div className="container">
+				<div
+					className={this.state.isLoading ? 'title title-pulse' : 'title'}
+					onClick={this.getJoke}>
+					Joke Machine
 				</div>
+				<Joke
+					setup={this.state.joke.setup}
+					punchline={this.state.joke.punchline}
+				/>
 			</div>
 		);
 	}
