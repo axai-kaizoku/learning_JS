@@ -6,6 +6,7 @@
     "chart": "^0.1.2",
     "error-manager": "^1.2.1",
     "lodash.debounce": "^4.0.8",
+    "miragejs": "^0.1.47",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^2.1.3",
