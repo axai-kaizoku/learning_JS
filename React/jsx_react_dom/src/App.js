@@ -1,63 +1,68 @@
-import React, { Component, createRef } from 'react';
-import debounce from 'lodash.debounce';
-import getBooks from './db';
-import BookCard from './BookCard';
+import React, { Component } from 'react';
+import CurrencyInput from './CurrencyInput';
+import openRates from './services/openRates';
 
 class App extends Component {
-	searchRef = createRef();
 	state = {
-		results: [],
-		selectedBook: null,
+		from: 'USD',
+		to: 'INR',
+		rate: 1,
+		fromAmt: 1,
+		toAmt: 1,
 	};
-	searchBooks = debounce((keyword) => {
-		console.log(`Searching for ${keyword}`);
-		if (keyword !== '') {
-			const getTitles = getBooks(keyword);
+	componentDidMount = () => {
+		this.fetchRates(this.state.from, this.state.to);
+	};
+	componentDidUpdate = (prevProps, prevState) => {
+		if (prevState.from !== this.state.from || prevState.to !== this.state.to) {
+			this.fetchRates(this.state.from, this.state.to);
+		}
+	};
+	fetchRates = async (base = 'USD', symbol = 'INR') => {
+		const { rate } = await openRates(base, symbol);
+		this.setState({
+			rate,
+		});
+	};
+	setAmount = (amt, field) => {
+		if (field === 'from') {
 			this.setState({
-				results: getTitles,
+				fromAmt: amt,
+				toAmt: null,
 			});
 		} else {
 			this.setState({
-				results: [],
+				fromAmt: null,
+				toAmt: amt,
 			});
 		}
-	}, 500);
-	clear = () => {
-		this.searchRef.current.value = '';
-		this.setState({ results: [] });
 	};
-	showDetails = (book) => {
-		this.setState({ selectedBook: book });
-		this.clear();
+	computeResult = (key) => {
+		let { fromAmt, toAmt } = this.state;
+
+		if (fromAmt !== null) {
+			toAmt = parseFloat(fromAmt * this.state.rate).toFixed(2);
+		} else {
+			fromAmt = parseFloat(toAmt * this.state.rate).toFixed(2);
+		}
+
+		return key === 'from' ? fromAmt : toAmt;
 	};
 	render() {
 		return (
-			<div className="books-app">
-				<div className="title">The Library Catalogue</div>
-				<div className="search-box">
-					<input
-						type="text"
-						onChange={(evt) => this.searchBooks(evt.target.value)}
-						ref={this.searchRef}
-					/>
-					<div className="clear-btn" onClick={() => this.clear()}>
-						X
-					</div>
-					<div className="search-results">
-						{this.state.results.length > 0 ? (
-							<ul>
-								{this.state.results.map((b, index) => (
-									<li key={index} onClick={() => this.showDetails(b)}>
-										{b.title}
-									</li>
-								))}
-							</ul>
-						) : null}
-					</div>
-				</div>
-				<div className="book-details">
-					<BookCard data={this.state.selectedBook} />
-				</div>
+			<div className="currency-converter">
+				<CurrencyInput
+					symbol={this.state.from}
+					selectSymbol={(sym) => this.setState({ from: sym })}
+					setAmount={(amt) => this.setAmount(amt, 'from')}
+					amount={this.computeResult('from')}
+				/>
+				<CurrencyInput
+					symbol={this.state.to}
+					selectSymbol={(sym) => this.setState({ to: sym })}
+					setAmount={(amt) => this.setAmount(amt, 'to')}
+					amount={this.computeResult('to')}
+				/>
 			</div>
 		);
 	}
