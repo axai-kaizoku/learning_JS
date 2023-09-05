@@ -1,6 +1,22 @@
-import React from "react";
-import MessageBox from "./MessageBox";
+import React from 'react';
+import ChartComponent from './ChartComponent';
 
-const App = () => <MessageBox />;
+const weatherData = [
+	{ x: 'Monday', y: 35 },
+	{ x: 'Tuesday', y: 31 },
+	{ x: 'Wednesday', y: 37 },
+	{ x: 'Thursday', y: 32 },
+	{ x: 'Friday', y: 33 },
+	{ x: 'Saturday', y: 35.5 },
+	{ x: 'Sunday', y: 28 },
+];
+
+const App = () => {
+	return (
+		<div className="container">
+			<ChartComponent data={weatherData} height="280" width="530" />
+		</div>
+	);
+};
 
 export default App;
