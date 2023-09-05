@@ -1,95 +1,75 @@
 body {
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-		sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
-	position: absolute;
-	width: 600px;
-	height: 600px;
-	border: 1px solid rgba(0, 0, 0, 0.4);
-	top: 0px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	padding: 10px;
-	margin: auto;
+.form-container {
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 370px;
+  height: 663px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
-.product {
-	position: relative;
-	height: 50px;
-	padding: 10px;
-	background-color: rgba(0, 0, 0, 0.1);
-	margin-bottom: 5px;
+.form-fields {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  height: 300px;
+  width: 370px;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.product-name {
-	position: absolute;
-	top: 25px;
+.output {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 350px;
+  width: 370px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  left: 10px;
+  top: 320px;
 }
 
-.product-cost {
-	position: absolute;
-	top: 25px;
-	right: 50px;
-	font-weight: bold;
+.field-holder {
+  position: relative;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
-.cat-btn {
-	position: relative;
-	display: inline-block;
-	background-color: #000;
-	border-radius: 12px;
-	padding: 8px;
-	color: #fff;
-	font-size: 14px;
-	margin: 10px;
-	cursor: pointer;
+input,
+select,
+textarea {
+  font-size: 20px;
+  width: 320px;
 }
 
-.cat-btn-on {
-	background-color: rgb(163, 31, 31);
+.label {
+  position: relative;
+  font-size: 12px;
 }
 
-.categories {
-	position: relative;
-	text-align: center;
+.ot-field {
+  position: relative;
+  color: #fff;
+  font-size: 17px;
+  padding: 5px;
 }
 
-.error {
-	position: absolute;
-	width: fit-content;
-	height: fit-content;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	margin: auto;
+.bold {
+  font-weight: bold;
 }
 
-.pick-text {
-	position: absolute;
-	width: 600px;
-	font-weight: bold;
-	font-size: 40px;
-	color: rgba(0, 0, 0, 0.3);
-	top: 100px;
-	text-align: center;
-}
-
-.reset-btn {
-	position: absolute;
-	background-color: rgb(196, 42, 42);
-	color: #fff;
-	font-size: 14px;
-	padding: 10px;
-	cursor: pointer;
-	top: 400px;
-	left: 175px;
-	display: inline-block;
+.red {
+  border: 1px solid red;
 }
