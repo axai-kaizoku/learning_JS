@@ -7,21 +7,68 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
+.form {
   position: absolute;
-  width: 550px;
-  height: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid;
+  width: 450px;
+  height: 480px;
+  padding: 5px;
   top: 0px;
   bottom: 0px;
   left: 0px;
   right: 0px;
   margin: auto;
+}
+
+.field-holder {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="phone"] {
+  padding: 5px;
+  margin: 0px;
+  width: 415px;
+  font-size: 18px;
+  display: block;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  padding: 5px;
+  margin: 0px;
+  font-size: 18px;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.field-holder > label {
+  font-size: 12px;
+  display: inline-block;
   padding: 10px;
 }
 
-.chart {
-  position: absolute;
-  background-color: rgb(255, 255, 255);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+.field-holder > p {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.field-holder > button {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.separator {
+  position: relative;
+  border-top: 2px solid red;
+}
+
+.output {
+  font-size: 15px;
 }

@@ -1,22 +1,126 @@
-import React from 'react';
-import ChartComponent from './ChartComponent';
+import React, { Component } from 'react';
 
-const weatherData = [
-	{ x: 'Monday', y: 35 },
-	{ x: 'Tuesday', y: 31 },
-	{ x: 'Wednesday', y: 37 },
-	{ x: 'Thursday', y: 32 },
-	{ x: 'Friday', y: 33 },
-	{ x: 'Saturday', y: 35.5 },
-	{ x: 'Sunday', y: 28 },
-];
+class App extends Component {
+	state = {
+		name: '',
+		email: '',
+		phone: '',
+		priveleges: {
+			Author: false,
+			Moderator: false,
+			Reviewer: false,
+		},
+		verification: '',
+	};
 
-const App = () => {
-	return (
-		<div className="container">
-			<ChartComponent data={weatherData} height="280" width="530" />
-		</div>
-	);
-};
+	formHandler = ({ target }) => {
+		const { type, name, value } = target;
+		this.setState({
+			[name]:
+				type === 'checkbox'
+					? { ...this.state[name], [value]: !this.state[name][value] }
+					: value,
+		});
+	};
+	render() {
+		return (
+			<div className="form">
+				<div className="field-holder">
+					<input
+						type="text"
+						placeholder="Name"
+						name="name"
+						onChange={this.formHandler}
+						value={this.state.name}
+					/>
+				</div>
+				<div className="field-holder">
+					<input
+						type="email"
+						placeholder="E-Mail"
+						name="email"
+						onChange={this.formHandler}
+						value={this.state.email}
+					/>
+				</div>
+				<div className="field-holder">
+					<input
+						type="phone"
+						placeholder="Phone"
+						name="phone"
+						onChange={this.formHandler}
+						value={this.state.phone}
+					/>
+				</div>
+				<div className="field-holder">
+					<p>Priveleges</p>
+					<label>
+						Author:
+						<input
+							type="checkbox"
+							name="priveleges"
+							value="Author"
+							onChange={this.formHandler}
+							checked={this.state.priveleges.Author}
+						/>
+					</label>
+					<label>
+						Moderator:
+						<input
+							type="checkbox"
+							name="priveleges"
+							value="Moderator"
+							onChange={this.formHandler}
+							checked={this.state.priveleges.Moderator}
+						/>
+					</label>
+					<label>
+						Reviewer:
+						<input
+							type="checkbox"
+							name="priveleges"
+							value="Reviewer"
+							onChange={this.formHandler}
+							checked={this.state.priveleges.Reviewer}
+						/>
+					</label>
+				</div>
+				<div className="field-holder">
+					<p>Verification</p>
+					<label>
+						Phone:
+						<input
+							type="radio"
+							name="verification"
+							value="Phone"
+							onChange={this.formHandler}
+							checked={this.state.verification === 'Phone' ? true : false}
+						/>
+					</label>
+					<label>
+						E-Mail:
+						<input
+							type="radio"
+							name="verification"
+							value="E-Mail"
+							onChange={this.formHandler}
+							checked={this.state.verification === 'E-Mail' ? true : false}
+						/>
+					</label>
+				</div>
+				<div className="separator" />
+				<div className="output">
+					<ul>
+						{Object.keys(this.state).map((k) => (
+							<li key={k}>
+								<b>{k}</b>: {JSON.stringify(this.state[k])}
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+		);
+	}
+}
 
 export default App;
