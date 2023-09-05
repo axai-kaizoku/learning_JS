@@ -1,122 +1,62 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
+import debounce from 'lodash.debounce';
+import getBooks from './db';
+import BookCard from './BookCard';
 
 class App extends Component {
+	searchRef = createRef();
 	state = {
-		name: '',
-		email: '',
-		phone: '',
-		priveleges: {
-			Author: false,
-			Moderator: false,
-			Reviewer: false,
-		},
-		verification: '',
+		results: [],
+		selectedBook: null,
 	};
-
-	formHandler = ({ target }) => {
-		const { type, name, value } = target;
-		this.setState({
-			[name]:
-				type === 'checkbox'
-					? { ...this.state[name], [value]: !this.state[name][value] }
-					: value,
-		});
+	searchBooks = debounce((keyword) => {
+		console.log(`Searching for ${keyword}`);
+		if (keyword !== '') {
+			const getTitles = getBooks(keyword);
+			this.setState({
+				results: getTitles,
+			});
+		} else {
+			this.setState({
+				results: [],
+			});
+		}
+	}, 500);
+	clear = () => {
+		this.searchRef.current.value = '';
+		this.setState({ results: [] });
+	};
+	showDetails = (book) => {
+		this.setState({ selectedBook: book });
+		this.clear();
 	};
 	render() {
 		return (
-			<div className="form">
-				<div className="field-holder">
+			<div className="books-app">
+				<div className="title">The Library Catalogue</div>
+				<div className="search-box">
 					<input
 						type="text"
-						placeholder="Name"
-						name="name"
-						onChange={this.formHandler}
-						value={this.state.name}
+						onChange={(evt) => this.searchBooks(evt.target.value)}
+						ref={this.searchRef}
 					/>
+					<div className="clear-btn" onClick={() => this.clear()}>
+						X
+					</div>
+					<div className="search-results">
+						{this.state.results.length > 0 ? (
+							<ul>
+								{this.state.results.map((b, index) => (
+									<li key={index} onClick={() => this.showDetails(b)}>
+										{b.title}
+									</li>
+								))}
+							</ul>
+						) : null}
+					</div>
 				</div>
-				<div className="field-holder">
-					<input
-						type="email"
-						placeholder="E-Mail"
-						name="email"
-						onChange={this.formHandler}
-						value={this.state.email}
-					/>
-				</div>
-				<div className="field-holder">
-					<input
-						type="phone"
-						placeholder="Phone"
-						name="phone"
-						onChange={this.formHandler}
-						value={this.state.phone}
-					/>
-				</div>
-				<div className="field-holder">
-					<p>Priveleges</p>
-					<label>
-						Author:
-						<input
-							type="checkbox"
-							name="priveleges"
-							value="Author"
-							onChange={this.formHandler}
-							checked={this.state.priveleges.Author}
-						/>
-					</label>
-					<label>
-						Moderator:
-						<input
-							type="checkbox"
-							name="priveleges"
-							value="Moderator"
-							onChange={this.formHandler}
-							checked={this.state.priveleges.Moderator}
-						/>
-					</label>
-					<label>
-						Reviewer:
-						<input
-							type="checkbox"
-							name="priveleges"
-							value="Reviewer"
-							onChange={this.formHandler}
-							checked={this.state.priveleges.Reviewer}
-						/>
-					</label>
-				</div>
-				<div className="field-holder">
-					<p>Verification</p>
-					<label>
-						Phone:
-						<input
-							type="radio"
-							name="verification"
-							value="Phone"
-							onChange={this.formHandler}
-							checked={this.state.verification === 'Phone' ? true : false}
-						/>
-					</label>
-					<label>
-						E-Mail:
-						<input
-							type="radio"
-							name="verification"
-							value="E-Mail"
-							onChange={this.formHandler}
-							checked={this.state.verification === 'E-Mail' ? true : false}
-						/>
-					</label>
-				</div>
-				<div className="separator" />
-				<div className="output">
-					<ul>
-						{Object.keys(this.state).map((k) => (
-							<li key={k}>
-								<b>{k}</b>: {JSON.stringify(this.state[k])}
-							</li>
-						))}
-					</ul>
+				<div className="book-details">
+					<BookCard data={this.state.selectedBook} />
 				</div>
 			</div>
 		);
