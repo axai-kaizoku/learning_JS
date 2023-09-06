@@ -27,8 +27,8 @@ const App = () => {
 							<div className="result">
 								<div className="place">{place}</div>
 								<div className="temperature">{temperature}&deg;C</div>
-								<div className="conditions">{conditions.join(',')}</div>
-								<img src={icon} alt={conditions.join(',')} className="icon" />
+								<div className="conditions">{conditions[0]}</div>
+								<img src={icon} alt={conditions[0]} className="icon" />
 							</div>
 						)
 					) : (

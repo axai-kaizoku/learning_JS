@@ -11,25 +11,33 @@ const Weather = ({ location, render }) => {
 	const fetchWeather = (location) => {
 		setIsLoading(true);
 		fetch(
-			`http://api.weatherstack.com/current?access_keys=${process.env.REACT_APP_API_KEY}&query= ${location}`,
+			`https://cors-anywhere.herokuapp.com/http://api.weatherstack.com/current?access_key=${process.env.REACT_APP_API_KEY}&query=${location}`,
 		)
 			.then((res) => res.json())
-			.then(({ current, location }) => {
-				const { temperature, weather_description, weather_icons } = current;
+
+			.then(({ location, current }) => {
+				const { temperature, weather_descriptions, weather_icons } = current;
+				console.log(current);
 				const { name, country } = location;
+				console.log(location);
 				setTemperature(temperature);
-				setConditions(weather_description);
+				setConditions(weather_descriptions);
 				setIcon(weather_icons[0]);
 				setPlace(`${name}, ${country}`);
 				setError(false);
 			})
-			.catch(() => setError(true))
+			.catch((err) => {
+				console.error('API error:', err); // Log the actual error
+
+				setError(true);
+			})
+
 			.finally(() => setIsLoading(false));
 	};
 
 	useEffect(() => {
 		if (location) {
-			fetchWeather();
+			fetchWeather(location);
 		}
 	}, [location]);
 
