@@ -1,6 +1,8 @@
 import React, { createRef, useState } from 'react';
 import ListApp from './components/ListApp';
 import withStorage from './services/withStorage';
+import Portal from './components/Portal';
+import TaskCount from './components/TaskCount';
 
 const ListAppWithStorage = withStorage(ListApp);
 
@@ -20,20 +22,25 @@ const App = () => {
 					}
 				}}
 			/>
-			<ListApp task={task}>
-				{({ list, remove }) => (
-					<div className="list-app">
-						{list.length > 0
-							? list.map(({ id, task }) => (
-									<div className="list-item" key={id}>
-										<span>{task}</span>
-										<button onClick={() => remove(id)}>X</button>
-									</div>
-							  ))
-							: null}
-					</div>
+			<ListAppWithStorage task={task}>
+				{({ list, remove, count }) => (
+					<>
+						<div className="list-app">
+							{list.length > 0
+								? list.map(({ id, task }) => (
+										<div className="list-item" key={id}>
+											<span>{task}</span>
+											<button onClick={() => remove(id)}>X</button>
+										</div>
+								  ))
+								: null}
+						</div>
+						<Portal domNode={document.getElementById('task-count')}>
+							<TaskCount count={count} />
+						</Portal>
+					</>
 				)}
-			</ListApp>
+			</ListAppWithStorage>
 		</div>
 	);
 };

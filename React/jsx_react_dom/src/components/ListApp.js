@@ -34,7 +34,11 @@ class ListApp extends Component {
 		this.props.save && this.props.save('shopping_list', newList);
 	};
 	render = () =>
-		this.props.children({ list: this.state.list, remove: this.remove });
+		this.props.children({
+			list: this.state.list,
+			remove: this.remove,
+			count: this.state.list.length,
+		});
 }
 
 export default ListApp;
