@@ -1,35 +1,47 @@
-import React, {useState} from "react";
-import ThemePicker from "./components/ThemePicker";
-import Dashboard from "./components/Dashboard";
-import ThemeCtx from "./components/ctx/ThemeCtx";
-import UserCtx from "./components/ctx/UserCtx";
-import StatsCtx from "./components/ctx/StatsCtx";
-
-const userData = {
-  name: "Vincent K",
-  lastLogged: new Date(2019, 11, 5)
-};
-
-const statsData = {
-  aqi: 120,
-  aqText: "Poor air quality. You may face breathing difficulties!"
-};
+import React, {useEffect, useState} from "react";
+import Categories from "./components/Categories";
+import Quote from "./components/Quote";
+import {getCategories, getQuote} from "./quotesService";
 
 const App = () => {
-  const [theme, setTheme] = useState({
-    backgroundColor: "rgba(255,255,255)",
-    color: "rgb(0,0,0,0.95)"
-  });
+  const [categories, setCategories] = useState([]);
+  const [selected, setSelected] = useState("");
+  const [quote, setQuote] = useState({});
+
+  // Fetch categories when the app is mounted
+  useEffect(() => {
+    getCategories().then(categs => {
+      if (categs.length > 0) {
+        setCategories(categs);
+        setSelected(categs[0]);
+      }
+    });
+  }, []);
+
+  // When the category is changed, a new quote is fetched
+  useEffect(() => {
+    selected && getQuote(selected).then(q => setQuote(q));
+  }, [selected]);
+
+  // When the category is changed, the timer is reset
+  // When the app is unmounted, the timer instance is cleaned up
+  useEffect(() => {
+    let timer = setInterval(() => {
+      getQuote(selected).then(q => setQuote(q));
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [selected]);
+
   return (
-    <div className="container">
-      <ThemePicker onSetTheme={ruleset => setTheme(ruleset)} />
-      <UserCtx.Provider value={userData}>
-        <ThemeCtx.Provider value={{theme}}>
-          <StatsCtx.Provider value={statsData}>
-            <Dashboard />
-          </StatsCtx.Provider>
-        </ThemeCtx.Provider>
-      </UserCtx.Provider>
+    <div className="quote-master">
+      <Categories
+        categories={categories}
+        selected={selected}
+        onSelected={category => setSelected(category)}
+      />
+
+      {quote && <Quote quote={quote.quote} author={quote.author} />}
     </div>
   );
 };
