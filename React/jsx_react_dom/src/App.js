@@ -1,20 +1,37 @@
 import React from 'react';
-import FormPanel from './components/FormPanel';
-import PhoneLogin from './components/PhoneLogin';
-import useResponsive from './hooks/useResponsive';
+import AddRecipe from './components/AddRecipe';
+import Input from './components/Input';
+import RecipeCard from './components/RecipeCard';
+import Recipe from './components/Recipe';
 
 const App = () => {
-	const { size } = useResponsive();
+	const flag = 1;
+
+	// 1 for home page
+	// 0 for recipe
+	// 2 for add recipe
 	return (
-		<div
-			className={
-				['sm', 'xs'].includes(size) ? 'container vertical' : 'container'
-			}
-		>
-			<div className="cover" />
-			<FormPanel />
-			{['sm ', 'xs'].includes(size) ? <PhoneLogin /> : null}
-		</div>
+		<>
+			<div className="recipe-meister">
+				<h1>Recipe Meister</h1>
+				{/* {if (flag === 0)
+       {<Recipe />
+       } else if (flag === 1) 
+       {<AddRecipe />}} */}
+				{flag === 1 ? (
+					<div>
+						<Input label="FIND RECIPES" />
+						<button className="btn btn-black">Add a Recipe</button>
+						<RecipeCard data={['CAKES', 'DESSERT']} />
+						<RecipeCard data={['CAKES', 'DESSERT']} />
+					</div>
+				) : flag === 2 ? (
+					<AddRecipe />
+				) : (
+					<Recipe />
+				)}
+			</div>
+		</>
 	);
 };
 
