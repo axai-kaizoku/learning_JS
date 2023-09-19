@@ -1,52 +1,32 @@
-import React, { useState } from 'react';
-import Home from './components/Home';
-import Books from './components/Books';
-import Secret from './components/Secret';
-import UserCtx from './components/UserCtx';
-import Login from './components/Login';
-import Protected from './components/Protected';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import React, { useState, lazy, Suspense } from "react";
+import slowLoad from "./slowLoad";
+import Spinner from "./components/Spinner";
+// import Photos from "./components/Photos";
+// import Posts from "./components/Posts";
+const Photos = lazy(() => slowLoad(import("./components/Photos"), 1500));
+const Posts = lazy(() => slowLoad(import("./components/Posts"), 800));
 
 const App = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	return (
-		<BrowserRouter>
-			<UserCtx.Provider
-				value={{
-					isLoggedIn,
-					doLogin: (code) =>
-						code === 'pizza' ? setIsLoggedIn(true) : setIsLoggedIn(false),
-				}}
-			>
-				<div className="app">
-					<h1>Book Store</h1>
-					<div className="navigation">
-						<Link to="/" id="home-link">
-							Home
-						</Link>
-						<Link to="/books" id="books-link">
-							Books
-						</Link>
-						<Link to="/secret" id="secret-link">
-							Secret Collection
-						</Link>
-					</div>
-					<div className="content">
-						<Routes>
-							<Route exact path="/" element={<Home />} />
+  const [showContent, setShowContent] = useState(false);
 
-							<Route path="/books/:id?" element={<Books />} />
-
-							<Protected isLoggedIn={isLoggedIn} path="/secret">
-								<Secret />
-							</Protected>
-							<Route path="/login" element={<Login />} />
-						</Routes>
-					</div>
-				</div>
-			</UserCtx.Provider>
-		</BrowserRouter>
-	);
+  return (
+    <div className="App">
+      <div className="header">
+        <button onClick={() => setShowContent(true)}>Show Content</button>
+        <button onClick={() => setShowContent(false)}>Hide Content</button>
+      </div>
+      <div className="content">
+        {showContent ? (
+          <>
+            <Suspense fallback={<Spinner />}>
+              <Photos />
+              <Posts />
+            </Suspense>
+          </>
+        ) : null}
+      </div>
+    </div>
+  );
 };
 
 export default App;
