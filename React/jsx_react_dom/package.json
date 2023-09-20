@@ -7,6 +7,7 @@
     "antd": "^5.9.2",
     "chart": "^0.1.2",
     "error-manager": "^1.2.1",
+    "jest": "^29.7.0",
     "lodash.debounce": "^4.0.8",
     "miragejs": "^0.1.47",
     "react": "^16.8.6",
