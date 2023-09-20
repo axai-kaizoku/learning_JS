@@ -1,47 +1,34 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Spinner from './components/Spinner';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import CartButton from './components/CartButton';
+import NavButton from './components/NavButton';
+import Catalog from './components/Catalog';
+import Cart from './components/Cart';
+import './App.css';
 
 const App = () => {
-	const Photos = lazy(() => import('./components/Photos'));
-	const Posts = lazy(() => import('./components/Posts'));
-
 	return (
-		<Router>
-			<div className="App">
-				<div className="header">
-					<Link to="/">
-						<div className="btn">Home</div>
-					</Link>
-					<Link to="/photos" id="photos-btn">
-						<div className="btn">Photos</div>
-					</Link>
-					<Link to="/posts" id="posts-btn">
-						<div className="btn">Posts</div>
-					</Link>
+		<BrowserRouter>
+			<div className="root">
+				<div className="app-bar">
+					<h1 className="title">ShopCart</h1>
+					<div className="navigation">
+						<Link to="/">
+							<NavButton label="CATALOG" />
+						</Link>
+						<Link to="/cart">
+							<CartButton items={0} />
+						</Link>
+					</div>
 				</div>
 				<div className="content">
 					<Routes>
-						<Route
-							path="/photos"
-							element={
-								<Suspense fallback={<Spinner />}>
-									<Photos />
-								</Suspense>
-							}
-						/>
-						<Route
-							path="/posts"
-							element={
-								<Suspense fallback={<Spinner />}>
-									<Posts />
-								</Suspense>
-							}
-						/>
+						<Route exact path="/" element={<Catalog />} />
+						<Route path="/cart" element={<Cart />} />
 					</Routes>
 				</div>
 			</div>
-		</Router>
+		</BrowserRouter>
 	);
 };
 
