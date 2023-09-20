@@ -38,15 +38,13 @@ export default (state = initialState, action) => {
 				return item;
 			});
 
-			let reviseTotalQuantity = reviseQuantity.reduce(
-				(prev, curr) => prev + curr.quantity,
-				0,
-			);
+			let reviseTotalQuantity = reviseQuantity.reduce((prev, curr) => {
+				return prev + curr.quantity;
+			}, 0);
 
-			let reviseTotalCost = reviseQuantity.reduce(
-				(prev, curr) => prev + curr.quantity * curr.cost,
-				0,
-			);
+			let reviseTotalCost = reviseQuantity.reduce((prev, curr) => {
+				return prev + curr.quantity * curr.cost;
+			}, 0);
 
 			return {
 				totalProducts: reviseTotalQuantity,
@@ -55,9 +53,7 @@ export default (state = initialState, action) => {
 			};
 		}
 		case 'REMOVE_ITEM': {
-			let findItem = state.items.find(
-				(item) => item.code === action.product.code,
-			);
+			let findItem = state.items.find((item) => item.code === action.code);
 			if (findItem) {
 				let totalCostOfItem = findItem.quantity * findItem.cost;
 				return {
