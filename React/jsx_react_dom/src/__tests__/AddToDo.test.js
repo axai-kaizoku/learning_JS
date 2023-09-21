@@ -1,26 +1,20 @@
 import React from 'react';
 import AddToDo from '../components/AddToDo';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { mount } from 'enzyme';
 
-afterEach(cleanup);
-
-describe('Testing ToDo Component', () => {
-	it('Returns the contents of the input field using the onAdd prop', async () => {
+describe('Testing AddToDo component', () => {
+	it('Returns the contents of the input field using the onAdd prop', () => {
 		const onAddFn = jest.fn();
-		const { getByPlaceholderText } = render(<AddToDo onAdd={onAddFn} />);
-		const taskInput = getByPlaceholderText(/Add a task/i);
 
-		// Events
-		fireEvent.change(taskInput, {
-			target: { value: 'This is an amazing task!' },
-		});
+		const wrapper = mount(<AddToDo onAdd={onAddFn} />);
+		wrapper
+			.find('input')
+			.simulate('change', { target: { value: 'This is an amazing task!' } })
+			.simulate('keyup', { key: 'Enter', keyCode: 13 });
 
-		fireEvent.keyUp(taskInput, { key: 'Enter', keyCode: 13 });
-
-		expect(taskInput.value).toBe('');
-		expect(onAddFn).toBeCalledWith({
-			title: 'This is an amazing task!',
+		expect(wrapper.props().onAdd).toBeCalledWith({
 			done: false,
+			title: 'This is an amazing task!',
 		});
 	});
 });

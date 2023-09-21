@@ -7,6 +7,7 @@
     "@types/react-router-dom": "^5.3.3",
     "antd": "^5.9.2",
     "chart": "^0.1.2",
+    "enzyme": "^3.11.0",
     "error-manager": "^1.2.1",
     "jest": "^29.7.0",
     "lodash.debounce": "^4.0.8",
