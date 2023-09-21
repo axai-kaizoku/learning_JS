@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/react": "^14.0.0",
     "@types/react-router-dom": "^5.3.3",
     "antd": "^5.9.2",
     "chart": "^0.1.2",

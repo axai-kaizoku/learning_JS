@@ -1,40 +1,26 @@
 import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
-import { act, Simulate } from 'react-dom/test-utils';
 import AddToDo from '../components/AddToDo';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 
-let div = null;
-beforeEach(() => {
-	div = document.createElement('div');
-	document.body.appendChild(div);
-});
+afterEach(cleanup);
 
-afterEach(() => {
-	unmountComponentAtNode(div);
-	div.remove();
-	div = null;
-});
-
-describe('Testing AddToDo Component', () => {
+describe('Testing ToDo Component', () => {
 	it('Returns the contents of the input field using the onAdd prop', async () => {
 		const onAddFn = jest.fn();
-		await act(async () => {
-			render(<AddToDo onAdd={onAddFn} />, div);
-		});
-		const inputFld = document.querySelector('input');
+		const { getByPlaceholderText } = render(<AddToDo onAdd={onAddFn} />);
+		const taskInput = getByPlaceholderText(/Add a task/i);
 
-		await act(async () => {
-			// Type in a value & press enter
-			await Simulate.change(inputFld, {
-				target: { value: 'This is a test task' },
-			});
-
-			await Simulate.keyUp(inputFld, { key: 'Enter', keyCode: 13 });
+		// Events
+		fireEvent.change(taskInput, {
+			target: { value: 'This is an amazing task!' },
 		});
+
+		fireEvent.keyUp(taskInput, { key: 'Enter', keyCode: 13 });
+
+		expect(taskInput.value).toBe('');
 		expect(onAddFn).toBeCalledWith({
-			title: 'This is a test task',
+			title: 'This is an amazing task!',
 			done: false,
 		});
-		expect(inputFld.value).toBe('');
 	});
 });
