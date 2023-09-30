@@ -1,36 +1,42 @@
-class Queue {
+class Stack {
 	constructor() {
-		this.queue = [];
-		this.front = 0;
-		this.rear = 0;
+		this.stack = [];
 	}
 
-	enqueue(val) {
-		this.queue[this.rear] = val;
-		this.rear++;
+	push(val) {
+		this.stack.push(val);
 	}
 
-	dequeue() {
-		if (this.queue.length > 0) {
-			var val = this.queue[this.front];
-			delete this.queue[this.front];
-			this.front++;
-			return val;
-		} else {
-			throw 'Stack Underflow!';
-		}
+	pop() {
+		return this.stack.pop();
 	}
 
 	print() {
-		console.log(this.queue);
+		console.log(this.stack);
 	}
 }
 
-var q = new Queue();
+class Queue {
+	constructor() {
+		this.s1 = new Stack();
+		this.s2 = new Stack();
+	}
 
-q.enqueue(1);
-q.enqueue(2);
-q.enqueue(3);
-q.print();
-q.dequeue();
-q.print();
+	enqueue(val) {
+		while (!this.s1.isEmpty()) {
+			this.s2.push(this.s1.pop());
+		}
+		this.s1.push(val);
+
+		while (!this.s2.isEmpty()) {
+			this.s1.push(this.s2.pop());
+		}
+	}
+
+	dequeue() {
+		return this.s1.pop();
+	}
+}
+
+const num = new Queue();
+console.log(num);
