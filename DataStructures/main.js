@@ -49,29 +49,24 @@ class Stack {
 	}
 }
 
-var brackerStack = new Stack();
-var testString = '(1+2))';
+var reverseString = new Stack();
+var testString = 'racecar';
+
+for (var i = 0; i < testString.length; i++) {
+	reverseString.push(testString.charAt(i));
+}
+
 var valid = true;
 var i = 0;
 
-while (i < testString.length && valid) {
-	var charVal = testString.charAt(i);
+while (reverseString.size > 0 && valid) {
+	var charVal = reverseString.pop();
 
-	if (charVal === '(') {
-		brackerStack.push(charVal);
-	} else if (charVal === ')') {
-		if (!brackerStack.isEmpty()) {
-			brackerStack.pop();
-		} else {
-			valid = false;
-		}
+	if (charVal != testString.charAt(i)) {
+		valid = false;
 	}
 
 	i++;
-}
-
-if (!brackerStack.isEmpty()) {
-	valid = false;
 }
 
 console.log(valid);
