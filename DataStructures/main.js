@@ -1,19 +1,10 @@
-const nums = [];
+const nums = [112, 32, 4, 9, 8, 11];
+var maxVal = nums[0];
 
-for (let i = 0; i <= 100; i++) {
-	if (i !== 50) {
-		nums.push(i);
+for (let i = 0; i < nums.length; i++) {
+	if (maxVal > nums[i]) {
+		maxVal = nums[i];
 	}
 }
 
-const findNum = () => {
-	let total = 0;
-	for (let i = 0; i < nums.length; i++) {
-		total += nums[i];
-	}
-	console.log(5050 - total);
-};
-
-// console.log(nums);
-
-findNum();
+console.log(maxVal);
