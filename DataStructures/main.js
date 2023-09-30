@@ -1,7 +1,19 @@
-const products = [
-	['yeast', 'flour', 'eggs'],
-	['water', 'lemons', 'sugar'],
-];
+const nums = [];
 
-products.push(['keyboard', 'mouse', 'monitor']);
-console.table(products);
+for (let i = 0; i <= 100; i++) {
+	if (i !== 50) {
+		nums.push(i);
+	}
+}
+
+const findNum = () => {
+	let total = 0;
+	for (let i = 0; i < nums.length; i++) {
+		total += nums[i];
+	}
+	console.log(5050 - total);
+};
+
+// console.log(nums);
+
+findNum();
