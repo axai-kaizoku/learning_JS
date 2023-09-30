@@ -1,24 +1,21 @@
-const nums = [];
-
-const randomArray = (len) => {
-	for (let i = 0; i < len; i++) {
-		nums.push(Math.floor(Math.random() * 109));
-	}
+const product = {
+	name: 'Iphone',
+	price: 1890.99,
+	model: 'XR 780',
+	get prod() {
+		return this.name;
+	},
+	set prod(prod) {
+		if (prod !== '') {
+			this.name = prod;
+		}
+	},
 };
 
-randomArray(10);
+product.name = '';
 
-console.log(nums);
-// console.log(nums[0]);
-var maxVal = nums[0];
-var minVal = nums[0];
+console.log(product.prod);
 
-for (let i = 0; i < nums.length; i++) {
-	if (minVal > nums[i]) {
-		minVal = nums[i];
-	} else if (maxVal < nums[i]) {
-		maxVal = nums[i];
-	}
-}
-console.log(maxVal);
-console.log(minVal);
+// for (prop in product) {
+// 	console.log(`The property is \"${prop}\" and value is \"${product[prop]}\"`);
+// }
