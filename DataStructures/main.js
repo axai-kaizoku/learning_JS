@@ -49,25 +49,29 @@ class Stack {
 	}
 }
 
-var undoStack = new Stack();
-var redoStack = new Stack();
+var brackerStack = new Stack();
+var testString = '(1+2))';
+var valid = true;
+var i = 0;
 
-var counter = 0;
+while (i < testString.length && valid) {
+	var charVal = testString.charAt(i);
 
-function incrementCounter() {
-	undoStack.push(counter);
-	counter++;
-	document.getElementById('val').value = counter;
+	if (charVal === '(') {
+		brackerStack.push(charVal);
+	} else if (charVal === ')') {
+		if (!brackerStack.isEmpty()) {
+			brackerStack.pop();
+		} else {
+			valid = false;
+		}
+	}
+
+	i++;
 }
 
-function undo() {
-	redoStack.push(counter);
-	counter = undoStack.pop();
-	document.getElementById('val').value = counter;
+if (!brackerStack.isEmpty()) {
+	valid = false;
 }
 
-function redo() {
-	undoStack.push(counter);
-	counter = redoStack.pop();
-	document.getElementById('val').value = counter;
-}
+console.log(valid);
