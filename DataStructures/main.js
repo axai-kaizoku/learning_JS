@@ -1,16 +1,12 @@
-const nums = [0, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 5, 6];
+const products = ['yeast', 'eggs', 'flour'];
 
-const removeDup = [];
+console.log(products.toString());
+console.log(products.join(' | '));
 
-for (let i = 0; i < nums.length; i++) {
-	if (i < nums.length - 1) {
-		if (nums[i] !== nums[i + 1]) {
-			removeDup.push(nums[i]);
-		}
-	} else {
-		removeDup.push(nums[i]);
-	}
-}
+// const product = products.shift();
 
-console.log(nums);
-console.log(removeDup);
+// console.log(product);
+
+// console.log(products.splice(1, 1));
+console.log(products.slice(2));
+console.log(products);
