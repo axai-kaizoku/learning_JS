@@ -1,72 +1,36 @@
-class Node {
-	constructor(value, next) {
-		this.value = value;
-		this.next = next;
-	}
-}
-
-class Stack {
+class Queue {
 	constructor() {
-		this.top = new Node(null, null);
-		this.size = 0;
+		this.queue = [];
+		this.front = 0;
+		this.rear = 0;
 	}
 
-	push(val) {
-		var inNode = new Node(val, this.top);
-		this.top = inNode;
-		this.size++;
+	enqueue(val) {
+		this.queue[this.rear] = val;
+		this.rear++;
 	}
 
-	peek() {
-		if (this.size > 0) {
-			return this.top.value;
+	dequeue() {
+		if (this.queue.length > 0) {
+			var val = this.queue[this.front];
+			delete this.queue[this.front];
+			this.front++;
+			return val;
 		} else {
-			throw 'Stack Underflow';
+			throw 'Stack Underflow!';
 		}
-	}
-
-	pop() {
-		if (this.size > 0) {
-			var retVal = this.top.value;
-			this.top = this.top.next;
-			this.size--;
-			return retVal;
-		} else {
-			throw 'Stack Underflow';
-		}
-	}
-
-	isEmpty() {
-		return this.size === 0;
 	}
 
 	print() {
-		var holder = this.top;
-		while (holder.next !== null) {
-			console.log(holder.value);
-			holder = holder.next;
-		}
+		console.log(this.queue);
 	}
 }
 
-var reverseString = new Stack();
-var testString = 'racecar';
+var q = new Queue();
 
-for (var i = 0; i < testString.length; i++) {
-	reverseString.push(testString.charAt(i));
-}
-
-var valid = true;
-var i = 0;
-
-while (reverseString.size > 0 && valid) {
-	var charVal = reverseString.pop();
-
-	if (charVal != testString.charAt(i)) {
-		valid = false;
-	}
-
-	i++;
-}
-
-console.log(valid);
+q.enqueue(1);
+q.enqueue(2);
+q.enqueue(3);
+q.print();
+q.dequeue();
+q.print();
