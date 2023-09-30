@@ -1,21 +1,19 @@
-const product = {
-	name: 'Iphone',
-	price: 1890.99,
-	model: 'XR 780',
-	get prod() {
-		return this.name;
-	},
-	set prod(prod) {
-		if (prod !== '') {
-			this.name = prod;
-		}
-	},
-};
+class Product {
+	constructor() {
+		this.name = '';
+		this.price = 0;
+	}
 
-product.name = '';
+	printProduct() {
+		console.log(
+			`${this.price} is the price of product named with ${this.name}`,
+		);
+	}
+}
 
-console.log(product.prod);
+const computer = new Product();
 
-// for (prop in product) {
-// 	console.log(`The property is \"${prop}\" and value is \"${product[prop]}\"`);
-// }
+computer.name = 'Macbook M2';
+computer.price = 799.99;
+
+computer.printProduct();
