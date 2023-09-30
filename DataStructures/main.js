@@ -1,23 +1,57 @@
-class Transportation {
-	constructor() {
-		this.name = '';
-		this.wheels = 0;
-		this.maxSpeed = 0;
+class Node {
+	constructor(value, next) {
+		this.value = value;
+		this.next = next;
 	}
 }
 
-class Car extends Transportation {
+class Stack {
 	constructor() {
-		super();
-		this.fuel = 0;
+		this.top = new Node(null, null);
+		this.size = 0;
+	}
+
+	push(val) {
+		var inNode = new Node(val, this.top);
+		this.top = inNode;
+		this.size++;
+	}
+
+	peek() {
+		if (this.size > 0) {
+			return this.top.value;
+		} else {
+			throw 'Stack Underflow';
+		}
+	}
+
+	pop() {
+		if (this.size > 0) {
+			var retVal = this.top.value;
+			this.top = this.top.next;
+			this.size--;
+		} else {
+			throw 'Stack Underflow';
+		}
+	}
+
+	isEmpty() {
+		return this.size === 0;
+	}
+
+	print() {
+		var holder = this.top;
+		while (holder.next !== null) {
+			console.log(holder.value);
+			holder = holder.next;
+		}
 	}
 }
 
-let car1 = new Car();
+var s = new Stack();
 
-car1.name = 'Skoda Rapid';
-car1.wheels = 4;
-car1.maxSpeed = 240;
-car1.fuel = 40;
-
-console.log(car1);
+s.push(1);
+s.push(2);
+s.push(3);
+s.print();
+s.pop();
