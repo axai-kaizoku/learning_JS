@@ -30,6 +30,7 @@ class Stack {
 			var retVal = this.top.value;
 			this.top = this.top.next;
 			this.size--;
+			return retVal;
 		} else {
 			throw 'Stack Underflow';
 		}
@@ -48,10 +49,25 @@ class Stack {
 	}
 }
 
-var s = new Stack();
+var undoStack = new Stack();
+var redoStack = new Stack();
 
-s.push(1);
-s.push(2);
-s.push(3);
-s.print();
-s.pop();
+var counter = 0;
+
+function incrementCounter() {
+	undoStack.push(counter);
+	counter++;
+	document.getElementById('val').value = counter;
+}
+
+function undo() {
+	redoStack.push(counter);
+	counter = undoStack.pop();
+	document.getElementById('val').value = counter;
+}
+
+function redo() {
+	undoStack.push(counter);
+	counter = redoStack.pop();
+	document.getElementById('val').value = counter;
+}
