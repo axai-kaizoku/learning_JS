@@ -1,19 +1,23 @@
-class Product {
+class Transportation {
 	constructor() {
 		this.name = '';
-		this.price = 0;
-	}
-
-	printProduct() {
-		console.log(
-			`${this.price} is the price of product named with ${this.name}`,
-		);
+		this.wheels = 0;
+		this.maxSpeed = 0;
 	}
 }
 
-const computer = new Product();
+class Car extends Transportation {
+	constructor() {
+		super();
+		this.fuel = 0;
+	}
+}
 
-computer.name = 'Macbook M2';
-computer.price = 799.99;
+let car1 = new Car();
 
-computer.printProduct();
+car1.name = 'Skoda Rapid';
+car1.wheels = 4;
+car1.maxSpeed = 240;
+car1.fuel = 40;
+
+console.log(car1);
