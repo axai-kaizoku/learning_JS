@@ -97,12 +97,23 @@ class LinkedList {
 			holder = holder.prev;
 		}
 	}
+
+	printMiddle() {
+		var slow = this.front;
+		var fast = this.front;
+
+		while (fast != null && fast.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+		}
+		console.log(slow.value);
+	}
 }
 
 var l = new LinkedList();
 l.insertFront(1);
 l.insertFront(2);
 l.insert(3, 1);
-l.delete(1);
-l.print();
-l.printReverse();
+l.insert(4, 1);
+l.insertFront(5);
+l.printMiddle();
