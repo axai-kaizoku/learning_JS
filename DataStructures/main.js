@@ -1,25 +1,36 @@
 class Node {
-	constructor(value, next) {
+	constructor(value, next, prev) {
 		this.value = value;
 		this.next = next;
+		this.prev = prev;
 	}
 }
 
 class LinkedList {
 	constructor() {
-		this.front = new Node(null, null);
+		this.front = new Node(null, null, null);
+		this.rear = new Node(null, null, null);
 		this.size = 0;
 	}
 
 	insertFront(val) {
-		var nodeIn = new Node(val, this.front);
-		this.front = nodeIn;
+		var nodeIn = new Node(val, null, null);
+
+		if (this.size === 0) {
+			this.front = this.rear = nodeIn;
+		} else {
+			nodeIn.next = this.front;
+			this.front.prev = nodeIn;
+
+			this.front = nodeIn;
+		}
+
 		this.size++;
 	}
 
 	print() {
 		var holder = this.front;
-		while (holder.next != null) {
+		while (holder != null) {
 			console.log(holder.value);
 			holder = holder.next;
 		}
@@ -40,7 +51,12 @@ class LinkedList {
 					i++;
 				}
 
-				var newNode = new Node(val, holder.next);
+				var newNode = new Node(val, holder.next, holder);
+
+				if (holder.next != null) {
+					holder.next.prev = newNode;
+				}
+
 				holder.next = newNode;
 				this.size++;
 			}
@@ -66,10 +82,19 @@ class LinkedList {
 					holder = holder.next;
 					i++;
 				}
-
+				holder.next.next.prev = holder;
 				holder.next = holder.next.next;
 				this.size--;
 			}
+		}
+	}
+
+	printReverse() {
+		var holder = this.rear;
+
+		while (holder != null) {
+			console.log(holder.value);
+			holder = holder.prev;
 		}
 	}
 }
@@ -78,5 +103,6 @@ var l = new LinkedList();
 l.insertFront(1);
 l.insertFront(2);
 l.insert(3, 1);
-l.delete();
+l.delete(1);
 l.print();
+l.printReverse();
