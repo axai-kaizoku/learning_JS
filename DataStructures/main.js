@@ -15,13 +15,11 @@ class LinkedList {
 
 	insertFront(val) {
 		var nodeIn = new Node(val, null, null);
-
 		if (this.size === 0) {
 			this.front = this.rear = nodeIn;
 		} else {
 			nodeIn.next = this.front;
 			this.front.prev = nodeIn;
-
 			this.front = nodeIn;
 		}
 
@@ -30,7 +28,7 @@ class LinkedList {
 
 	print() {
 		var holder = this.front;
-		while (holder != null) {
+		while (holder !== null) {
 			console.log(holder.value);
 			holder = holder.next;
 		}
@@ -38,25 +36,21 @@ class LinkedList {
 
 	insert(val, index) {
 		if (index > this.size) {
-			throw 'IndexOfRange';
+			throw 'IndexOutOfRange';
 		} else {
 			if (index === 0) {
 				this.insertFront(val);
 			} else {
 				var i = 0;
 				var holder = this.front;
-
 				while (i < index - 1) {
 					holder = holder.next;
 					i++;
 				}
-
 				var newNode = new Node(val, holder.next, holder);
-
-				if (holder.next != null) {
+				if (holder.next !== null) {
 					holder.next.prev = newNode;
 				}
-
 				holder.next = newNode;
 				this.size++;
 			}
@@ -77,11 +71,11 @@ class LinkedList {
 			} else {
 				var i = 0;
 				var holder = this.front;
-
 				while (i < index - 1) {
 					holder = holder.next;
 					i++;
 				}
+
 				holder.next.next.prev = holder;
 				holder.next = holder.next.next;
 				this.size--;
@@ -91,8 +85,7 @@ class LinkedList {
 
 	printReverse() {
 		var holder = this.rear;
-
-		while (holder != null) {
+		while (holder !== null) {
 			console.log(holder.value);
 			holder = holder.prev;
 		}
@@ -102,7 +95,7 @@ class LinkedList {
 		var slow = this.front;
 		var fast = this.front;
 
-		while (fast != null && fast.next != null) {
+		while (fast !== null && fast.next !== null) {
 			fast = fast.next.next;
 			slow = slow.next;
 		}
@@ -110,10 +103,11 @@ class LinkedList {
 	}
 }
 
-var l = new LinkedList();
-l.insertFront(1);
-l.insertFront(2);
-l.insert(3, 1);
-l.insert(4, 1);
-l.insertFront(5);
-l.printMiddle();
+var list = new LinkedList();
+list.insertFront(1);
+list.insertFront(2);
+list.insert(3, 1);
+list.insert(4, 1);
+list.insert(1, 1);
+// list.print();
+list.printMiddle();
