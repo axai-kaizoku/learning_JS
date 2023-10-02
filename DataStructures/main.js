@@ -1,113 +1,61 @@
-class Node {
-	constructor(value, next, prev) {
-		this.value = value;
-		this.next = next;
-		this.prev = prev;
-	}
-}
-
-class LinkedList {
-	constructor() {
-		this.front = new Node(null, null, null);
-		this.rear = new Node(null, null, null);
-		this.size = 0;
+class HashTable {
+	constructor(size) {
+		this.size = size;
+		this.values = {};
 	}
 
-	insertFront(val) {
-		var nodeIn = new Node(val, null, null);
-		if (this.size === 0) {
-			this.front = this.rear = nodeIn;
+	calculateHash(value) {
+		return value % this.size;
+	}
+
+	add(value) {
+		var hash = this.calculateHash(value);
+		if (this.values[hash] === undefined) {
+			this.values[hash] = value;
 		} else {
-			nodeIn.next = this.front;
-			this.front.prev = nodeIn;
-			this.front = nodeIn;
-		}
+			var iters = 0;
+			while (this.values[hash] !== undefined && iters <= this.size) {
+				hash += 1;
+				hash = hash % this.size;
+				iters += 1;
+			}
 
-		this.size++;
+			if (iters > this.size) {
+				throw 'StackOverflow';
+			} else {
+				this.values[hash] = value;
+			}
+		}
+	}
+
+	contains(value) {
+		var hash = this.calculateHash(value);
+
+		if (this.values[hash] === value) {
+			return true;
+		} else {
+			var iters = 0;
+			while (this.values[hash] !== value && iters <= this.size) {
+				hash += 1;
+				hash = hash % this.size;
+				iters += 1;
+			}
+
+			if (this.values[hash] === value) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 	print() {
-		var holder = this.front;
-		while (holder !== null) {
-			console.log(holder.value);
-			holder = holder.next;
-		}
-	}
-
-	insert(val, index) {
-		if (index > this.size) {
-			throw 'IndexOutOfRange';
-		} else {
-			if (index === 0) {
-				this.insertFront(val);
-			} else {
-				var i = 0;
-				var holder = this.front;
-				while (i < index - 1) {
-					holder = holder.next;
-					i++;
-				}
-				var newNode = new Node(val, holder.next, holder);
-				if (holder.next !== null) {
-					holder.next.prev = newNode;
-				}
-				holder.next = newNode;
-				this.size++;
-			}
-		}
-	}
-
-	deleteFront() {
-		this.front = this.front.next;
-		this.size--;
-	}
-
-	delete(index) {
-		if (index > this.size) {
-			throw 'IndexOutOfRange';
-		} else {
-			if (index === 0) {
-				this.deleteFront();
-			} else {
-				var i = 0;
-				var holder = this.front;
-				while (i < index - 1) {
-					holder = holder.next;
-					i++;
-				}
-
-				holder.next.next.prev = holder;
-				holder.next = holder.next.next;
-				this.size--;
-			}
-		}
-	}
-
-	printReverse() {
-		var holder = this.rear;
-		while (holder !== null) {
-			console.log(holder.value);
-			holder = holder.prev;
-		}
-	}
-
-	printMiddle() {
-		var slow = this.front;
-		var fast = this.front;
-
-		while (fast !== null && fast.next !== null) {
-			fast = fast.next.next;
-			slow = slow.next;
-		}
-		console.log(slow.value);
+		console.log(this.values);
 	}
 }
 
-var list = new LinkedList();
-list.insertFront(1);
-list.insertFront(2);
-list.insert(3, 1);
-list.insert(4, 1);
-list.insert(1, 1);
-// list.print();
-list.printMiddle();
+var h = new HashTable(13);
+h.add(0);
+h.add(13);
+h.add(1);
+h.print();
