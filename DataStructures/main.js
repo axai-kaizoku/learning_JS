@@ -1,14 +1,24 @@
 const map = new Map();
 
-const arr = [1, 2, 3, 4, 4, 4, 3, 3, 2, 1, 1, 1, 1, 6, 7, 8, 1];
+var union = [];
+const arr1 = [1, 3, 5, 7, 9];
+const arr2 = [2, 4, 6, 8, 3, 4];
 
-for (var i = 0; i < arr.length; i++) {
-	var v = arr[i];
-	if (map.has(v)) {
-		map.set(v, map.get(v) + 1);
-	} else {
-		map.set(v, 1);
+for (var i = 0; i < arr1.length; i++) {
+	var v = arr1[i];
+	if (!map.has(v)) {
+		map.set(v, v);
+		union.push(v);
 	}
 }
 
-console.log(map);
+for (var i = 0; i < arr2.length; i++) {
+	var v = arr2[i];
+	if (!map.has(v)) {
+		map.set(v, v);
+		union.push(v);
+	}
+}
+
+console.log(union);
+// console.log(union.sort());
