@@ -54,17 +54,24 @@ class HashTable {
 	}
 }
 
-var arr = [1, 2, 3, 3, 4, 4, 5, 6];
+var arr = [1, 2, 3, 3, 4, 4, 2, 4, 5, 6];
+var arr2 = [2, 1, 9, 8, 7, 7, 0];
+
 var h = new HashTable(51);
-var retArr = [];
+var intercept = [];
 
 for (var i = 0; i < arr.length; i++) {
 	var v = arr[i];
 	if (!h.contains(v)) {
 		h.add(v);
-		retArr.push(v);
-		console.log('added');
 	}
 }
 
-console.log(retArr);
+for (var i = 0; i < arr2.length; i++) {
+	var v = arr2[i];
+	if (h.contains(v)) {
+		intercept.push(v);
+	}
+}
+
+console.log(intercept);
