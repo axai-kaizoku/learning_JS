@@ -5,23 +5,48 @@ class HashTable {
 	}
 
 	calculateHash(value) {
-		var sum = 0;
-		for (var i = 0; i < value.length; i++) {
-			var charCode = value.charCodeAt(i);
-			sum += charCode;
-		}
-
-		return sum % this.size;
+		return value % this.size;
 	}
 
-	add(key, value) {
+	add(value) {
 		var hash = this.calculateHash(value);
-		this.values[key] = value;
+
+		if (this.values[hash] === undefined) {
+			this.values[hash] = value;
+		} else {
+			var iters = 0;
+			while (this.values[hash] !== undefined && iters <= this.size) {
+				hash += 1;
+				hash = hash % this.size;
+				iters += 1;
+			}
+
+			if (iters > this.size) {
+				throw 'StackOverflow';
+			} else {
+				this.values[hash] = value;
+			}
+		}
 	}
 
-	getItem(key) {
-		var hash = this.calculateHash(key);
-		return this.values[key];
+	contains(value) {
+		var hash = this.calculateHash(value);
+		if (this.values[hash] === value) {
+			return true;
+		} else {
+			var iters = 0;
+			while (this.values[hash] !== value && iters <= this.size) {
+				hash += 1;
+				hash = hash % this.size;
+				iters += 1;
+			}
+
+			if (this.values[hash] === value) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 	print() {
@@ -29,13 +54,17 @@ class HashTable {
 	}
 }
 
-var h = new HashTable(251);
-h.add('Hello', 'World!');
-h.add(5, 41);
-h.add('Hot', 69);
-h.add(20, 'Twenty');
-console.log(h.getItem(20));
-console.log(h.getItem('Hot'));
-console.log(h.getItem(5));
-console.log(h.getItem('Hello'));
-h.print();
+var arr = [1, 2, 3, 3, 4, 4, 5, 6];
+var h = new HashTable(51);
+var retArr = [];
+
+for (var i = 0; i < arr.length; i++) {
+	var v = arr[i];
+	if (!h.contains(v)) {
+		h.add(v);
+		retArr.push(v);
+		console.log('added');
+	}
+}
+
+console.log(retArr);
