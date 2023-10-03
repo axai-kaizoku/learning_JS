@@ -1,25 +1,32 @@
 const map = new Map();
 
-const arr1 = [1, 3, 5, 7, 9];
-const arr2 = [9, 7, 5];
+const arr = [1, 2, 2, 7, 10];
 
-for (var i = 0; i < arr1.length; i++) {
-	var v = arr1[i];
-	if (!map.has(v)) {
-		map.set(v, v);
-	}
+var target = 15;
+
+var solution = [];
+var i = 0;
+var foundPair = false;
+
+while (i < arr.length) {
+	map.set(arr[i], i);
+	i++;
 }
 
-var isSubset = true;
-var i = 0;
+i = 0;
 
-while (i < arr2.length && isSubset) {
-	var v = arr2[i];
-	if (!map.has(v)) {
-		isSubset = false;
+while (i < arr.length && !foundPair) {
+	var compliment = target - arr[i];
+
+	if (map.has(compliment)) {
+		if (i != map.get(compliment)) {
+			solution.push(arr[i]);
+			solution.push(arr[map.get(compliment)]);
+			foundPair = true;
+		}
 	}
 	i++;
 }
 
-console.log(isSubset);
-console.log(map);
+console.log(foundPair);
+console.log(solution);
