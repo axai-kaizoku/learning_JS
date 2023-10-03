@@ -1,32 +1,40 @@
-const map = new Map();
+class Graph {
+	constructor() {
+		this.adjList = new Map();
+	}
 
-const arr = [1, 2, 2, 7, 10];
-
-var target = 15;
-
-var solution = [];
-var i = 0;
-var foundPair = false;
-
-while (i < arr.length) {
-	map.set(arr[i], i);
-	i++;
-}
-
-i = 0;
-
-while (i < arr.length && !foundPair) {
-	var compliment = target - arr[i];
-
-	if (map.has(compliment)) {
-		if (i != map.get(compliment)) {
-			solution.push(arr[i]);
-			solution.push(arr[map.get(compliment)]);
-			foundPair = true;
+	addEdgeHelper(node, adj, weight) {
+		if (this.adjList.has(node)) {
+			var currSet = this.adjList.get(node);
+			currSet.add({ adj, weight });
+			this.adjList.set(node, currSet);
+		} else {
+			this.adjList.set(node, new Set([{ adj, weight }]));
 		}
 	}
-	i++;
+
+	addEdge(node, adj, weight) {
+		this.addEdgeHelper(node, adj, weight);
+	}
+
+	getEdges(node) {
+		return this.adjList.get(node);
+	}
+
+	getAllNodes() {
+		return Array.from(this.adjList.keys());
+	}
+
+	print() {
+		console.log(this.adjList);
+	}
 }
 
-console.log(foundPair);
-console.log(solution);
+var g = new Graph();
+g.addEdge(0, 1, 0);
+g.addEdge(0, 2, 0);
+g.addEdge(2, 3, 0);
+
+g.print();
+console.log(g.getEdges(2));
+console.log(g.getAllNodes());
