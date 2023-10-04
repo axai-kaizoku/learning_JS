@@ -112,10 +112,20 @@ function dijkstra(g, source) {
 	console.log(distances);
 }
 
-var g = new Graph();
-g.addEdge(0, 1, 13);
-g.addEdge(1, 4, 3);
-g.addEdge(0, 2, 14);
-g.addEdge(0, 3, 30);
-g.addEdge(3, 4, 12);
-dijkstra(g, 0);
+// var g = new Graph();
+// g.addEdge(0, 1, 13);
+// g.addEdge(1, 4, 3);
+// g.addEdge(0, 2, 14);
+// g.addEdge(0, 3, 30);
+// g.addEdge(3, 4, 12);
+// dijkstra(g, 0);
+
+function factorial(n) {
+	if (n === 1) {
+		return 1;
+	} else {
+		return n * factorial(n - 1);
+	}
+}
+
+console.log(factorial(4));
