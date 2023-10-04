@@ -1,46 +1,58 @@
-class GraphNode {
-	constructor(name, weight) {
-		this.name = name;
-		this.weight = weight;
+class Node {
+	constructor(value, next) {
+		this.value = value;
+		this.next = next;
 	}
 }
 
-class PriorityQueue {
+class Queue {
 	constructor() {
-		this.items = [];
+		this.front = new Node(null, null);
+		this.rear = new Node(null, null);
+		this.size = 0;
 	}
 
-	enqueue(element, weight) {
-		var graphNode = new GraphNode(element, weight);
-		var contain = false;
-		var i = 0;
-		while (i < this.items.length && !contain) {
-			if (this.items[i].weight > graphNode.weight) {
-				this.items.splice(i, 0, graphNode);
-				contain = true;
-			}
-			i++;
-		}
-
-		if (!contain) {
-			this.items.push(graphNode);
+	enqueue(val) {
+		var inNode = new Node(val, null);
+		if (this.size === 0) {
+			this.front = this.rear = inNode;
+			this.size++;
+		} else {
+			this.rear.next = inNode;
+			this.rear = inNode;
+			this.size++;
 		}
 	}
 
 	dequeue() {
-		if (this.items.length === 0) {
+		if (this.size === 0) {
 			throw 'Stack Underflow';
 		} else {
-			return this.items.shift();
+			var val = this.front.value;
+			this.front = this.front.next;
+			this.size--;
+			return val;
 		}
 	}
 
-	print() {
-		console.log(this.items);
+	peek() {
+		if (this.size === 0) {
+			throw 'Stack Underflow';
+		} else {
+			return this.front.value;
+		}
 	}
 
 	isEmpty() {
-		return this.items.length === 0;
+		return this.size === 0;
+	}
+
+	print() {
+		var holder = this.front;
+		while (holder !== null) {
+			console.log(holder.next);
+			holder = holder.next;
+		}
 	}
 }
 
@@ -61,7 +73,7 @@ class Graph {
 
 	addEdge(node, adj, weight) {
 		this.addEdgeHelper(node, adj, weight);
-		if (adj !== node) {
+		if (adj != node) {
 			this.addEdgeHelper(adj, node, weight);
 		}
 	}
@@ -70,69 +82,38 @@ class Graph {
 		return this.adjList.get(node);
 	}
 
-	getAllNodes() {
-		return Array.from(this.adjList.keys());
-	}
-
 	print() {
 		console.log(this.adjList);
 	}
 }
 
-function dijkstra(g, source) {
-	let distances = {};
-	let prev = {};
-	let pq = new PriorityQueue();
+function bfs(g, start) {
+	var explored = [];
+	var q = new Queue();
 
-	distances[source] = 0;
-	pq.enqueue(source, 0);
-	var allNodes = g.getAllNodes();
-	for (var i = 0; i < allNodes.length; i++) {
-		if (allNodes[i] !== source) {
-			distances[allNodes[i]] = Infinity;
-		}
+	explored.push(start);
 
-		prev[allNodes[i]] = null;
-	}
+	q.enqueue(start);
 
-	while (!pq.isEmpty()) {
-		let minNode = pq.dequeue();
-		let currNode = minNode.name;
-		let adjList = g.getEdges(minNode.name);
-		for (const [key, value] of adjList.entries()) {
-			let alt = distances[currNode] + key.weight;
-			if (alt < distances[key.adj]) {
-				distances[key.adj] = alt;
-				prev[key.adj] = currNode;
-				pq.enqueue(key.adj, distances[key.adj]);
+	while (!q.isEmpty()) {
+		var v = q.dequeue();
+		console.log(v);
+
+		if (v) {
+			var adj = Array.from(g.getEdges(v));
+			for (var i = 0; i < adj.length; i++) {
+				if (!explored.includes(adj[i].adj)) {
+					explored.push(adj[i].adj);
+					q.enqueue(adj[i].adj);
+				}
 			}
 		}
 	}
-
-	console.log(distances);
-}
-
-function degree(g) {
-	var nodes = g.getAllNodes();
-	var degrees = new Map();
-
-	for (var i = 0; i < nodes.length; i++) {
-		var adj = g.adjList.get(nodes[i]);
-		for (const [key, value] of adj.entries()) {
-			if (degrees.has(key.adj)) {
-				degrees.set(key.adj, degrees.get(key.adj) + 1);
-			} else {
-				degrees.set(key.adj, 1);
-			}
-		}
-	}
-	console.log(degrees);
 }
 
 var g = new Graph();
-g.addEdge(0, 1, 13);
-g.addEdge(1, 4, 3);
-g.addEdge(0, 2, 14);
-g.addEdge(0, 3, 30);
-g.addEdge(3, 4, 12);
-degree(g);
+g.addEdge(1, 2);
+g.addEdge(2, 3);
+g.addEdge(3, 4);
+g.print();
+bfs(g, 1);
