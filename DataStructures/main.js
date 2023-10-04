@@ -73,9 +73,6 @@ class Graph {
 
 	addEdge(node, adj, weight) {
 		this.addEdgeHelper(node, adj, weight);
-		if (adj != node) {
-			this.addEdgeHelper(adj, node, weight);
-		}
 	}
 
 	getEdges(node) {
@@ -115,5 +112,5 @@ var g = new Graph();
 g.addEdge(1, 2);
 g.addEdge(2, 3);
 g.addEdge(3, 4);
-g.print();
-bfs(g, 1);
+g.addEdge(2, 5);
+console.log(g.getEdges(2));
