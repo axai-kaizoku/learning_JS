@@ -133,10 +133,22 @@ function dfs(start, target, g) {
 	return null;
 }
 
-var g = new Graph();
-g.addEdge(1, 2);
-g.addEdge(2, 3);
-g.addEdge(3, 4);
-g.addEdge(4, 5);
-g.addEdge(5, 6);
-console.log(dfs(1, 5, g));
+// var g = new Graph();
+// g.addEdge(1, 2);
+// g.addEdge(2, 3);
+// g.addEdge(3, 4);
+// g.addEdge(4, 5);
+// g.addEdge(5, 6);
+// console.log(dfs(1, 5, g));
+
+function addN(n) {
+	if (n === 1) {
+		return 1;
+	} else {
+		return n + addN(n - 1);
+	}
+}
+
+// The function addN gives sum of all numbers from 1 to number n
+
+console.log(addN(10));
