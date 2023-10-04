@@ -1,40 +1,50 @@
-class Graph {
-	constructor() {
-		this.adjList = new Map();
-	}
-
-	addEdgeHelper(node, adj, weight) {
-		if (this.adjList.has(node)) {
-			var currSet = this.adjList.get(node);
-			currSet.add({ adj, weight });
-			this.adjList.set(node, currSet);
-		} else {
-			this.adjList.set(node, new Set([{ adj, weight }]));
-		}
-	}
-
-	addEdge(node, adj, weight) {
-		this.addEdgeHelper(node, adj, weight);
-	}
-
-	getEdges(node) {
-		return this.adjList.get(node);
-	}
-
-	getAllNodes() {
-		return Array.from(this.adjList.keys());
-	}
-
-	print() {
-		console.log(this.adjList);
+class GraphNode {
+	constructor(name, weight) {
+		this.name = name;
+		this.weight = weight;
 	}
 }
 
-var g = new Graph();
-g.addEdge(0, 1, 0);
-g.addEdge(0, 2, 0);
-g.addEdge(2, 3, 0);
+class PriorityQueue {
+	constructor() {
+		this.items = [];
+	}
 
-g.print();
-console.log(g.getEdges(2));
-console.log(g.getAllNodes());
+	enqueue(element, weight) {
+		var graphNode = new GraphNode(element, weight);
+		var contain = false;
+		var i = 0;
+		while (i < this.items.length && !contain) {
+			if (this.items[i].weight > graphNode.weight) {
+				this.items.splice(i, 0, graphNode);
+				contain = true;
+			}
+			i++;
+		}
+
+		if (!contain) {
+			this.items.push(graphNode);
+		}
+	}
+
+	dequeue() {
+		if (this.items.length === 0) {
+			throw 'Stack Underflow';
+		} else {
+			return this.items.shift();
+		}
+	}
+
+	print() {
+		console.log(this.items);
+	}
+}
+
+var pq = new PriorityQueue();
+pq.enqueue(1, 100);
+pq.enqueue(10, 200);
+pq.enqueue(9, 200);
+pq.enqueue(3, 20);
+pq.enqueue(0, 40);
+// pq.dequeue();
+pq.print();
