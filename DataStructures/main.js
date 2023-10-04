@@ -112,20 +112,27 @@ function dijkstra(g, source) {
 	console.log(distances);
 }
 
-// var g = new Graph();
-// g.addEdge(0, 1, 13);
-// g.addEdge(1, 4, 3);
-// g.addEdge(0, 2, 14);
-// g.addEdge(0, 3, 30);
-// g.addEdge(3, 4, 12);
-// dijkstra(g, 0);
+function degree(g) {
+	var nodes = g.getAllNodes();
+	var degrees = new Map();
 
-function factorial(n) {
-	if (n === 1) {
-		return 1;
-	} else {
-		return n * factorial(n - 1);
+	for (var i = 0; i < nodes.length; i++) {
+		var adj = g.adjList.get(nodes[i]);
+		for (const [key, value] of adj.entries()) {
+			if (degrees.has(key.adj)) {
+				degrees.set(key.adj, degrees.get(key.adj) + 1);
+			} else {
+				degrees.set(key.adj, 1);
+			}
+		}
 	}
+	console.log(degrees);
 }
 
-console.log(factorial(4));
+var g = new Graph();
+g.addEdge(0, 1, 13);
+g.addEdge(1, 4, 3);
+g.addEdge(0, 2, 14);
+g.addEdge(0, 3, 30);
+g.addEdge(3, 4, 12);
+degree(g);
