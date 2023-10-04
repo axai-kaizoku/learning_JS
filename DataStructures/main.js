@@ -108,9 +108,35 @@ function bfs(g, start) {
 	}
 }
 
+function dfs(start, target, g) {
+	console.log('Visting Node ' + start);
+
+	if (start === target) {
+		console.log('Found the target');
+		return start;
+	}
+
+	var adj = Array.from(g.getEdges(start));
+	for (var i = 0; i < adj.length; i++) {
+		var result = dfs(adj[i].adj, target, g);
+
+		if (result !== null) {
+			return result;
+		}
+	}
+
+	console.log(
+		'Went through all children of ',
+		start,
+		", return to it's parent",
+	);
+	return null;
+}
+
 var g = new Graph();
 g.addEdge(1, 2);
 g.addEdge(2, 3);
 g.addEdge(3, 4);
-g.addEdge(2, 5);
-console.log(g.getEdges(2));
+g.addEdge(4, 5);
+g.addEdge(5, 6);
+console.log(dfs(1, 5, g));
