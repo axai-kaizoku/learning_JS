@@ -1,5 +1,14 @@
-import * as url from 'url';
+import fs from 'fs';
 
-const __dirname = url.fileURLToPath(new URL(',', import.meta.url));
+let stream1 = fs.createWriteStream('log2.txt');
+stream1.write('Line1\n');
+stream1.write('Line2\n');
+stream1.write('Line3\n');
+stream1.write('Line4\n');
 
-console.log(__dirname);
+let stream = fs.createReadStream('log2.txt');
+
+stream.on('data', (data) => {
+	let chunk = data.toString();
+	console.log(chunk);
+});
