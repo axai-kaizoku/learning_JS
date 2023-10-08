@@ -1,6 +1,5 @@
-import path from 'path';
+import * as url from 'url';
 
-let dir = path.format({ dir: '\\home\\prasa', base: 'text.txt' });
-console.log(path.parse(dir).ext);
+const __dirname = url.fileURLToPath(new URL(',', import.meta.url));
 
-console.log(path.parse('C:\\Users\\prasa\\file.txt'));
+console.log(__dirname);
