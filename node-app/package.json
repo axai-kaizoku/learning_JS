@@ -12,6 +12,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"csv-parse": "^5.5.1",
+		"csv-stringify": "^6.4.3",
 		"fs": "^0.0.1-security"
 	}
 }
