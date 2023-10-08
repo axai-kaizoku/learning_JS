@@ -1,3 +1,6 @@
-import { writeLogLine, readLogFile, appendLogLine } from './logger.js';
+import path from 'path';
 
-readLogFile('log.txt');
+let dir = path.format({ dir: '\\home\\prasa', base: 'text.txt' });
+console.log(path.parse(dir).ext);
+
+console.log(path.parse('C:\\Users\\prasa\\file.txt'));
