@@ -1,20 +1,16 @@
-import * as stringify from 'csv-stringify';
+import * as csv from 'csv-parse';
 import fs from 'fs';
 
-const write = fs.createWriteStream('log2.txt');
-const data = [
-	[1, 2, 3],
-	[4, 5, 6],
-	[7, 8, 9],
-	[10, 11, 12],
-];
+let sum = 0;
 
-const columns = ['num1', 'num2', 'num3'];
-
-const stringifier = stringify.stringify({ header: true, columns: columns });
-
-for (let i = 0; i < data.length; i++) {
-	stringifier.write(data[i]);
-}
-
-stringifier.pipe(write);
+fs.createReadStream('transactions.csv')
+	.pipe(csv.parse({ delimiter: ',' }))
+	.on('data', function (row) {
+		sum += parseFloat(row[1]);
+	})
+	.on('end', () => {
+		console.log(sum);
+	})
+	.on('error', (err) => {
+		console.log(err);
+	});
