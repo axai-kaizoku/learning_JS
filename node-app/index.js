@@ -5,5 +5,10 @@ async function getFile(fileName) {
 	return (await data).toString();
 }
 
-const data = await getFile('async.txt');
-console.log(data);
+// let dataGet = getFile('async.txt');
+let dataGet = fs.readFileSync('async.txt');
+
+console.log('Code here!');
+console.log('More here!');
+
+console.log(await dataGet.toString());
