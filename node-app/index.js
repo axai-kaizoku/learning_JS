@@ -1,14 +1,11 @@
-import { ArgumentParser } from 'argparse';
+import { EventEmitter } from 'events';
 
-const parser = new ArgumentParser({
-	description: 'A simple command line utility',
-});
+const myEventEmitter = new EventEmitter();
 
-parser.add_argument('-f', '--foo', { help: 'Enter some value' });
-parser.add_argument('-g', { help: 'Enter a value for g' });
-let args = parser.parse_args();
+function notifyConnection(ip) {
+	console.log(ip + ' connected to server!');
+}
 
-console.log(parseInt(args.g) + parseInt(args.foo));
+myEventEmitter.on('connection', notifyConnection);
 
-// node . -h
-// node . -g 1 -f 3
+myEventEmitter.emit('connection', '127.0.0.1');
