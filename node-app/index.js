@@ -11,3 +11,4 @@ let args = parser.parse_args();
 console.log(parseInt(args.g) + parseInt(args.foo));
 
 // node . -h
+// node . -g 1 -f 3
