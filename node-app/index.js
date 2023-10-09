@@ -1,13 +1,13 @@
-import readline from 'readline';
+import { ArgumentParser } from 'argparse';
 
-let r1 = readline.createInterface(process.stdin, process.stdout);
-
-r1.on('SIGINT', () => {
-	console.log('This is a testing create Interface');
-	r1.question('Exit (y or n)', (input) => {
-		console.log('This is a testing create Interface');
-		if (input === 'y') {
-			r1.pause();
-		}
-	});
+const parser = new ArgumentParser({
+	description: 'A simple command line utility',
 });
+
+parser.add_argument('-f', '--foo', { help: 'Enter some value' });
+parser.add_argument('-g', { help: 'Enter a value for g' });
+let args = parser.parse_args();
+
+console.log(parseInt(args.g) + parseInt(args.foo));
+
+// node . -h
