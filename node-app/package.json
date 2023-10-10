@@ -2,18 +2,13 @@
 	"name": "app",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "client.js",
 	"type": "module",
 	"scripts": {
-		"start": "node index.js"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js"
 	},
 	"keywords": [],
 	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"argparse": "^2.0.1",
-		"csv-parse": "^5.5.1",
-		"csv-stringify": "^6.4.3",
-		"fs": "^0.0.1-security"
-	}
+	"license": "ISC"
 }
