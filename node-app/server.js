@@ -5,8 +5,17 @@ http
 	.createServer((req, res) => {
 		if (req.method === 'GET') {
 			res.write('GET request received!');
-		} else {
-			res.write('Other request received!');
+		} else if (req.method === 'POST') {
+			let body = '';
+
+			req.on('data', (data) => {
+				body += data;
+			});
+
+			req.on('end', () => {
+				body = JSON.parse(body);
+				console.log(body.username);
+			});
 		}
 		res.end();
 	})
