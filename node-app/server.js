@@ -1,10 +1,17 @@
 import net from 'net';
+let sockets = [];
+
+const broadcast = (data) => {
+	sockets.forEach((socket) => {
+		socket.write(data);
+	});
+};
 
 const server = net.createServer((socket) => {
-	socket.write('Hello!');
+	sockets.push(socket);
 
 	socket.on('data', (data) => {
-		console.log(`Received: ${data.toString()}`);
+		broadcast(data);
 	});
 
 	socket.on('error', (err) => {
@@ -12,10 +19,10 @@ const server = net.createServer((socket) => {
 	});
 
 	socket.on('close', () => {
-		console.log('Server connection closed!');
+		console.log('Connection closed from client!');
 	});
 });
 
 server.listen(8080, () => {
-	console.log('Server is running on PORT 3000');
+	console.log('Server is connected to PORT 8080');
 });

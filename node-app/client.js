@@ -1,9 +1,27 @@
 import net from 'net';
+import readline from 'readline';
 
-const client = net.connect({ port: 8080 }, () => {
-	client.write('Hello server!');
+const readLine = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
 });
 
-client.on('data', (data) => {
-	console.log(`Received: ${data.toString()}`);
+const usernameIn = new Promise((resolve) => {
+	readLine.question('Enter a username: ', (answer) => {
+		resolve(answer);
+	});
+});
+
+usernameIn.then((username) => {
+	const client = net.connect({ port: 8080 }, () => {
+		console.log('Connected to server!');
+	});
+
+	readLine.on('line', (data) => {
+		client.write(`${username} : ${data}`);
+	});
+
+	client.on('data', (data) => {
+		console.log(data.toString());
+	});
 });
