@@ -1,7 +1,19 @@
 import net from 'net';
 
-const server = net.createServer(function (connection) {
-	console.log('Connection Made!');
+const server = net.createServer((socket) => {
+	socket.write('Hello!');
+
+	socket.on('data', (data) => {
+		console.log(`Received: ${data.toString()}`);
+	});
+
+	socket.on('error', (err) => {
+		console.log(`${err}`);
+	});
+
+	socket.on('close', () => {
+		console.log('Server connection closed!');
+	});
 });
 
 server.listen(8080, () => {
