@@ -1,28 +1,12 @@
-import net from 'net';
-let sockets = [];
+import http from 'http';
+import url from 'url';
 
-const broadcast = (data) => {
-	sockets.forEach((socket) => {
-		socket.write(data);
-	});
-};
-
-const server = net.createServer((socket) => {
-	sockets.push(socket);
-
-	socket.on('data', (data) => {
-		broadcast(data);
-	});
-
-	socket.on('error', (err) => {
-		console.log(`${err}`);
-	});
-
-	socket.on('close', () => {
-		console.log('Connection closed from client!');
-	});
-});
-
-server.listen(8080, () => {
-	console.log('Server is connected to PORT 8080');
-});
+http
+	.createServer((req, res) => {
+		const q = url.parse(req.url, true);
+		console.log(q);
+		res.writeHead(200, { 'Content-type': 'text/html' });
+		res.write('Hello!');
+		res.end();
+	})
+	.listen(80);
