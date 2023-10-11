@@ -20,7 +20,7 @@ http
 					users[body.username] = body.password;
 				}
 
-				console.log(`Saved user ${users.username}`);
+				console.log(`Saved user ${users}`);
 			});
 		} else if (req.method === 'PUT') {
 			let body = '';
@@ -32,7 +32,7 @@ http
 			req.on('end', () => {
 				body = JSON.parse(body);
 				users[body.username] = body.password;
-				console.log(`Updated user ${users.username}`);
+				console.log(`Updated user ${users}`);
 			});
 		} else if (req.method === 'DELETE') {
 			let body = '';
