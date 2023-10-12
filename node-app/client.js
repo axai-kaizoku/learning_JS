@@ -6,15 +6,20 @@ session.on('error', (err) => {
 	console.log(err);
 });
 
-const req = session.request({ ':path': '/' });
+const req = session.request({ ':path': '/', ':method': 'POST' });
+req.write(
+	JSON.stringify({ title: 'Killing a mocking bird', author: 'Dan Brown' }),
+	'utf8',
+);
+
 req.end();
 
 req.on('response', (headers) => {
 	console.log(headers);
 });
 
-req.setEncoding('utf-8');
+req.setEncoding('utf8');
 
-req.on('data', (chunk) => {
-	console.log(chunk);
+req.on('data', (data) => {
+	console.log(data);
 });
