@@ -2,6 +2,7 @@ import express from 'express';
 import { join } from 'path';
 import morgan from 'morgan';
 import { createWriteStream } from 'fs';
+import session from 'express-session';
 
 const app = express();
 const logFile = join(__dirname, 'blogchef.log');
@@ -15,6 +16,23 @@ app.use(
 app.use('/assets', express.static(join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(
+	'/admin',
+	session({
+		name: 'sessId',
+		resave: false,
+		saveUninitialized: true,
+		secret:
+			app.get('env') === 'production'
+				? process.env.sessionSecret
+				: '2bb37ckdse9383jds8h29',
+		cookie: {
+			httpOnly: true,
+			maxAge: 18000000,
+			secure: app.get('env') === 'production' ? true : false,
+		},
+	}),
+);
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
@@ -22,19 +40,26 @@ app.get('/', (req, res) => {
 });
 
 app
+	.get('/admin', (req, res) => {
+		req.session.user
+			? res.redirect('/admin/dashboard')
+			: res.redirect('/admin/login');
+	})
 	.get('/admin/login', (req, res) => {
 		res.render('login');
 	})
 	.post('/admin/login', (req, res) => {
 		const { email, password } = req.body;
-		console.log(`E-mail: ${email}`);
-		console.log(`Password: ${password}`);
-		res.redirect('/admin/dashboard');
+		if (email === 'asdfasdf@asdf.com' && password === 'qwerty') {
+			req.session.user = 'Axai Yu';
+			return res.redirect('/admin/dashboard');
+		}
+		res.redirect('/admin/login');
 	});
 
 app.get('/admin/dashboard', (req, res) => {
 	res.render('dashboard', {
-		user: 'Joe Mockery',
+		user: req.session.user,
 		posts: [
 			{
 				id: 1,
@@ -54,6 +79,7 @@ app.get('/admin/dashboard', (req, res) => {
 });
 
 app.get('/admin/logout', (req, res) => {
+	delete req.session.user;
 	res.redirect('/admin/login');
 });
 
