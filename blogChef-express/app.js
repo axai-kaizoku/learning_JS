@@ -2,6 +2,7 @@ import express from 'express';
 import { join } from 'path';
 import morgan from 'morgan';
 import { createWriteStream } from 'fs';
+
 const app = express();
 const logFile = join(__dirname, 'blogchef.log');
 
