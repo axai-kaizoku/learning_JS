@@ -3,6 +3,8 @@ import { join } from 'path';
 const app = express();
 
 app.use('/assets', express.static(join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
@@ -14,6 +16,9 @@ app
 		res.render('login');
 	})
 	.post('/admin/login', (req, res) => {
+		const { email, password } = req.body;
+		console.log(`E-mail: ${email}`);
+		console.log(`Password: ${password}`);
 		res.redirect('/admin/dashboard');
 	});
 
@@ -38,12 +43,17 @@ app.get('/admin/dashboard', (req, res) => {
 	});
 });
 
+app.get('/admin/logout', (req, res) => {
+	res.redirect('/admin/login');
+});
+
 app.post('/admin/approve', (req, res) => {
 	res.redirect('/admin/dashboard');
 });
 
-app.get('/admin/logout', (req, res) => {
-	res.redirect('/admin/login');
+app.post('/api/posts', (req, res) => {
+	console.log(req.body);
+	res.json({ message: 'Got it!' });
 });
 
 app.listen(3000, () => console.log('Blog Chef is cooking on port 3000'));
