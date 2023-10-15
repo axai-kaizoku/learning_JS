@@ -3,10 +3,13 @@ import { join } from 'path';
 import morgan from 'morgan';
 import { createWriteStream } from 'fs';
 import session from 'express-session';
+import compression from 'compression';
+import protectRoute from './utils/protectRoute';
 
 const app = express();
 const logFile = join(__dirname, 'blogchef.log');
 
+app.use(compression());
 app.use(morgan(':method - :url - :date -:response-time ms'));
 app.use(
 	morgan(':method - :url - :date -:response-time ms', {
@@ -55,28 +58,27 @@ app
 			return res.redirect('/admin/dashboard');
 		}
 		res.redirect('/admin/login');
+	})
+	.get('/admin/dashboard', protectRoute('/admin/login'), (req, res) => {
+		res.render('dashboard', {
+			user: req.session.user,
+			posts: [
+				{
+					id: 1,
+					author: 'Axai Y',
+					title: 'I love express',
+					content:
+						'The express frame work is more convenient to use and not strict to libraries',
+				},
+				{
+					id: 2,
+					author: 'Carry Minati',
+					title: 'I love PUG',
+					content: "It's a great templating language and very easy to use!",
+				},
+			],
+		});
 	});
-
-app.get('/admin/dashboard', (req, res) => {
-	res.render('dashboard', {
-		user: req.session.user,
-		posts: [
-			{
-				id: 1,
-				author: 'Axai Y',
-				title: 'I love express',
-				content:
-					'The express frame work is more convenient to use and not strict to libraries',
-			},
-			{
-				id: 2,
-				author: 'Carry Minati',
-				title: 'I love PUG',
-				content: "It's a great templating language and very easy to use!",
-			},
-		],
-	});
-});
 
 app.get('/admin/logout', (req, res) => {
 	delete req.session.user;
