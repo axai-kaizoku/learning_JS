@@ -39,9 +39,9 @@ app.use(
 );
 app.set('view engine', 'pug');
 
-app.use('/', home);
 app.use('/admin', admin);
 app.use('/api', api);
+app.use('/', home);
 
 Promise.all([connectToDb()])
 	.then(() =>

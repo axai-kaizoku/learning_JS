@@ -5,6 +5,7 @@ import dashboard from './dashboard';
 import protectRoute from '../../utils/protectRoute';
 import logOut from './logout';
 import moderate from './moderate-post';
+import signUpAdmin from './signup-admin';
 
 const router = Router();
 
@@ -14,6 +15,10 @@ router
 	.get((req, res) => res.render('login'))
 	.post(login);
 
+router
+	.route('/signup')
+	.get((req, res) => res.render('signup'))
+	.post(signUpAdmin);
 router.get('/dashboard', protectRoute('/admin/login'), dashboard);
 router.get('/logout', logOut);
 router.post('/moderate', protectRoute('/admin/login'), moderate);
