@@ -7,8 +7,7 @@ import compression from 'compression';
 import home from './routes/home';
 import admin from './routes/admin';
 import api from './routes/api';
-// import connectToDb from './db/index';
-// import mongoose from 'mongoose';
+import connectToDb from './db/index';
 
 const app = express();
 const logFile = join(__dirname, 'blogchef.log');
@@ -43,13 +42,13 @@ app.use('/', home);
 app.use('/admin', admin);
 app.use('/api', api);
 
-// Promise.all([connectToDb()])
-// 	.then(() =>
-// 		app.listen(3000, () => console.log('Blog Chef is cooking on port 3000')),
-// 	)
-// 	.catch((error) => {
-// 		console.error(`MongoDB Atlas Error: ${error}`);
-// 		process.exit();
-// 	});
+Promise.all([connectToDb()])
+	.then(() =>
+		app.listen(3000, () => console.log('Blog Chef is cooking on port 3000')),
+	)
+	.catch((error) => {
+		console.error(`MongoDB Atlas Error: ${error}`);
+		process.exit();
+	});
 
-app.listen(3000, () => console.log('Blog Chef is cooking on port 3000'));
+// app.listen(3000, () => console.log('Blog Chef is cooking on port 3000'));
