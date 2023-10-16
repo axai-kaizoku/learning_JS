@@ -7,6 +7,7 @@ import storePost from './store-post';
 import deletePost from './delete-post';
 import catchAll from './catch-all';
 import protectApi from '../../utils/protectApi';
+import verify from './verify';
 
 const router = Router();
 
@@ -18,6 +19,7 @@ router
 	.delete(protectApi, deletePost);
 router.post('/login', loginUser);
 router.post('/signup', signUpUser);
+router.post('/verify', verify);
 router.use(catchAll);
 
 export default router;
