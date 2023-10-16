@@ -1,6 +1,11 @@
+import moment from 'moment';
+
 export default (req, res) => {
 	res.render('dashboard', {
-		user: req.session.user,
+		user: req.session.user.name,
+		lastLoggedIn: moment(req.session.user.lastLoggedIn).format(
+			'MMMM, Do YYYY, h:mm:ss a',
+		),
 		posts: [
 			{
 				id: 1,

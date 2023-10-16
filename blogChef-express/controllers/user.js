@@ -8,3 +8,14 @@ export const signUpAdmin = async ({ name, email, password }) => {
 		return Promise.reject({ error });
 	}
 };
+
+export const loginAdmin = async ({ email, password }) => {
+	try {
+		const user = await User.findOne({ email, isAdmin: true });
+		await user.checkPassword(password);
+		await user.updateLoggedIn();
+		return Promise.resolve(user);
+	} catch (error) {
+		return Promise.reject(error);
+	}
+};
