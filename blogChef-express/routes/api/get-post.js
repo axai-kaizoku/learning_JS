@@ -1,6 +1,11 @@
-export default (req, res) => {
-	const postId = req.params.postId;
-	res.json({
-		post: postId,
-	});
+import { getPost } from '../../controllers/post';
+
+export default async (req, res) => {
+	try {
+		const id = req.params.postId;
+		const post = await getPost(id);
+		res.json({ post });
+	} catch (error) {
+		res.status(404).json(error);
+	}
 };
