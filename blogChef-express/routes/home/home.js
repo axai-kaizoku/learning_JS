@@ -1,1 +1,4 @@
-export default (req, res) => res.send('<h1>Blog Chef</h1>');
+import { join } from 'path';
+
+export default (req, res) =>
+	res.sendFile(join(__dirname, '../../', 'public', 'client', 'index.html'));

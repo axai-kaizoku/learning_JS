@@ -20,6 +20,7 @@ app.use(
 	}),
 );
 app.use('/assets', express.static(join(__dirname, 'public')));
+app.use(express.static(join(__dirname, 'public', 'client')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
