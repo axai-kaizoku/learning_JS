@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 const { ObjectId } = Schema.Types;
+import profanityFilter from '../utils/profanityFilter';
 
 const postSchema = new Schema({
 	title: {
@@ -23,6 +24,19 @@ const postSchema = new Schema({
 		type: Boolean,
 		default: true,
 	},
+});
+
+postSchema.pre('validate', function (next) {
+	if (!this.isModified('content')) {
+		return next();
+	}
+
+	if (profanityFilter(this.content)) {
+		this.isApproved = false;
+		next();
+	} else {
+		next();
+	}
 });
 
 const Post = model('Post', postSchema);

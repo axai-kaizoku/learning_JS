@@ -97,3 +97,13 @@ export const verifyToken = async (token) => {
 		return Promise.reject({ error: 'Unauthorized' });
 	}
 };
+
+export const verifyUser = (email) =>
+	new Promise(async (resolve, reject) => {
+		try {
+			const user = await User.findOne({ email });
+			return resolve(user ? true : false);
+		} catch (error) {
+			return reject(false);
+		}
+	});
