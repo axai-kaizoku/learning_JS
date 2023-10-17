@@ -8,13 +8,17 @@ import deletePost from './delete-post';
 import catchAll from './catch-all';
 import protectApi from '../../utils/protectApi';
 import verify from './verify';
+import {
+	servePostsFromCache,
+	servePostFromCache,
+} from '../../controllers/cache';
 
 const router = Router();
 
-router.get('/posts', getPosts);
+router.get('/posts', servePostsFromCache(), getPosts);
 router
 	.route('/post/:postId?')
-	.get(getPost)
+	.get(servePostFromCache(), getPost)
 	.post(protectApi, storePost)
 	.delete(protectApi, deletePost);
 router.post('/login', loginUser);
