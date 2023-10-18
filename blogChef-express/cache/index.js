@@ -1,3 +1,3 @@
-import { createClient } from 'redis';
+// import { createClient } from 'redis';
 
-export default createClient(process.env.REDIS_URL);
+// export default createClient(process.env.REDIS_URL);

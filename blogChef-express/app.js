@@ -1,8 +1,8 @@
 import express from 'express';
 import { join } from 'path';
-import morgan from 'morgan';
-import { createWriteStream } from 'fs';
-import session from './session';
+// import morgan from 'morgan';
+// import { createWriteStream } from 'fs';
+import session from './session/index';
 import compression from 'compression';
 import home from './routes/home';
 import admin from './routes/admin';
@@ -13,12 +13,12 @@ const app = express();
 const logFile = join(__dirname, 'blogchef.log');
 
 app.use(compression());
-app.use(morgan(':method - :url - :date -:response-time ms'));
-app.use(
-	morgan(':method - :url - :date -:response-time ms', {
-		// stream: createWriteStream(logFile, { flags: 'a' }),
-	}),
-);
+// app.use(morgan(':method - :url - :date -:response-time ms'));
+// app.use(
+// 	morgan(':method - :url - :date -:response-time ms', {
+// 		   stream: createWriteStream(logFile, { flags: 'a' }),
+// 	}),
+// );
 app.use('/assets', express.static(join(__dirname, 'public')));
 app.use(express.static(join(__dirname, 'public', 'client')));
 app.use(express.urlencoded({ extended: false }));
