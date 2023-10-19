@@ -8,10 +8,12 @@ import home from './routes/home';
 import admin from './routes/admin';
 import api from './routes/api';
 import connectToDb from './db/index';
+import helmet from 'helmet';
 
 const app = express();
 const logFile = join(__dirname, 'blogchef.log');
 
+app.use(helmet());
 app.use(compression());
 // app.use(morgan(':method - :url - :date -:response-time ms'));
 // app.use(
