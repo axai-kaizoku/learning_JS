@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Noter
+  description: A simple notes api designed using openAPI
+
+servers:
+  - url: http://notes.com/api/
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+security:
+  - BasicAuth: []
+
+paths:
+  /notes:
+    get:
+      description: returns a list of all notes
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              required:
+                - n_note
+              properties:
+                n_name:
+                  type: string
+                n_time:
+                  type: integer
+                n_instructions:
+                  type: string
+      '400':
+        description: Invalid request
+        content:
+          application/json:
+            schema:
+            type: object
+            properties:
+              message:
+              type: string
