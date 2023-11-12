@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Peter Griffin",
+		"email": "petergriffin@gmail.com",
+		"id": 1
+	},
+	{
+		"name": "Louis Griffin",
+		"email": "louisgriffin69@gmail.com",
+		"id": 2
+	},
+	{
+		"name": "Brain Griffin",
+		"email": "bowbow@gmail.com",
+		"id": 3
+	},
+	{
+		"name": "Stewie Griffin",
+		"email": "stewiegriffin@gmail.com",
+		"id": 4
+	}
+]

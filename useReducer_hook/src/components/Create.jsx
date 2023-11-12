@@ -1,62 +1,45 @@
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Grid, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { addUser } from '../redux/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const users = useSelector((state) => state.user);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		dispatch(
+			addUser({ name: name, email: email, id: users[users.length - 1].id + 1 }),
+		);
+		navigate('/');
+	};
+
 	return (
-		<Grid
-			container
-			spacing={0}
-			direction='column'
-			alignItems='center'
-			justify='center'
-			style={{ minHeight: '100vh' }}
-			padding={5}>
-			<Grid
-				item
-				xs={3}>
-				<Card
-					sx={{ maxWidth: 400, minWidth: 500 }}
-					variant='elevation'>
-					<CardContent>
-						<Typography sx={{ fontSize: 24 }}>Create User</Typography>
-						<br />
-						<br />
-
-						<TextField
-							id='outlined-basic'
-							label='Name'
-							variant='outlined'
-							fullWidth
-						/>
-						<br />
-						<br />
-						<TextField
-							id='outlined-basic'
-							label='Email'
-							variant='outlined'
-							fullWidth
-						/>
-					</CardContent>
-
-					<Box
-						padding={2}
-						direction='column'
-						textAlign='center'>
-						<Button
-							variant='contained'
-							onSubmit={() => {}}>
-							Submit
-						</Button>
-					</Box>
-				</Card>
-			</Grid>
-		</Grid>
+		<form onSubmit={(e) => handleSubmit(e)}>
+			<label>Name</label>
+			<br />
+			<input
+				name='name'
+				type='name'
+				onChange={(e) => setName(e.target.value)}
+			/>
+			<br />
+			<label>Email</label>
+			<br />
+			<input
+				name='email'
+				type='email'
+				onChange={(e) => setEmail(e.target.value)}
+			/>
+			<br />
+			<br />
+			<button type='submit'>Submit</button>
+		</form>
 	);
 };
 

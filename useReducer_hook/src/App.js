@@ -3,7 +3,9 @@ import Home from './components/Home';
 import Create from './components/Create';
 import AppBar from '@mui/material/AppBar';
 import { Typography } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Update from './components/Update';
+import Delete from './components/Delete';
 
 export function App() {
 	return (
@@ -16,9 +18,27 @@ export function App() {
 					Reduxjs
 				</Typography>
 			</AppBar>
-			<div style={{ alignItems: 'center' }}>
-				<Home />
-				{/* <Create /> */}
+			<div>
+				<BrowserRouter>
+					<Routes>
+						<Route
+							path='/'
+							element={<Home />}
+						/>
+						<Route
+							path='/create'
+							element={<Create />}
+						/>
+						<Route
+							path='/edit/:id'
+							element={<Update />}
+						/>
+						<Route
+							path='/delete/:id'
+							element={<Delete />}
+						/>
+					</Routes>
+				</BrowserRouter>
 			</div>
 		</>
 	);
