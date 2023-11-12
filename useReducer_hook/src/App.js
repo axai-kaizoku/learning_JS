@@ -1,19 +1,24 @@
 import React from 'react';
-import Cart from './components/Cart';
-import Product from './components/Product';
-import products from './products.json';
+import Home from './components/Home';
+import Create from './components/Create';
+import AppBar from '@mui/material/AppBar';
+import { Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
 
 export function App() {
 	return (
 		<>
-			<Cart />
-			<div className='list'>
-				{products.map((product) => (
-					<Product
-						key={product.id}
-						{...product}
-					/>
-				))}
+			<AppBar position='static'>
+				<Typography
+					variant='h4'
+					padding={2.3}
+					sx={{ flexGrow: 2 }}>
+					Reduxjs
+				</Typography>
+			</AppBar>
+			<div style={{ alignItems: 'center' }}>
+				<Home />
+				{/* <Create /> */}
 			</div>
 		</>
 	);
